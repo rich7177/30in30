@@ -1,0 +1,73 @@
+<dashboard version="1.1" theme="light">
+  <label>gentimes</label>
+  <row>
+    <panel>
+      <html>
+      <p>What: Generate time stamps in defined incriments</p>
+      <ol>
+        <li>Returns both epoch and human readable format</li>
+        <li>Default is always 1d</li>
+      </ol>
+      <p>How: <tt>|gentimes start=&lt;MM/DD/YYYY[:HH:MM:SS] | &lt;int&gt; &gt;</tt>
+        </p>
+      <p>Why: <tt>gentimes</tt> often pairs with the map command or sometimes you just need periodic time, ya know?</p>
+      <p>So What: Exact time stamps to do whatever you need to do with them</p>
+      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Gentimes">gentimes</a>.
+      </p>
+      <p>Extra Notes here</p>
+      <p>Previous Command - <a href="makeresults">makeresults</a>
+        </p>
+      <p>Next Command - <a href="outputlookup">outputlookup</a>
+        </p>
+      </html>
+    </panel>
+    <panel>
+      <html>
+      <p>The data we are using for this command:
+      <pre>| gentimes</pre>
+        </p>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>gentimes by day</title>
+      <html><pre>| gentimes start=4/1/24 end=4/10/24</pre></html>
+      <table>
+        <search>
+          <query>| gentimes start=4/1/24 end=4/10/24</query>
+          <earliest>-30m@m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">100</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <title>gentimes by hour</title>
+       <html><pre>| gentimes start=-1 increment=2h</pre></html>
+
+      <table>
+        <search>
+          <query>| gentimes start=-1 increment=2h</query>
+          <earliest>-30m@m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">100</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>

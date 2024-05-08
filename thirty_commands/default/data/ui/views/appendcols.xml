@@ -1,0 +1,108 @@
+<dashboard version="1.1" theme="light">
+  <label>appendcols</label>
+  <row>
+    <panel>
+      <html>
+      <p>What: pastes two result sets together, horizontally</p>
+      <ol>
+        <li>Does it in at least as "dumb" of a way as <tt>append</tt></li>
+        <li>But that's OK, there's still no way to be smart about it</li>
+        <li><b>CAN ONLY be used</b> after a generating command or a transforming command </li>
+        <li>Generating commands like <tt>makeresults</tt> or transforming commands like <tt>stats</tt> that output a table</li>
+        <li>If fieldnames collide, you lose data</li>
+      </ol>
+      <p>How: ... (existing search) | appendcols [(some other search)]</p>
+      <p>Why: Even more unusual to need this than <tt>append</tt> itself</p>
+      <p>So What: Few use cases, but it's one of those commands to be aware of because sometimes it's the only command that will do what you need.</p>
+      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/appendcols">appendcols</a>.
+      </p>
+      <p>Extra Notes here</p>
+      <p>Previous Command - <a href="append">append</a>
+        </p>
+      <p>Next Command - <a href="appendpipe">appendpipe</a>
+        </p>
+      </html>
+    </panel>
+    <panel>
+      <html>
+      <p>The data we are using for this command - <br/>Data 1, a previous makeresults:</p>
+      <pre>| makeresults format=json data="[{\"name\":\"John\", \"age\":35}, {\"name\":\"Sarah\", \"age\":39}]"</pre>
+      <p>Data 2 - an <tt>inputlookup</tt> we built earlier:</p>
+      <pre>| inputlookup mydata.csv</pre>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        John and Sarah
+      </html>
+      <title>Data 1</title>
+      <table>
+        <search>
+          <query>| makeresults format=json data="[{\"name\":\"John\", \"age\":35}, {\"name\":\"Sarah\", \"age\":39}]"</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <html>
+        Whatever's in mydata.csv :)
+      </html>
+      <title>Data 2</title>
+      <table>
+        <search>
+          <query>| inputlookup mydata.csv</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        <p>Adding them together:</p>
+        <tt>| makeresults format=json data="[{\"name\":\"John\", \"age\":35}, {\"name\":\"Sarah\", \"age\":39}]"
+| appendcols [ | inputlookup mydata.csv ]</tt>
+        <p>gets this behavior and output.  Notice the two rows of _time only, other rows got overwritten with "nothings"</p>
+      </html>
+      <title>End Result 1</title>
+      <table>
+        <search>
+          <query>| makeresults format=json data="[{\"name\":\"John\", \"age\":35}, {\"name\":\"Sarah\", \"age\":39}]" | appendcols [ | inputlookup mydata.csv ]</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>

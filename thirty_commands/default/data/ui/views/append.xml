@@ -1,0 +1,117 @@
+<dashboard version="1.1" theme="light">
+  <label>append</label>
+  <row>
+    <panel>
+      <html>
+      <p>What: pastes two result sets together</p>
+      <ol>
+        <li>Does it in a "fairly dumb" way</li>
+        <li>But that's OK, there's no way to be smart about it</li>
+        <li>Columns that are in both sets of data are filled out.</li>
+        <li>Columns that are only on one side or the other will have blanks from 'the other side'</li>
+      </ol>
+      <p>How: ... (existing search) | append [(some other search)]</p>
+      <p>Why: While it's not the best command, there are times when it's the right one to use.  Two data, *completely* unrelated, especially if one or both are relatively small.  And by "completely unrelated" I mean that specifically, like 'from search' and 'from a datagen/makeresults'.</p>
+      <p>So What: IMO it's an overused command.  It's often better to do the big "pile o' data" then stats it to group it.</p>
+      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/append">append</a>.
+      </p>
+      <p>Extra Notes here</p>
+      <p>Previous Command - <a href="table">table</a>
+        </p>
+      <p>Next Command - <a href="appendcols">appendcols</a>
+        </p>
+      </html>
+    </panel>
+    <panel>
+      <html>
+      <p>The data we are using for this command - <br />Data 1, a previous makeresults:</p>
+      <pre>| makeresults format=json data="[{\"name\":\"John\", \"age\":35}, {\"name\":\"Sarah\", \"age\":39}]"</pre>
+      <p>Data 2 - an <tt>inputlookup</tt> we built earlier:</p>
+      <pre>| inputlookup mydata.csv</pre>
+      While yours may differ slightly, that data for us is:
+      <pre>"_time",salesperson,"Cars Sold This Hour"
+1711665905,Rich,1
+1711665905,David,1
+1711662305,Rich,0
+1711662305,David,0
+1711658705,Rich,1
+1711658705,David,2
+1711655105,Rich,2
+1711655105,David,3</pre>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        John and Sarah
+      </html>
+      <title>Data 1</title>
+      <table>
+        <search>
+          <query>| makeresults format=json data="[{\"name\":\"John\", \"age\":35}, {\"name\":\"Sarah\", \"age\":39}]"</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <html>
+        Whatever's in mydata.csv :)
+      </html>
+      <title>Data 2</title>
+      <table>
+        <search>
+          <query>| inputlookup mydata.csv</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        <p>Adding them together</p>
+        <tt>| makeresults format=json data="[{\"name\":\"John\", \"age\":35}, {\"name\":\"Sarah\", \"age\":39}]"
+| append [ | inputlookup mydata.csv ]</tt>
+        <p>You'll see all the columns from both sides.</p>
+      </html>
+      <title>Data 1</title>
+      <table>
+        <search>
+          <query>| makeresults format=json data="[{\"name\":\"John\", \"age\":35}, {\"name\":\"Sarah\", \"age\":39}]" | append [ | inputlookup mydata.csv ]</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>

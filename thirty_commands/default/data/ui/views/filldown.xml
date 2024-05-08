@@ -1,0 +1,113 @@
+<dashboard version="1.1" theme="light">
+  <label>filldown</label>
+  <row>
+    <panel>
+      <html>
+      <p>What: Copies the last non-null value "down" into new events where that field's value is null.</p>
+      <p>How: <tt>filldown [fieldname...]</tt>
+        </p>
+      <p>Why: Sometimes you need to fill in gaps in data and the best option is to just pretend it is what it was before.  Also sometimes that's *exactly* what no data means (see a lot of home-automation data).</p>
+      <p>So What: Cleans up weird looking data.</p>
+      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/filldown">filldown</a>.
+      </p>
+      <p>Watch your sorting!  See also <a href="fillnull"><tt>fillnull</tt></a> for a command to use when it should not just use the last value.</p>
+      <p>Previous Command - <a href="makecontinuous">makecontinuous</a>
+        </p>
+      <p>Next Command - <a href="fillnull">fillnull</a>
+        </p>
+      </html>
+    </panel>
+    <panel>
+      <html>
+      <p>Remember our <tt>makecontinuous</tt> example?  We'll start with that.
+      <pre>| makeresults format="csv" data="time, percent, miles
+2024-02-25T10:17:00,51,107
+2024-02-25T11:11:00,52,111
+2024-02-25T12:15:00,53,116
+2024-02-25T13:13:00,55,119
+2024-02-25T14:12:00,57,124
+2024-02-25T15:26:00,59,129
+2024-02-25T16:22:00,61,132
+2024-02-25T17:27:00,64,137
+2024-02-25T19:02:00,66,144
+2024-02-25T20:43:00,69,150
+2024-02-26T05:57:00,86,188"
+| eval _time = strptime(time, "%Y-%m-%dT%H:%M:%S")
+| makecontinuous _time span=1h
+</pre>
+        </p>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Makecontinuous "original"</title>
+      <html>
+        Notice the gaps in the fields <tt>percent</tt> and <tt>miles</tt>.
+      </html>
+      <table>
+        <search>
+          <query>| makeresults format="csv" data="time, percent, miles
+2024-02-25T10:17:00,51,107
+2024-02-25T11:11:00,52,111
+2024-02-25T12:15:00,53,116
+2024-02-25T13:13:00,55,119
+2024-02-25T14:12:00,57,124
+2024-02-25T15:26:00,59,129
+2024-02-25T16:22:00,61,132
+2024-02-25T17:27:00,64,137
+2024-02-25T19:02:00,66,144
+2024-02-25T20:43:00,69,150
+2024-02-26T05:57:00,86,188"
+| eval _time = strptime(time, "%Y-%m-%dT%H:%M:%S")
+| makecontinuous _time span=1h</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">25</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <title>Makecontinuous with filldown on percent and miles</title>
+      <html>
+        The "gaps" in <tt>percent</tt> and <tt>miles</tt> are now replaced with the previous values, except for the first one which has no "previous value" to use to fill down.  If you wanted to fix that problem too, one could possibly use <a href="fillnull"><tt>fillnull</tt></a>, which is the next command.
+      </html>
+      <table>
+        <search>
+          <query>| makeresults format="csv" data="time, percent, miles
+2024-02-25T10:17:00,51,107
+2024-02-25T11:11:00,52,111
+2024-02-25T12:15:00,53,116
+2024-02-25T13:13:00,55,119
+2024-02-25T14:12:00,57,124
+2024-02-25T15:26:00,59,129
+2024-02-25T16:22:00,61,132
+2024-02-25T17:27:00,64,137
+2024-02-25T19:02:00,66,144
+2024-02-25T20:43:00,69,150
+2024-02-26T05:57:00,86,188"
+| eval _time = strptime(time, "%Y-%m-%dT%H:%M:%S")
+| makecontinuous _time span=1h
+| filldown percent, miles</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">25</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>

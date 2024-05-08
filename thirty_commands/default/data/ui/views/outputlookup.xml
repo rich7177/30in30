@@ -1,0 +1,117 @@
+<dashboard version="1.1" theme="light">
+  <label>outputlookup</label>
+  <row>
+    <panel>
+      <html>
+      <p>What: outputs events/rows/whatever as a csv file in the "lookups" directory.</p>
+      <ol>
+        <li>Can be used with <tt>inputlookup</tt> to read that back off disk</li>
+        <li>Or can be used with <tt>lookup</tt> itself to enrich</li>
+        <li>If you want to use it as a lookup 'automatically' then you'll have to go the whole route of specifying the lookup definition etc.  And you probably should anyway.</li>
+        <li>Sort of "invisible" when run.</li>
+        <li>Other options, like appending or overwriting, available too in the docs.</li>
+      </ol>
+      <p>How: <tt>... | outputlookup myFileName.csv</tt></p>
+      <p>Why: Quick way to temporarily save off "slower" search output to work on and test with.</p>
+      <p>So What: We'll use it a lot in here.</p>
+      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/outputlookup">outputlookup</a>.
+      </p>
+      <p>Previous Command - <a href="gentimes">gentimes</a>
+        </p>
+      <p>Next Command - <a href="inputlookup">inputlookup</a>
+        </p>
+      </html>
+    </panel>
+    <panel>
+      <html>
+      <p>The data output we build here will be used in a lot of succeeding commands, so please be sure to do this one!</p>
+      <pre>| makeresults format=csv data="offset, salesperson, cars
+-10800, Rich, 1
+-10800, David, 1
+-7200, Rich, 0
+-7200, David, 0
+-3600, Rich, 1
+-3600, David, 2
+-0, Rich, 2
+-0, David, 3"</pre>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        The raw search above
+      </html>
+      <title></title>
+      <table>
+        <search>
+          <query>| makeresults format=csv data="offset, salesperson, cars
+-10800, Rich, 1
+-10800, David, 1
+-7200, Rich, 0
+-7200, David, 0
+-3600, Rich, 1
+-3600, David, 2
+-0, Rich, 2
+-0, David, 3"
+| eval _time = now() - offset
+| table _time, salesperson, cars
+| rename cars AS "Cars Sold This Hour" 
+</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <html>
+        Adding <tt>| outputlookup mydata.csv</tt> to the end.  <b>NOTE</b> that it's an "unsafe command" so you'll have to click the warning triangle to allow it!
+      </html>
+      <title></title>
+      <table>
+        <search>
+          <query>| makeresults format=csv data="offset, salesperson, cars
+-10800, Rich, 1
+-10800, David, 1
+-7200, Rich, 0
+-7200, David, 0
+-3600, Rich, 1
+-3600, David, 2
+-0, Rich, 2
+-0, David, 3"
+| eval _time = now() - offset
+| table _time, salesperson, cars
+| rename cars AS "Cars Sold This Hour" 
+| outputlookup mydata.csv</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+      <h1>The next command, <tt>inputlookup</tt>, will show you one way to read prove this worked by reading the values back in.</h1>
+      </html>
+    </panel>
+  </row>
+</dashboard>

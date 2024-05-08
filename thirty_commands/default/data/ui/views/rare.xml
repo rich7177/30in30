@@ -1,0 +1,83 @@
+<dashboard version="1.1" theme="light">
+  <label>rare</label>
+  <row>
+    <panel>
+      <html>
+      <p>What: Returns the *least common value* of the field specified along with some statistics about that field</p>
+      <p>How: <tt>... | rare &lt;fieldname&gt;</tt> </p>
+      <p>Why: Occasionally useful for reporting things, but often useful when you are exploring the data.</p>
+      <p>So What: Quicker than doing your own <tt>stats</tt> to get these same statistics on a single field and how common it is.
+        </p>
+      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/top">top</a>.
+      </p>
+      <p>See also <tt>top</tt> which is the "reverse" of this command.</p>
+      <p>Previous Command - <a href="top">top</a>
+        </p>
+      <p>Next Command - <a href="sort">sort</a>
+        </p>
+      </html>
+    </panel>
+    <panel>
+      <html>
+      <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
+      <pre>| inputlookup mydata.csv</pre>
+      While yours may differ slightly, that data for us is:
+      <pre>"_time",salesperson,"Cars Sold This Hour"
+1711665905,Rich,1
+1711665905,David,1
+1711662305,Rich,0
+1711662305,David,0
+1711658705,Rich,1
+1711658705,David,2
+1711655105,Rich,2
+1711655105,David,3</pre>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        This is the data
+      </html>
+      <title>Raw data</title>
+      <table>
+        <search>
+          <query>| inputlookup mydata.csv</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <html>
+        And here's the data with <tt>rare "Cars Sold This Hour"</tt> applied.  "3" is the least common, so it's at the top. 
+      </html>
+      <title>Using rare</title>
+      <table>
+        <search>
+          <query>| inputlookup mydata.csv | rare "Cars Sold This Hour"</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>

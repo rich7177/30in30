@@ -1,0 +1,81 @@
+<dashboard version="1.1" theme="light">
+  <label>chart</label>
+  <row>
+    <panel>
+      <html>
+      <p>What: Similar to <tt>timechart</tt> and <tt>stats</tt>, but has the ability to use both axes at once.</p>
+      <ol>
+        <li><tt>OVER</tt> is the Y axis</li>
+        <li><tt>BY</tt> is the X axis</li>
+        <li>You actually don't need to use both parameters if you don't want.</li>
+      </ol>
+      <p>How: <tt>chart &lt;aggregation terms&gt; OVER &lt;field&gt; BY &lt;field&gt;</tt></p>
+      <p>Why: <tt>chart</tt> does a job that's nearly impossible without it.  See the examples!</p>
+      <p>So What: Usually, but not always, <tt>chart</tt> is a command to </p>
+      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/chart">chart</a>.
+      </p>
+      <p>Extra Notes here</p>
+      <p>Previous Command - <a href="eventstats">eventstats</a>
+        </p>
+      <p>Next Command - <a href="Contents">Back to Contents</a>
+        </p>
+      </html>
+    </panel>
+    <panel>
+      <html>
+      <p>The data we are using for this command:
+      <pre>SPL_GOES_HERE</pre>
+        </p>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        Adding <tt>| chart  sum("Cars Sold This Hour") as "Cars Sold This Hour" over salesperson by _time</tt> changed it into a two-important-axis chart.
+      </html>
+      <title>A simple example using our test data.</title>
+      <table>
+        <search>
+          <query>| inputlookup mydata.csv | eval _time = strftime(_time, "%Y-%m-%d %H:%M:%S") 
+| chart  sum("Cars Sold This Hour") as "Cars Sold This Hour" over salesperson by _time</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        NOTES FOR DATA
+      </html>
+      <title>EXAMPLE TITLE</title>
+      <table>
+        <search>
+          <query>index=_internal | chart count over action by level</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>

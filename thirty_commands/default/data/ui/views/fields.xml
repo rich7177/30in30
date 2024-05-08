@@ -1,0 +1,110 @@
+<dashboard version="1.1" theme="light">
+  <label>fields</label>
+  <row>
+    <panel>
+      <html>
+      <p>What: Only keep and use what you need</p>
+      <ol>
+        <li><tt>fields</tt> returns only the fields you specify, and removes the rest from the working data set</li>
+        <li>Use <tt>fields</tt> anywhere in the SPL to slim down the data set</li>
+        <li>It's okay to use <tt>fields</tt> multiple times in the same SPL</li>
+        <li><tt>fields</tt> can keep [+] or remove [-] the field list presented</li>
+      </ol>
+      <p>How: <tt>| fields [+|-] &lt;field&gt;, &lt;field&gt;, ...</tt>
+        </p>
+      <p>Why: Nuke unnecessary fields in data, keep the fields you need</p>
+      <p>So What: Return results faster, clean up output, save memory and processing resources, and don't confuse with <tt>table</tt>.</p>
+      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/fields">fields</a>.
+      </p>
+      <p>Previous Command - <a href="eval">eval</a>
+        </p>
+      <p>Next Command - <a href="table">table</a>
+        </p>
+      </html>
+    </panel>
+    <panel>
+      <html>
+      <p>The data we are using for this command:
+      <pre>| index=internal sourcetype=splunkd earliest=-24h</pre>
+        </p>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html><p>Return all the fields</p>
+      <pre>index=_internal sourcetype=splunkd earliest=-24h  
+| eval size=len(_raw) 
+| stats sum(size) as datasize 
+| table datasize
+| eval datasize=tostring(datasize, "commas")</pre>
+Note the data size and duration to run. Note that everything after <tt>fields</tt> is used to calculate the size of the data set returned.
+</html>
+      <table>
+        <search>
+          <query>index=_internal sourcetype=splunkd earliest=-24h  
+| eval size=len(_raw) 
+| stats sum(size) as datasize 
+| table datasize
+| eval datasize=tostring(datasize, "commas")</query>
+          <progress>
+            <eval token="duration1">tostring(tonumber($job.runDuration$),"duration")</eval>
+          </progress>
+          <earliest>-1h@m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">2</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+      <html>
+          <h3>Duration</h3>
+          <div class="custom-result-value">$duration1$</div>
+      </html>
+    </panel>
+    <panel>
+      <html>
+        <p>Now let's ask for only the fields we care about</p>
+<pre>index=_internal sourcetype=splunkd earliest=-24h 
+| fields component group 
+| eval size=len(component)+len(group) 
+| stats sum(size) as datasize 
+| table datasize
+| eval datasize=tostring(datasize, "commas")</pre>
+Note the data size and duration to run. Note that everything after <tt>fields</tt> is used to calculate the size of the data set returned.
+</html>
+      <table>
+        <search>
+          <query>index=_internal sourcetype=splunkd earliest=-24h 
+| fields component group 
+| eval size=len(component)+len(group) 
+| stats sum(size) as datasize 
+| table datasize
+| eval datasize=tostring(datasize, "commas")</query>
+          <progress>
+            <eval token="duration2">tostring(tonumber($job.runDuration$),"duration")</eval>
+          </progress>
+          <earliest>-1h@m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">2</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+      <html>
+          <h3>Duration</h3>
+          <div class="custom-result-value">$duration2$</div>
+      </html>
+    </panel>
+  </row>
+</dashboard>

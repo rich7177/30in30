@@ -1,0 +1,83 @@
+<dashboard version="1.1" theme="light">
+  <label>lookup</label>
+  <row>
+    <panel>
+      <html>
+      <p>What: Efficiently "augments" existing data with information from a CSV.</p>
+      <ol>
+        <li>Can be made to function automatically.</li>
+        <li>Vastly more efficient than variations with <tt>append</tt></li>
+      </ol>
+      <p>How: lookup &lt;lookup name&gt; &lt;lookup field&gt; AS &lt;matching field in data&gt; OUTPUT/OUTPUTNEW &lt;field in lookup&gt; AS &lt;new name for field from lookup&gt; &lt;maybe another field from lookup&gt; AS &lt;and a new name for it&gt;</p>
+      <p>Why: Extremely efficient at adding in relatively small (e.g. not TB!) set of reasonably static data.</p>
+      <p>So What: Commonly used to do things like convert status codes into status strings.  Instead of "404" you could build a new field that said "Not Found".</p>
+      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/lookup">lookup</a>.
+      </p>
+      <p>Previous Command - <a href="inputlookup">inputlookup</a>
+        </p>
+      <p>Next Command - <a href="eval">eval</a>
+        </p>
+      </html>
+    </panel>
+    <panel>
+       <html>
+      <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
+      <pre>| inputlookup mydata.csv</pre>
+      <p>You'll see what this looks like in the first data pane below.</p>
+<p>And also a new lookup created with <a href="outputlookup"><tt>outputlookup</tt></a> -</p><pre>| makeresults format=csv data="count, outcome
+0,Fired
+1,Warned
+2,OK
+3,Bonus!"
+| outputlookup rich_outcomes.csv</pre>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        Note this is just the contents of the lookup that we built ages ago.
+      </html>
+      <title>Original Data</title>
+      <table>
+        <search>
+          <query>| inputlookup mydata.csv</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <html>
+        By adding <tt>| lookup rich_outcomes.csv count AS "Cars Sold This Hour" OUTPUT outcome as Outcome"</tt> to the end, look what happens!
+      </html>
+      <title>Data with lookup</title>
+      <table>
+        <search>
+          <query>| inputlookup mydata.csv | lookup rich_outcomes.csv count AS "Cars Sold This Hour" OUTPUT outcome as Outcome </query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row><panel><html>Note - normally you would use this command against lookups that were defined via the UI (or in .conf files).  By doing it the way we're doing it, we have to specify the CSV file exactly (including the ".csv" at the end), otherwise it works just the same.  Except of course we can make these "automatic".  To do that, see the fine <a href="https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Makeyourlookupautomatic">docs on lookups</a>.</html></panel></row>
+</dashboard>
