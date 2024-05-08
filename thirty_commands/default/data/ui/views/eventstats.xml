@@ -36,7 +36,7 @@
   </row>
   <row>
     <panel>
-      <title></title>
+      <title>Creating a simple average.</title>
         <html>
           <p>
       <pre>| inputlookup mydata.csv
@@ -61,7 +61,7 @@
       </table>
     </panel>
     <panel>
-      <title></title>
+      <title>It also supports a "BY" clause.</title>
               <html>
           <p>
       <pre>| inputlookup mydata.csv
@@ -73,6 +73,65 @@
         <search>
           <query>| inputlookup mydata.csv
 | eventstats avg("Cars Sold This Hour") as "Avg_cars_per_hour" by salesperson</query>
+          <earliest>-30m@m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">100</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  
+  <row>
+    <panel>
+      <title>Creating a percent of total field</title>
+        <html>
+          <p>
+      <pre>| inputlookup mydata.csv
+| eventstats sum("Cars Sold This Hour") as "total_cars"
+| eval percent_of_total = (('Cars Sold This Hour' / total_cars) * 100) . "%"</pre>
+Also you may notice why you shouldn't use fields with spaces in them.  
+        </p>
+      </html>
+      <table>
+        <search>
+          <query>| inputlookup mydata.csv
+| eventstats sum("Cars Sold This Hour") as "total_cars"
+| eval percent_of_total = (('Cars Sold This Hour' / total_cars) * 100) . "%"</query>
+          <earliest>-30m@m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">100</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <title>Combining the above things</title>
+              <html>
+          <p> Creates a total per salesperson, then tells you what percentage of that person's sales were each hour.
+      <pre>| inputlookup mydata.csv
+| eventstats avg("Cars Sold This Hour") as "total_cars_for_this_salesperson" by salesperson
+| eval percent_of_total = (('Cars Sold This Hour' / total_cars_for_this_salesperson) * 100) . "%"</pre>
+        </p>
+      </html>
+
+      <table>
+        <search>
+          <query>| inputlookup mydata.csv
+| eventstats sum("Cars Sold This Hour") as "total_cars_for_this_salesperson" by salesperson
+| eval percent_of_total = (('Cars Sold This Hour' / total_cars_for_this_salesperson) * 100) . "%"</query>
           <earliest>-30m@m</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
