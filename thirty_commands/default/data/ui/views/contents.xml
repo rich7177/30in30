@@ -8,6 +8,11 @@
   </row>
   <row>
     <panel>
+      <html></html>
+    </panel>
+  </row>
+  <row>
+    <panel>
       <html>
         <h1>Generating Commands</h1>
         <p><tt><a href="gentimes">gentimes</a></tt> and <tt><a href="makeresults">makeresults</a></tt> can *directly* create events.  The former can generate a sequence of time-stamped events, and the latter can generate either a single stub event, or can be used to generate data from a small inline CSV or JSON data set.</p>
@@ -29,10 +34,15 @@
   </row>
   <row>
     <panel>
+      <html></html>
+    </panel>
+  </row>
+  <row>
+    <panel>
       <html>
         <h1>What can I do with the data I just wrote using outputlookup?</h1>
         <p>Now that we have data "created", how might we read that back in to use it again?</p>
-        <p><tt><a href="inputlookup">inputlookup</a></tt> and <a href="lookup"><tt>lookup</tt></a>to the rescue!</p>
+        <p><tt><a href="inputlookup">inputlookup</a></tt> and <a href="lookup"><tt>lookup</tt></a> to the rescue!</p>
       </html>
     </panel>
     <panel>
@@ -43,6 +53,11 @@
           <tr><td style="border: 1px solid black;"><tt>inputcsv</tt></td><td style="border: 1px solid black;">NOT covered here, but is much like inputlookup only reads files created by outputcsv and which live in a different folder.</td></tr>
         </table> 
       </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html></html>
     </panel>
   </row>
   <row>
@@ -63,6 +78,11 @@
   </row>
   <row>
     <panel>
+      <html></html>
+    </panel>
+  </row>
+  <row>
+    <panel>
       <html>
         <h1>Table vs. Fields, which does what?</h1>
         <p>A pair of commands, <tt><a href="fields">fields</a></tt> and <tt><a href="table">table</a></tt> which are often confused, but are worlds apart for what they actually do.  <tt>table</tt> is for prettifying things, but can have enormous [negative] performance implications.  <tt>fields</tt> on the other hand doesn't make things much prettier but is the complete opposite with respect to performance and is very useful to optimize searches.</p>
@@ -76,6 +96,11 @@
           <tr><td style="border: 1px solid black;"><tt><a href="fields">fields</a></tt></td><td style="border: 1px solid black;">Removes fields from the existing output stream, often for increased performance.</td></tr>
         </table> 
       </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html></html>
     </panel>
   </row>
   <row>
@@ -99,6 +124,11 @@
   </row>
   <row>
     <panel>
+      <html></html>
+    </panel>
+  </row>
+  <row>
+    <panel>
       <html>
         <h1>The first and easiest of the data analytics commands</h1>
         <p><tt><a href="head">head</a></tt>, <tt><a href="tail">tail</a></tt>, <tt><a href="top">top</a></tt>,and <tt><a href="rare">rare</a></tt> all work in similar ways, and their names are a giveaway.  </p>
@@ -114,6 +144,11 @@
           <tr><td style="border: 1px solid black;"><tt><a href="rare">rare</a></tt></td><td style="border: 1px solid black;">The inverse of <tt>top</tt>, <tt>rare</tt> shows you the least common of the different values of a field. (The "rarest 10" by default).</td></tr>
         </table> 
       </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html></html>
     </panel>
   </row>
   <row>
@@ -135,6 +170,11 @@
   </row>
   <row>
     <panel>
+      <html></html>
+    </panel>
+  </row>
+  <row>
+    <panel>
       <html>
         <h1>Flipping X with Y</h1>
         <p><tt><a href="transpose">transpose</a></tt> is in a class of its own.  When used it swaps your X and your Y axes.</p>
@@ -147,6 +187,11 @@
           <tr><td style="border: 1px solid black;"><a href="transpose"><tt>transpose</tt></a></td><td style="border: 1px solid black;">Swap your X and your Y.</td></tr>
         </table> 
       </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html></html>
     </panel>
   </row>
   <row>
@@ -164,6 +209,11 @@
           <tr><td style="border: 1px solid black;"><tt><a href="untable">untable</a></tt></td><td style="border: 1px solid black;">Converts data into a more "tabular" form.</td></tr>
         </table> 
       </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html></html>
     </panel>
   </row>
   <row>
@@ -186,6 +236,11 @@
   </row>
   <row>
     <panel>
+      <html></html>
+    </panel>
+  </row>
+  <row>
+    <panel>
       <html>
         <h1>So, I'm weird and this is my favorite command.</h1>
         <p>While it's a fairly niche command, I think <a href="reltime"><tt>reltime</tt></a> underutilized.  Makes times into things like "5 minutes ago".</p>
@@ -198,6 +253,11 @@
           <tr><td style="border: 1px solid black;"><tt><a href="reltime">reltime</a></tt></td><td style="border: 1px solid black;">Converts times into a human-readable difference in time from "now", like "2 days ago".</td></tr>
         </table> 
       </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html></html>
     </panel>
   </row>
   <row>
@@ -218,6 +278,11 @@
   </row>
   <row>
     <panel>
+      <html></html>
+    </panel>
+  </row>
+  <row>
+    <panel>
       <html>
         <h1>Regular Expressions are FUN!</h1>
         <p><a href="regex"><tt>regex</tt></a> and <a href="rex"><tt>rex</tt></a> both involve regular expressions, but in completely different ways.  <tt>regex</tt> lets you filter events by a regular expression, and <tt>rex</tt> lets you either create new fields from parsing "things" with regular expressions, or lets you do some simple replacing/substitution (using mode=sed).</p>
@@ -231,6 +296,11 @@
           <tr><td style="border: 1px solid black;"><tt><a href="rex">rex</a></tt></td><td style="border: 1px solid black;">Uses regular expressions to *CREATE* new fields from existing data.</td></tr>
         </table> 
       </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html></html>
     </panel>
   </row>
   <row>

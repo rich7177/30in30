@@ -14,7 +14,7 @@
         </p>
       <p>Why: Easy way to enrich the results set and provide context beyond the event data</p>
       <p>So What: We'll use it a lot in this workshop and you'll use it a lot once you understand what it does</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/InputlookupE">Inputlookup</a>.
+      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/inputlookup">inputlookup</a>.
       </p>
       <p>Previous Command - <a href="outputlookup">outputlookup</a>
         </p>
