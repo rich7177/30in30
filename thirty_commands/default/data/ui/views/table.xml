@@ -1,0 +1,160 @@
+<dashboard version="1.1" theme="light">
+  <label>table</label>
+  <row>
+    <panel>
+      <html>
+      <p>What: Structure a table of data for humans</p>
+      <ol>
+        <li><tt>Table</tt> returns only the fields you specify</li>
+        <li>Cannot be used to rename fields.  Which is a huge let-down, but no one seems interested in fixing it.</li>
+        <li>Use <tt>table</tt> at the end of your SPL; it can significantly impact performance when used too early!</li>
+      </ol>
+      <p>How: <tt>| table &lt;field&gt;, &lt;field&gt;, ...</tt>
+        </p>
+      <p>Why: Sometimes people need to read data too!</p>
+      <p>So What: Make your results pretty, and don't confuse it with <tt>fields</tt>.</p>
+      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/table">table</a>.
+      </p>
+      <p>Previous Command - <a href="fields">fields</a>
+        </p>
+      <p>Next Command - <a href="append">append</a>
+        </p>
+      </html>
+    </panel>
+    <panel>
+      <html>
+      <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
+      <pre>| inputlookup mydata.csv</pre>
+      While yours may differ slightly, that data for us is:
+      <pre>"_time",salesperson,"Cars Sold This Hour"
+1711665905,Rich,1
+1711665905,David,1
+1711662305,Rich,0
+1711662305,David,0
+1711658705,Rich,1
+1711658705,David,2
+1711655105,Rich,2
+1711655105,David,3</pre>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        <p>Adding <tt>| table "Cars Sold This Hour", salesperson</tt> to the end of the search.</p>
+      </html>
+      <table>
+        <search>
+          <query>| inputlookup mydata.csv | table "Cars Sold This Hour", salesperson</query>
+          <earliest>-1h@m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">2</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+     <panel>
+      <html>
+        <p>Skipping more fields by just adding <tt>| table salesperson</tt> to the end of the search.</p>
+      </html>
+      <table>
+        <search>
+          <query>| inputlookup mydata.csv | table salesperson</query>
+          <earliest>-1h@m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">2</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+
+  </row>
+  <row>
+    <html><hr style="height: 4px;" /></html>
+  </row>
+  <row>
+    <panel>
+      <html>
+        <p>Remember our fields example?  Here we add a <tt>table</tt> and a <tt>fields</tt> command on one order:.</p>
+      <pre>index=_internal sourcetype=splunkd earliest=-1h
+| fields component group 
+| table * 
+| eval _raw=substr(_raw,1,50) 
+| eval _raw=_raw . "..."</pre>
+Runs faster as its returning only 2 fields (plus _raw and _time). Note the eval's are there just to make it more readable.
+</html>
+      <table>
+        <search>
+          <query>index=_internal sourcetype=splunkd earliest=-1h
+| fields component group 
+| table * 
+| eval _raw=substr(_raw,1,50) 
+| eval _raw=_raw . "..."</query>
+          <progress>
+            <eval token="duration1">tostring(tonumber($job.runDuration$),"duration")</eval>
+          </progress>
+          <earliest>-1h@m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">2</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+      <html>
+          <h3>Duration</h3>
+          <div class="custom-result-value">$duration1$</div>
+      </html>
+    </panel>
+    <panel>
+            <html>
+        <p>Now let's flip the <tt>table</tt> and a <tt>fields</tt>:</p>
+<pre>index=_internal sourcetype=splunkd earliest=-1h
+| table *
+| fields component group 
+| eval _raw=substr(_raw,1,50) 
+| eval _raw=_raw . "..."</pre>
+Runs slower showing only the same fields, but this time it did the work for *all* the fields and only threw them away at the very end. Note the eval's are there just to make it more readable.
+</html>
+      <table>
+        <search>
+          <query>index=_internal sourcetype=splunkd earliest=-1h
+| table *| fields component group | eval _raw=substr(_raw,1,50) | eval _raw=_raw . "..."</query>
+          <progress>
+            <eval token="duration2">tostring(tonumber($job.runDuration$),"duration")</eval>
+          </progress>
+          <earliest>-1h@m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">2</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+            <html>
+          <h3>Duration</h3>
+          <div class="custom-result-value">$duration2$</div>
+      </html>
+    </panel>
+  </row>
+</dashboard>

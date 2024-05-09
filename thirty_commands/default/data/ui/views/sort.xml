@@ -1,0 +1,137 @@
+<dashboard version="1.1" theme="light">
+  <label>sort</label>
+  <row>
+    <panel>
+      <html>
+      <p>What: I'll give you three guesses as to what it does.</p>
+      <ol>
+        <li>Can sort ascending, descending, and a mixture of those.</li>
+        <li>Can also sort with special fields, like by <tt>ip(&lt;field&gt;)</tt></li>
+      </ol>
+      <p>How: <tt>sort [limit=N] +/-&lt;field&gt; +/-&lt;field&gt;...</tt></p>
+      <p>Why: I mean, come on. Of course you occasionally need to sort things!  For a simple and specific case, see also <a href="reverse"><tt>reverse</tt></a></p>
+      <p>So What: Often useful after a stats or top/rare or some other "grouping and statistics" function.</p>
+      <p>Be aware that <tt>sort</tt> has a built in default limit of 10000. First argument may be a number, and if it set to 0, all results are returned.</p>
+      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/sort">sort</a>.
+      </p>
+      <p>Previous Command - <a href="rare">rare</a>
+        </p>
+      <p>Next Command - <a href="reverse">reverse</a>
+        </p>
+      </html>
+    </panel>
+    <panel>
+      <html>
+      <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
+      <pre>| inputlookup mydata.csv</pre>
+      While yours may differ slightly, that data for us is:
+      <pre>"_time",salesperson,"Cars Sold This Hour"
+1711665905,Rich,1
+1711665905,David,1
+1711662305,Rich,0
+1711662305,David,0
+1711658705,Rich,1
+1711658705,David,2
+1711655105,Rich,2
+1711655105,David,3</pre>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        Sorted most simply, with the default "ascending" on one field, "Cars Sold This Hour"
+      </html>
+      <title>Simple sort</title>
+      <table>
+        <search>
+          <query>| inputlookup mydata.csv
+| sort "Cars Sold This Hour"</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <html>
+        Flipping the sort to be "descending" for "Cars Sold This Hour"
+      </html>
+      <title>Simple sort, descending</title>
+      <table>
+        <search>
+          <query>| inputlookup mydata.csv
+| sort -"Cars Sold This Hour"</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+</row>
+  <row>
+    <panel>
+      <html>
+        More complex sort - "salesperson" ascending (David first), "Cars Sold This Hour" descending
+      </html>
+      <title>Complex sort</title>
+      <table>
+        <search>
+          <query>| inputlookup mydata.csv
+| sort +salesperson -"Cars Sold This Hour"</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <html>
+        More complex sort - "salesperson" and "Cars Sold This Hour" both ascending
+      </html>
+      <title>Complex sort</title>
+      <table>
+        <search>
+          <query>| inputlookup mydata.csv
+| sort +salesperson +"Cars Sold This Hour"</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+</row>
+
+</dashboard>

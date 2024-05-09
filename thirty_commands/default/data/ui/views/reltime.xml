@@ -1,0 +1,68 @@
+<dashboard version="1.1" theme="light">
+  <label>reltime</label>
+  <row>
+    <panel>
+      <html>
+      <p>What: Creates a human-readable time from _time, like "A day ago".</p>
+      <ol>
+        <li>Recently "updated" to add support for additional fields.</li>
+      </ol>
+      <p>How: <tt>reltime [timefield="field-list"][prefix=string"]</tt></p>
+      <p>Why: Very useful for human-readable dates/times.</p>
+      <p>So What: The admiration of colleagues.</p>
+      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/reltime">reltime</a>.
+      </p>
+      <p>Was previous *very* limited, but recently they added some functionality. Still waiting for "future" timespans to work well though.</p>
+      <p>Previous Command - <a href="fillnull">fillnull</a>
+        </p>
+      <p>Next Command - <a href="rename">rename</a>
+        </p>
+      </html>
+    </panel>
+    <panel>
+      <html>
+      <p>We'll use a customized makeresults that generates a list of various "times ago" to see how they behave.
+      <pre>| makeresults format="csv" data="time_adjust
+-500
+60
+1000
+30000
+400000"
+| eval time = now() - time_adjust</pre>
+        </p>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        Works for quite far in the past (hundreds of years!) but all future dates just say <tt>future</tt>.
+      </html>
+      <title>Conversion of times to "16 minutes ago" by using reltime</title>
+      <table>
+        <search>
+          <query>| makeresults format="csv" data="time_adjust
+-500
+60
+1000
+30000
+400000"
+| eval time = now() - time_adjust
+| eval _time = strftime(time, "%Y-%m-%d %H:%M:%S")
+| reltime timefield=time</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>

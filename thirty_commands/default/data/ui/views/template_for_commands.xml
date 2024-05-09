@@ -1,0 +1,54 @@
+<dashboard version="1.1" theme="light">
+  <label>Template - COMMAND_NAME</label>
+  <row>
+    <panel>
+    <html>
+      <p>What: Short description of command</p>
+      <ol>
+        <li>Note 1 if needed </li>
+        <li>Note 2 if needed</li>
+      </ol>
+      <p>How: BASIC SYNTAX HERE</p>
+      <p>Why: WHY SHOULD I CARE?</p>
+      <p>So What: WHAT DO I GET OUT OF IT?</p>
+      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/COMMAND_NAME">COMMAND_NAME</a>.
+      </p>
+      <p>Extra Notes here</p>
+      <p>Previous Command - <a href="PREV_COMMAND">PREV_COMMAND</a></p>
+      <p>Next Command - <a href="NEXT_COMMAND">NEXT_COMMAND</a></p>
+      </html>
+</panel>
+<panel>
+    <html>
+      <p>The data we are using for this command:
+      <pre>SPL_GOES_HERE</pre>
+        </p>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        NOTES FOR DATA
+      </html>
+      <title>EXAMPLE TITLE</title>
+      <table>
+        <search>
+          <query>SPL_GOES_HERE</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+
+</dashboard>

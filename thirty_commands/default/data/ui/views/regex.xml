@@ -1,0 +1,84 @@
+<dashboard version="1.1" theme="light">
+  <label>regex</label>
+  <row>
+    <panel>
+      <html>
+      <p>What: Filters data based on a regular expression.  Can include or exclude lines.</p>
+      <ol>
+        <li>Don't confuse with the command rex!</li>
+        <li>Be aware that pipes <tt>|</tt> and backslashes <tt>\</tt> need special attention.</li>
+      </ol>
+      <p>How: <tt>| regex &lt;regex-expression&gt;|&lt;field&gt;=&lt;regex-expression&gt;</tt></p>
+      <p>Why: More complex filtering/searching is possible through it.</p>
+      <p>So What: I honestly have never used it in a production environment.  I prefer using rex to create a new field out of the things I want/don't want and then use a standard <tt>| search ...</tt> to do this instead.  I know, I'm crazy.</p>
+      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/regex">regex</a>.
+      </p>
+      <p>Previous Command - <a href="rename">rename</a>
+        </p>
+      <p>Next Command - <a href="rex">rex</a>
+        </p>
+      </html>
+    </panel>
+    <panel>
+      <html>
+      <p>The data we are using for this command:
+      <pre>| inputlookup mydata.csv
+| rename "Cars Sold This Hour" AS carsSoldPerHour
+| eval carsSoldPerHour = 6 * carsSoldPerHour</pre>
+        </p>
+      Note that we use our base lookup, but a) I <tt>rename</tt> that terribly long fieldname with spaces (now that we know how to do that), and b) I also multiply the number of cars per hour by 6 to give us some neat things to work with.
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        Note the x6 of the cars sold per hour, and it being renamed.
+      </html>
+      <title>Original (slightly modified) data</title>
+      <table>
+        <search>
+          <query>| inputlookup mydata.csv
+| rename "Cars Sold This Hour" AS carsSoldPerHour
+| eval carsSoldPerHour = 6 * carsSoldPerHour</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+      <panel>
+      <html>
+        Filtered with <tt>| regex carsSoldPerHour="\d{2,}"</tt> which tells it to include only rows where carsSoldPerHour is two or more digits.
+      </html>
+      <title>Regex is fun!</title>
+      <table>
+        <search>
+          <query>| inputlookup mydata.csv
+      | rename "Cars Sold This Hour" AS carsSoldPerHour
+      | eval carsSoldPerHour = 6 * carsSoldPerHour
+      | regex carsSoldPerHour="\d{2,}"</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+</row>
+</dashboard>
