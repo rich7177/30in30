@@ -1,0 +1,133 @@
+<dashboard version="1.1" theme="light">
+  <label>rex</label>
+  <row>
+    <panel>
+      <html>
+      <p>What: Create/extract new fields from existing data using regular expressions, or replace/substitute charactesr using SED mode expressions.</p>
+      <ol>
+        <li>Don't confuse with the command <tt>regex</tt> which *filters* events.</li>
+        <li>Can pull multiple new fields from a single <tt>rex</tt> call.</li>
+      </ol>
+      <p>How: <tt>| rex field=foo (bunch of regular expression stuff)</tt>
+        </p>
+      <p>Why: Sometimes your data isn't fully extracted, so this command can help with that.</p>
+      <p>So What: Incredibly useful, often you'll end up creating a proper props.conf EXTRACT out of what you build here.  Not always, but often.</p>
+      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/rex">rex</a>.
+      </p>
+      <p>Also there's a few more flags you can use that can be useful.  See the docs.</p>
+      <p>As awesome as Splunk is, <a href="http://regex101.com">regex101.com</a> is the bees knees for quickly and visually testing out regex expressions on small data sets.</p>
+      <p>Check out <a href="https://conf.splunk.com/sessions/catalog.html?search=BORE#/">Clara and Cary's BORE: Boss Of Regular Expressions (PLA1127C)</a> competition workshop this year!</p>
+      <p>Previous Command - <a href="regex">regex</a>
+        </p>
+      <p>Next Command - <a href="timechart">timechart</a>
+        </p>
+      </html>
+    </panel>
+    <panel>
+      <html>
+      <p>The data we are using for this command:
+      <pre>| makeresults format=csv data="_raw
+activity=yelling loudly; account=12345678-1234; extra information=this is a terrible log format;"</pre>
+        We needed a "better example" data set to work with for this.
+        </p>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Original Data</title>
+      <html>
+        Let's pretend your logs are terrible, like these are.
+      </html>
+      <table>
+        <search>
+          <query>| makeresults format=csv data="_raw
+activity=yelling loudly; account=12345678-1234; extra information=this is a terrible log format;"</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <title>Single Field Extract</title>
+      <html>
+        Using <tt>| rex "activity=(?&lt;extracted_activity&gt;[^;]*)"</tt> we'll extract a new field, "extracted_activity", by including any characters up to the first semicolon after 'activity='.
+      </html>
+      <table>
+        <search>
+          <query>| makeresults format=csv data="_raw
+activity=yelling loudly; account=12345678-1234; extra information=this is a terrible log format;"
+| rex "activity=(?&lt;extracted_activity&gt;[^;]*)"</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Multiple Field Extract</title>
+      <html>
+        Using <tt>| rex "activity=(?&lt;extracted_activity&gt;.*); account=(?&lt;acct_num&gt;.*); extra information=(?&lt;everything_else&gt;.*);"</tt> we'll extract all the fields in the event.
+      </html>
+      <table>
+        <search>
+          <query>| makeresults format=csv data="_raw
+activity=yelling loudly; account=12345678-1234; extra information=this is a terrible log format;" 
+| rex "activity=(?&lt;extracted_activity&gt;.*); account=(?&lt;acct_num&gt;.*); extra information=(?&lt;everything_else&gt;.*);"</query>
+          <earliest>-30m@m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">100</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <title>Sed mode for obfuscation</title>
+      <html>
+        Using <tt>| rex mode=sed "s/(\d{8})-\d{4}/XXXXXXXX-YYYY/g"</tt> we'll obfuscate sensitive information.
+      </html>
+      <table>
+        <search>
+          <query>| makeresults format=csv data="_raw
+activity=yelling loudly; account=12345678-1234; extra information=this is a terrible log format;" 
+| rex mode=sed "s/(\d{8})-\d{4}/XXXXXXXX-YYYY/g"</query>
+          <earliest>-30m@m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">100</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>

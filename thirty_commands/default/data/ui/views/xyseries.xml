@@ -1,0 +1,96 @@
+<dashboard version="1.1" theme="light">
+  <label>xyseries</label>
+  <row>
+    <panel>
+      <html>
+      <p>What: Converts results into a tabular format.</p>
+      <p>How: <tt>xyseries &lt;x-field&gt; &lt;y-name-field&gt; &lt;y-data-field&gt; </tt></p>
+      <p>Why: Twists data around to show it in a completely different format.</p>
+      <p>So What: In addition to changing the "look" of data, it can occasionally be used to reformat data so that other manipulation can be done.  See also <a href="untable"><tt>untable</tt></a> which is the inverse of this command.  Another similar command is <a href="transpose"><tt>transpose</tt></a>.</p>
+      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/xyseries">xyseries</a>.
+      </p>
+      <p>Extra Notes here</p>
+      <p>Previous Command - <a href="transpose">transpose</a>
+        </p>
+      <p>Next Command - <a href="untable">untable</a>
+        </p>
+      </html>
+    </panel>
+    <panel>
+      <html>
+      <p>The data we are using for this command:
+      <pre>| makeresults format="csv" data="location, conditions, observations 
+The Town Hall, Sunny, 14
+The Town Hall, Cloudy, 5 
+The Town Hall, Partly Cloudy, 6
+The Park, Sunny, 23
+The Park, Cloudy, 2
+The Park, Partly Cloudy, 9"
+| eval _time = strptime(time, "%Y-%m-%dT%H:%M:%S")
+</pre>
+        </p>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        Note we're using a different data set, because xyseries requires more axes.
+      </html>
+      <title>Original Data</title>
+      <table>
+        <search>
+          <query>| makeresults format="csv" data="location, conditions, observations 
+The Town Hall, Sunny, 14
+The Town Hall, Cloudy, 5 
+The Town Hall, Partly Cloudy, 6
+The Park, Sunny, 23
+The Park, Cloudy, 2
+The Park, Partly Cloudy, 9"
+| eval _time = strptime(time, "%Y-%m-%dT%H:%M:%S")</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <html>
+        Appended <tt>| xyseries location conditions observations</tt> to the end of the search.
+      </html>
+      <title>Reformatted with xyseries</title>
+      <table>
+        <search>
+          <query>| makeresults format="csv" data="location, conditions, observations 
+The Town Hall, Sunny, 14
+The Town Hall, Cloudy, 5 
+The Town Hall, Partly Cloudy, 6
+The Park, Sunny, 23
+The Park, Cloudy, 2
+The Park, Partly Cloudy, 9"
+| eval _time = strptime(time, "%Y-%m-%dT%H:%M:%S")
+| xyseries location conditions observations</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>

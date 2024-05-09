@@ -1,0 +1,87 @@
+<dashboard version="1.1" theme="light">
+  <label>reverse</label>
+  <row>
+    <panel>
+      <html>
+      <p>What: You only get two guesses for this one.<br/>
+      Reverses a list from whatever order it's in to "upside down."</p>
+      <p>How: <tt>| reverse</tt>
+        </p>
+      <p>Why: A special case of sort, to just flip it upside down.  See also <a href="sort">
+            <tt>sort</tt>
+          </a> for a more generic sorter.
+        </p>
+      <p>So What: Fairly rare to use this.  Also in really large result sets this can be slow and take a lot of RAM and temporary disk space.  Because obviously.</p>
+      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/reverse">reverse</a>.
+      </p>
+      <p>Previous Command - <a href="sort">sort</a>
+        </p>
+      <p>Next Command - <a href="transpose">transpose</a>
+        </p>
+      </html>
+    </panel>
+    <panel>
+      <html>
+      <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
+      <pre>| inputlookup mydata.csv</pre>
+      While yours may differ slightly, that data for us is:
+      <pre>"_time",salesperson,"Cars Sold This Hour"
+1711665905,Rich,1
+1711665905,David,1
+1711662305,Rich,0
+1711662305,David,0
+1711658705,Rich,1
+1711658705,David,2
+1711655105,Rich,2
+1711655105,David,3</pre>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        Default order.
+      </html>
+      <title>Original sort order</title>
+      <table>
+        <search>
+          <query>| inputlookup mydata.csv</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <html>
+        Adding <tt>| reverse</tt> after it.
+      </html>
+      <title>Reversed</title>
+      <table>
+        <search>
+          <query>| inputlookup mydata.csv
+| reverse</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>
