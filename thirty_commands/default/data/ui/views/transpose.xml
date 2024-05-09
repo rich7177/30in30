@@ -1,0 +1,90 @@
+<dashboard version="1.1" theme="light">
+  <label>transpose</label>
+  <row>
+    <panel>
+      <html>
+      <p>What: Convert data in rows to data in columns</p>
+      <ol>
+        <li>Field names used in the output are based on how you call the command</li>
+      </ol>
+      <p>How: <tt>| transpose </tt>
+        </p>
+      <p>Why: Few rows with many columns can be hard to read or scroll through</p>
+      <p>So What: Reorient data in a much easier to consume way</p>
+      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Transpose">transpose</a>.
+      </p>
+      <p>Previous Command - <a href="reverse">reverse</a>
+        </p>
+      <p>Next Command - <a href="xyseries">xyseries</a>
+        </p>
+      </html>
+    </panel>
+    <panel>
+      <html>
+      <p>The data we are using for this command:
+      <pre>| makeresults format="csv" data="Name,Pigeons_counted,Location
+Dave,-500,Belfast
+Rich,60,Berlin
+Frankie,1000,Bethlehem
+Sinatra,30000,Barstow
+Flyboy,400000,Boise"</pre>
+        </p>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>This is the raw data</title>
+      <html>
+        Raw data
+      </html>
+      <table>
+        <search>
+          <query>| makeresults format="csv" data="Name,Pigeons_counted,Location
+Dave,-500,Belfast
+Rich,60,Berlin
+Frankie,1000,Bethlehem
+Sinatra,30000,Barstow
+Flyboy,400000,Boise"</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <title>After transpose</title>
+        <html>
+          This is what it looks like after transposing columns for rows and assigning the Name field as headers
+        </html>
+      <table>
+        <search>
+          <query>| makeresults format="csv" data="Name,Pigeons_counted,Location
+Dave,-500,Belfast
+Rich,60,Berlin
+Frankie,1000,Bethlehem
+Sinatra,30000,Barstow
+Flyboy,400000,Boise" | transpose header_field=Name column_name="Who did what now?"</query>
+          <earliest>-30m@m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">100</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>

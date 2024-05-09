@@ -1,0 +1,198 @@
+<dashboard version="1.1" theme="light">
+  <label>stats</label>
+  <row>
+    <panel>
+      <html>
+      <p>What: Group things together and do statistics on them</p>
+      <ol>
+        <li>Simply can be used to count things</li>
+        <li>When using <b>BY</b>, <tt>stats</tt> returns a row per value</li>
+      </ol>
+      <p>How: <tt>|stats function(field) [AS field], function(field) [AS field], ... [BY field, field, ...]</tt>
+        </p>
+      <p>Why: Primary way to perform aggregration &amp; analysis to data sets in Splunk</p>
+      <p>So What: Slicing &amp; dicing data to fit the narrative you want to tell.  Note that stats is probably the most useful command in all of Splunk. It's a swiss army knife that can do so much.</p>
+      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/stats">stats</a>.
+      </p>
+      <p>Previous Command - <a href="timechart">timechart</a>
+        </p>
+      <p>Next Command - <a href="eventstats">eventstats</a>
+        </p>
+      </html>
+    </panel>
+    <panel>
+      <html>
+      <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a>
+        </p>
+      <pre>| inputlookup mydata.csv</pre>
+      While yours may differ slightly, that data for us is:
+      <pre>"_time",salesperson,"Cars Sold This Hour"
+1711665905,Rich,1
+1711665905,David,1
+1711662305,Rich,0
+1711662305,David,0
+1711658705,Rich,1
+1711658705,David,2
+1711655105,Rich,2
+1711655105,David,3</pre>
+      <p>Also, we'll use some data from _internal:
+      <pre>index=_internal</pre>
+        </p>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Who's Selling Cars?</title>
+      <html>
+        <pre>... | stats values(salesperson)
+      </pre>
+      </html>
+      <table>
+        <search>
+          <query>|inputlookup mydata.csv | stats values(salesperson)</query>
+          <earliest>-5m</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">100</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <title>How many cars sold by day?</title>
+      <html>
+        <pre>... | bin _time span=1d | stats sum("Cars Sold This Hour") AS "Cars Sold By Day" by _time</pre>
+      </html>
+      <table>
+        <search>
+          <query>|inputlookup mydata.csv | bin _time span=1d | stats sum("Cars Sold This Hour") AS "Cars Sold By Day" by _time</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">100</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <title>How many cars did each salesperson sell each day?</title>
+      <html>
+        <pre>... | bin _time span=1d | stats sum("Cars Sold This Hour") AS "Cars Sold By Day" by salesperson, _time</pre>
+      </html>
+      <table>
+        <search>
+          <query>|inputlookup mydata.csv | bin _time span=1d | stats sum("Cars Sold This Hour") AS "Cars Sold By Day" by salesperson, _time</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">100</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>actions vs. levels in _internal</title>
+      <html>Does a two-level stats, counting how many results for each combination of <tt>action</tt> (get_modtime, update_configurations...) and <tt>level</tt> (INFO, ERROR...) (limiting to first 10 results)
+      <pre>... | stats count by action level</pre>
+      </html>
+      <table>
+        <search>
+          <query>index=_internal action=* level=* earliest=-1h | stats count by action level | head 10</query>
+          <earliest>0</earliest>
+          <latest></latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">100</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <title>actions vs. levels in _internal</title>
+      <html>Here we take an average and a 95th percentile for action_time_ms, and list those by savedsearch_name. (Filtering out where there's 4 or fewer results, because "95th percentile" isn't very useful on small results)
+      <pre>... | stats count avg(action_time_ms) as action_time_ms_avg, perc95(action_time_ms) as action_time_ms_p95 by savedsearch_name | search count&gt;=5 | fields - count</pre>
+      </html>
+      <table>
+        <search>
+          <query>index=_internal action_time_ms=* | stats count avg(action_time_ms) as action_time_ms_avg, perc95(action_time_ms) as action_time_ms_p95 by savedsearch_name | search count&gt;=5 | fields - count</query>
+          <earliest>-5m</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">100</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>NOT USING JOIN</title>
+      <html>The Splunk command <tt>join</tt> is almost never what you want.  Here's an example where you combine two completely different sets of data by using <tt>stats</tt> instead of <tt>join</tt>.
+      <pre>(index=_internal sourcetype=splunkd) OR (index=_internal sourcetype=scheduler) 
+| stats sum(run_time) as total_run_time, sum(active_hist_searches) as active_hist_searches by user</pre>
+      The important point here is that the two searches on each side of the <tt>OR</tt> could be *any* two searches. If they share a common field, you use <tt>stats ... by</tt> to group them.
+      </html>
+      <table>
+        <search>
+          <query>(index=_internal sourcetype=splunkd) OR (index=_internal sourcetype=scheduler) 
+| stats sum(run_time) as total_run_time, sum(active_hist_searches) as active_hist_searches by user</query>
+          <earliest>0</earliest>
+          <latest></latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">100</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <title>Gonna do another here too.</title>
+      <html>
+      <pre></pre>
+      </html>
+      <table>
+        <search>
+          <query></query>
+          <earliest>-5m</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">100</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>

@@ -1,0 +1,102 @@
+<dashboard version="1.1" theme="light">
+  <label>untable</label>
+  <row>
+    <panel>
+      <html>
+      <p>What: Flattens/normalizes columns into rows</p>
+      <ol>
+        <li>Position-dependent field ordering</li>
+        <li>First parameter is the x-field to use, the remaining parameters are just the names you want the output to have.</li>
+      </ol>
+      <p>How: untable x-field y-name-field y-data-field</p>
+      <p>Why: Data sometimes comes in already summarized, this is a way to "unsummarize" it.  It's sort of the inverse of <a href="xyseries"><tt>xyseries</tt></a>.</p>
+      <p>So What: I honestly have only used it a few times, but it's great when you need it.</p>
+      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/untable">untable</a>.
+      </p>
+      <p>Previous Command - <a href="xyseries">xyseries</a>
+        </p>
+      <p>Next Command - <a href="makecontinuous">makecontinuous</a>
+        </p>
+      </html>
+    </panel>
+    <panel>
+      <html>
+      <p>The data we are using for this command:
+      <pre>| makeresults format="csv" data="location, conditions, observations 
+The Town Hall, Sunny, 14
+The Town Hall, Cloudy, 5 
+The Town Hall, Partly Cloudy, 6
+The Park, Sunny, 23
+The Park, Cloudy, 2
+The Park, Partly Cloudy, 9"
+| eval _time = strptime(time, "%Y-%m-%dT%H:%M:%S")
+| table location, conditions, observations
+</pre> NOTE that the <tt>table</tt> command is *only* there to enforce column ordering!  It has nothing to do with the <tt>untable</tt> command.
+        </p>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        Original data, see notes above about <tt>table</tt>.
+      </html>
+      <title>Original Data</title>
+      <table>
+        <search>
+          <query>| makeresults format="csv" data="location, conditions, observations 
+The Town Hall, Sunny, 14
+The Town Hall, Cloudy, 5 
+The Town Hall, Partly Cloudy, 6
+The Park, Sunny, 23
+The Park, Cloudy, 2
+The Park, Partly Cloudy, 9"
+| eval _time = strptime(time, "%Y-%m-%dT%H:%M:%S")
+| table location, conditions, observations</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <html>
+        Added <tt>| untable location item value</tt> to the end.  
+      </html>
+      <title>After using untable</title>
+      <table>
+        <search>
+          <query>| makeresults format="csv" data="location, conditions, observations 
+The Town Hall, Sunny, 14
+The Town Hall, Cloudy, 5 
+The Town Hall, Partly Cloudy, 6
+The Park, Sunny, 23
+The Park, Cloudy, 2
+The Park, Partly Cloudy, 9"
+| eval _time = strptime(time, "%Y-%m-%dT%H:%M:%S")
+| table location, conditions, observations
+| untable location item value</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>
