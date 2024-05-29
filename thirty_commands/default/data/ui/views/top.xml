@@ -19,19 +19,15 @@
     </panel>
     <panel>
       <html>
-      <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
-      <pre>| inputlookup mydata.csv</pre>
-      While yours may differ slightly, that data for us is:
-      <pre>"_time",salesperson,"Cars Sold This Hour"
-1711665905,Rich,1
-1711665905,David,1
-1711662305,Rich,0
-1711662305,David,0
-1711658705,Rich,1
-1711658705,David,2
-1711655105,Rich,2
-1711655105,David,3</pre>
+        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
+        <pre>| inputlookup rich_and_dave_cars.csv</pre>
+        <p>While yours may differ slightly, that data for us is:</p>
       </html>
+      <table>
+        <search>
+          <query>| inputlookup rich_and_dave_cars.csv</query>
+        </search>
+      </table>
     </panel>
   </row>
   <row>
@@ -42,41 +38,25 @@
       <title>Raw data</title>
       <table>
         <search>
-          <query>| inputlookup mydata.csv</query>
+          <query>| inputlookup rich_and_dave_cars.csv</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
     <panel>
       <html>
-        And here's the data with <tt>top "Cars Sold This Hour"</tt> applied.  "1" is the most common, so it's at the top.  Pun intended, lol.
+        And here's the data with <tt>top "cars"</tt> applied.  "1" is the most common, so it's at the top.  Pun intended, lol.
       </html>
       <title>Using top</title>
       <table>
         <search>
-          <query>| inputlookup mydata.csv | top "Cars Sold This Hour"</query>
+          <query>| inputlookup rich_and_dave_cars.csv | top cars</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
   </row>

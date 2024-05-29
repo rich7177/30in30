@@ -25,11 +25,17 @@
     </panel>
     <panel>
       <html>
-      <p>The data we are using for this command - <br/>Data 1, a previous makeresults:</p>
+      <p>The data we are using for this command - <br/>Data 1 - a previous makeresults:</p>
       <pre>| makeresults format=json data="[{\"name\":\"John\", \"age\":35}, {\"name\":\"Sarah\", \"age\":39}]"</pre>
-      <p>Data 2 - an <tt>inputlookup</tt> we built earlier:</p>
-      <pre>| inputlookup mydata.csv</pre>
+      <p>Data 2 - an <tt>inputlookup</tt> we built earlier.  To build this see <a href="outputlookup">outputlookup</a>.</p>
+        <pre>| inputlookup rich_and_dave_cars.csv</pre>
+        <p>While yours may differ slightly, that data for us is:</p>
       </html>
+      <table>
+        <search>
+          <query>| inputlookup rich_and_dave_cars.csv</query>
+        </search>
+      </table>
     </panel>
   </row>
   <row>
@@ -45,36 +51,20 @@
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
     <panel>
       <html>
-        Whatever's in mydata.csv :)
+        Whatever's in rich_and_dave_cars.csv :)
       </html>
       <title>Data 2</title>
       <table>
         <search>
-          <query>| inputlookup mydata.csv</query>
+          <query>| inputlookup rich_and_dave_cars.csv</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
   </row>
@@ -83,25 +73,17 @@
       <html>
         <p>Adding them together:</p>
         <tt>| makeresults format=json data="[{\"name\":\"John\", \"age\":35}, {\"name\":\"Sarah\", \"age\":39}]"
-| appendcols [ | inputlookup mydata.csv ]</tt>
+| appendcols [ | inputlookup rich_and_dave_cars.csv ]</tt>
         <p>gets this behavior and output.  Notice the two rows of _time only, other rows got overwritten with "nothings"</p>
       </html>
       <title>End Result 1</title>
       <table>
         <search>
-          <query>| makeresults format=json data="[{\"name\":\"John\", \"age\":35}, {\"name\":\"Sarah\", \"age\":39}]" | appendcols [ | inputlookup mydata.csv ]</query>
+          <query>| makeresults format=json data="[{\"name\":\"John\", \"age\":35}, {\"name\":\"Sarah\", \"age\":39}]" | appendcols [ | inputlookup rich_and_dave_cars.csv ]</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
   </row>

@@ -18,116 +18,75 @@
     </panel>
     <panel>
       <html>
-      <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
-      <pre>| inputlookup mydata.csv</pre>
-      While yours may differ slightly, that data for us is:
-      <pre>"_time",salesperson,"Cars Sold This Hour"
-1711665905,Rich,1
-1711665905,David,1
-1711662305,Rich,0
-1711662305,David,0
-1711658705,Rich,1
-1711658705,David,2
-1711655105,Rich,2
-1711655105,David,3</pre>
+        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
+        <pre>| inputlookup rich_and_dave_cars.csv</pre>
+        <p>While yours may differ slightly, that data for us is:</p>
       </html>
+      <table>
+        <search>
+          <query>| inputlookup rich_and_dave_cars.csv</query>
+        </search>
+      </table>
     </panel>
   </row>
   <row>
     <panel>
       <html>
-        You know, that field <tt>Cars Sold This Hour</tt> is hard to work with because of quoting and spaces and capital letters.
+        You know, that field <tt>cars</tt> isn't real descriptive.
       </html>
       <title>Our original data</title>
       <table>
         <search>
-          <query>| inputlookup mydata.csv</query>
-          <earliest>1708873200</earliest>
-          <latest>1708959600</latest>
-          <sampleRatio>1</sampleRatio>
+          <query>| inputlookup rich_and_dave_cars.csv</query>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
     <panel>
       <html>
-        So we rename <tt>Cars Sold This Hour</tt> to <tt>carsperhour</tt> to work with. This is useful for fields with dots in them or {} brackets, too.<br />
-        <tt>| rename "Cars Sold This Hour" AS carsperhour</tt>
+        So we rename <tt>cars</tt> to <tt>Cars Sold This Hour</tt> <br />
+        <tt>| rename cars AS "Cars Sold This Hour"</tt>
       </html>
-      <title>Renaming the awkward field</title>
+      <title>Renaming a field</title>
       <table>
         <search>
-          <query>| inputlookup mydata.csv
-          | rename "Cars Sold This Hour" AS carsperhour</query>
-          <earliest>1708873200</earliest>
-          <latest>1708959600</latest>
-          <sampleRatio>1</sampleRatio>
+          <query>| inputlookup rich_and_dave_cars.csv
+          | rename cars AS "Cars Sold This Hour"</query>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
   </row>
     <row>
     <panel>
       <html>
-        Normally though it's a command run near the end to make things pretty.<br />
+        You can make all the fields pretty.  Just do yourself a favor, only rename things to have spaces in them at the end of your search. It's painful if you do that too soon.<br />
         <tt>| rename "salesperson" AS "Sales Person"</tt>
       </html>
-      <title>The "usual" way to do this</title>
+      <title>Another example</title>
       <table>
         <search>
-          <query>| inputlookup mydata.csv
+          <query>| inputlookup rich_and_dave_cars.csv
           | rename "salesperson" AS "Sales Person" </query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
     <panel>
       <html>
-        Also you can rename multiple fields at once, like<br />
+        <p>Also you can rename multiple fields at once, like the following.  NOTE _time is even mroe special than the other _* fields.  It is stored as unix epoch time, then at display time converted to your default time format.  When you rename it, that specialness gets lost.  You can "fix" it with eval though.</p>
         <tt>| rename salesperson AS "Sales Person" _time as Time</tt>
+        
       </html>
       <title>Multiple renames</title>
       <table>
         <search>
-          <query>| inputlookup mydata.csv
+          <query>| inputlookup rich_and_dave_cars.csv
           | rename salesperson AS "Sales Person" _time as Time</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
   </row>

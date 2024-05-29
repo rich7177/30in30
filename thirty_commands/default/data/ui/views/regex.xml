@@ -21,13 +21,15 @@
     </panel>
     <panel>
       <html>
-      <p>The data we are using for this command:
-      <pre>| inputlookup mydata.csv
-| rename "Cars Sold This Hour" AS carsSoldPerHour
-| eval carsSoldPerHour = 6 * carsSoldPerHour</pre>
-        </p>
-      Note that we use our base lookup, but a) I <tt>rename</tt> that terribly long fieldname with spaces (now that we know how to do that), and b) I also multiply the number of cars per hour by 6 to give us some neat things to work with.
+        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a>.  Note that we use our base lookup, but I multiply the number of cars per hour by 6 to give us some neat things to work with.</p>
+        <pre>| inputlookup rich_and_dave_cars.csv</pre>
+        <p>While yours may differ slightly, that data for us is:</p>
       </html>
+      <table>
+        <search>
+          <query>| inputlookup rich_and_dave_cars.csv</query>
+        </search>
+      </table>
     </panel>
   </row>
   <row>
@@ -38,21 +40,13 @@
       <title>Original (slightly modified) data</title>
       <table>
         <search>
-          <query>| inputlookup mydata.csv
-| rename "Cars Sold This Hour" AS carsSoldPerHour
+          <query>| inputlookup rich_and_dave_cars.csv
+| rename cars AS carsSoldPerHour
 | eval carsSoldPerHour = 6 * carsSoldPerHour</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
       <panel>
@@ -62,22 +56,14 @@
       <title>Regex is fun!</title>
       <table>
         <search>
-          <query>| inputlookup mydata.csv
-      | rename "Cars Sold This Hour" AS carsSoldPerHour
+          <query>| inputlookup rich_and_dave_cars.csv
+      | rename cars AS carsSoldPerHour
       | eval carsSoldPerHour = 6 * carsSoldPerHour
       | regex carsSoldPerHour="\d{2,}"</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
 </row>

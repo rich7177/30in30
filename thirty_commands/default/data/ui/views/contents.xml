@@ -21,14 +21,8 @@
       <html>
         <p>
           <h1>"Creating" data</h1>
-          <tt>
-            <a href="gentimes">gentimes</a>
-          </tt> and <tt>
-            <a href="makeresults">makeresults</a>
-          </tt> can *directly* create events.  The former can generate a sequence of time-stamped events, and the latter can generate either a single stub event, or can be used to generate data from a small inline CSV or JSON data set.</p>
-        <p>The last of the three is <tt>
-            <a href="outputlookup">outputlookup</a>
-          </tt> which can be used to take some existing search/data and "save it" so that you can pull it up again.  </p>
+          <tt><a href="gentimes">gentimes</a></tt> and <tt><a href="makeresults">makeresults</a></tt> can *directly* create events.  The former can generate a sequence of time-stamped events, and the latter can generate either a single stub event, or can be used to generate data from a small inline CSV or JSON data set.</p>
+        <p>The last of the three is <tt><a href="outputlookup">outputlookup</a></tt> which can be used to take some existing search/data and "save it" so that you can pull it up again.  </p>
         <p>These three commands make up the cornerstone of our test data.  Do note there's also a <tt>outputcsv</tt> that can function much like outputlookup, but it saves the file in a different location which can't actually be used as a <tt>lookup</tt>.</p>
       </html>
     </panel>
@@ -41,29 +35,21 @@
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="makeresults">makeresults</a>
-              </tt>
+              <tt>    <a href="makeresults">makeresults</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Can be used to create a single empty event, or used to generate small data sets from CSV or JSON formatted data.</td>
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="gentimes">gentimes</a>
-              </tt>
+              <tt>    <a href="gentimes">gentimes</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Generates a set of timestamped fake events.</td>
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="outputlookup">outputlookup</a>
-              </tt>
+              <tt>    <a href="outputlookup">outputlookup</a>    </tt>
             </td>
-            <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Takes any other output and saves it onto disk to be read back in with <tt>
-                <a href="inputlookup">inputlookup</a>
-              </tt>
+            <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Takes any other output and saves it onto disk to be read back in with <tt>    <a href="inputlookup">inputlookup</a>    </tt>
             </td>
           </tr>
           <tr>
@@ -90,11 +76,7 @@
         <h1>What can I do with the data I just wrote using outputlookup?</h1>
         <p>Now that we have data "created", how might we read that back in to use it again?</p>
         <p>
-          <tt>
-            <a href="inputlookup">inputlookup</a>
-          </tt> and <a href="lookup">
-            <tt>lookup</tt>
-          </a> to the rescue!</p>
+          <tt><a href="inputlookup">inputlookup</a></tt> and <a href="lookup"><tt>lookup</tt></a> to the rescue!</p>
       </html>
     </panel>
     <panel>
@@ -105,17 +87,13 @@
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="inputlookup">inputlookup</a>
-              </tt>
+              <tt>    <a href="inputlookup">inputlookup</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Directly reads in the contents of CSV files that are stored in the 'lookups' directory.</td>
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="lookup">lookup</a>
-              </tt>
+              <tt>    <a href="lookup">lookup</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Uses the CSV file "dynamically", looking up the matching values from the events into the lookup, and returning other fields from the lookup.</td>
           </tr>
@@ -141,9 +119,7 @@
     <panel>
       <html>
         <h1>Making new fields, and editing existing</h1>
-        <p>An extremely useful "swiss army knife" command is <tt>
-            <a href="eval">eval</a>
-          </tt> which lets us dynamically create new fields on the fly.  This is a lot more powerful than you might think at first.</p>
+        <p>An extremely useful "swiss army knife" command is <tt><a href="eval">eval</a></tt> which lets us dynamically create new fields on the fly.  This is a lot more powerful than you might think at first.</p>
       </html>
     </panel>
     <panel>
@@ -155,9 +131,7 @@
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="eval">eval</a>
-              </tt>
+              <tt>    <a href="eval">eval</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Edits existing fields or creates new fields.  Can use all sorts of conditional logic.</td>
           </tr>
@@ -177,11 +151,7 @@
     <panel>
       <html>
         <h1>Table vs. Fields, which does what?</h1>
-        <p>A pair of commands, <tt>
-            <a href="fields">fields</a>
-          </tt> and <tt>
-            <a href="table">table</a>
-          </tt> which are often confused, but are worlds apart for what they actually do.  <tt>table</tt> is for prettifying things, but can have enormous [negative] performance implications.  <tt>fields</tt> on the other hand doesn't make things much prettier but is the complete opposite with respect to performance and is very useful to optimize searches.</p>
+        <p>A pair of commands, <tt><a href="fields">fields</a></tt> and <tt><a href="table">table</a></tt>, are often confused but are worlds apart for what they actually do.  <tt>table</tt> is for prettifying things, but can have enormous [negative] performance implications.  <tt>fields</tt> on the other hand doesn't make things much prettier but is the complete opposite with respect to performance and is very useful to optimize searches.</p>
       </html>
     </panel>
     <panel>
@@ -193,17 +163,13 @@
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="table">table</a>
-              </tt>
+              <tt>    <a href="table">table</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Formats output for "human consumption" into a nice, organized table.</td>
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="fields">fields</a>
-              </tt>
+              <tt>    <a href="fields">fields</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Removes fields from the existing output stream, often for increased performance.</td>
           </tr>
@@ -224,13 +190,7 @@
       <html>
         <h1>Appending multiple data together</h1>
         <p>
-          <tt>
-            <a href="append">append</a>
-          </tt>, <tt>
-            <a href="appendcols">appendcols</a>
-          </tt>, and <tt>
-            <a href="appendpipe">appendpipe</a>
-          </tt> all have "append" in their name, but function in totally different ways.  </p>
+          <tt><a href="append">append</a></tt>, <tt><a href="appendcols">appendcols</a></tt>, and <tt><a href="appendpipe">appendpipe</a></tt> all have "append" in their name, but function in totally different ways.  </p>
         <p>Note that "append" here means something specific.  We do NOT generally recommend using any of the <tt>append</tt> methods to actually combine separate data together, there are better ways you'll learn later.</p>
       </html>
     </panel>
@@ -243,25 +203,19 @@
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="append">append</a>
-              </tt>
+              <tt>    <a href="append">append</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Appends two data sets together, like if you pasted a second log file to the end of the first.</td>
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="appendcols">appendcols</a>
-              </tt>
+              <tt>    <a href="appendcols">appendcols</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Appends a second data set in as new *columns* in the existing rows, like if you paste new columns to the right side of a spreadsheet.</td>
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="appendpipe">appendpipe</a>
-              </tt>
+              <tt>    <a href="appendpipe">appendpipe</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Kind of like appending in the same data, useful in some niche use cases where you need to do calculations on the data, but also keep the data as raw events too.</td>
           </tr>
@@ -282,15 +236,7 @@
       <html>
         <h1>The first and easiest of the data analytics commands</h1>
         <p>
-          <tt>
-            <a href="head">head</a>
-          </tt>, <tt>
-            <a href="tail">tail</a>
-          </tt>, <tt>
-            <a href="top">top</a>
-          </tt>,and <tt>
-            <a href="rare">rare</a>
-          </tt> all work in similar ways, and their names are a giveaway.  </p>
+          <a href="head"><tt>head</tt></a>, <tt><a href="tail">tail</a></tt>, <tt><a href="top">top</a></tt>, and <tt><a href="rare">rare</a></tt> all work in similar ways, and their names are a giveaway.  </p>
       </html>
     </panel>
     <panel>
@@ -302,33 +248,25 @@
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="head">head</a>
-              </tt>
+              <tt>    <a href="head">head</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Trims data to just the first N events (default 10).</td>
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="tail">tail</a>
-              </tt>
+              <tt>    <a href="tail">tail</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Trims data to just the last N events (default 10).</td>
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="top">top</a>
-              </tt>
+              <tt>    <a href="top">top</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Does some simple calculations and shows you the more common of the different values of a field are. (The "top 10" by default).</td>
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="rare">rare</a>
-              </tt>
+              <tt>    <a href="rare">rare</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">The inverse of <tt>top</tt>, <tt>rare</tt> shows you the least common of the different values of a field. (The "rarest 10" by default).</td>
           </tr>
@@ -349,11 +287,7 @@
       <html>
         <h1>Sorting data</h1>
         <p>
-          <tt>
-            <a href="sort">sort</a>
-          </tt> and <tt>
-            <a href="reverse">reverse</a>
-          </tt> both exist to sort data, which Splunk rarely (if ever) needs but people need all the time.  Because we're not machines.</p>
+          <tt><a href="sort">sort</a></tt> and <tt><a href="reverse">reverse</a></tt> both exist to sort data, which Splunk rarely (if ever) needs but people need all the time.  Because we're not machines.</p>
       </html>
     </panel>
     <panel>
@@ -365,17 +299,13 @@
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="sort">sort</a>
-              </tt>
+              <tt>    <a href="sort">sort</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Sorts events ascending, descending, or in complex combinations.</td>
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="reverse">reverse</a>
-              </tt>
+              <tt>    <a href="reverse">reverse</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">A special case of sort, just reverses the normal output direction of a search's events.  Has negative performance implications, though if that's what you need, you just deal with it.</td>
           </tr>
@@ -396,9 +326,7 @@
       <html>
         <h1>Flipping X with Y</h1>
         <p>
-          <tt>
-            <a href="transpose">transpose</a>
-          </tt> is in a class of its own.  When used it swaps your X and your Y axes.</p>
+          <tt><a href="transpose">transpose</a></tt> is in a class of its own.  When used it swaps your X and your Y axes.</p>
       </html>
     </panel>
     <panel>
@@ -412,8 +340,7 @@
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
               <a href="transpose">
                 <tt>transpose</tt>
-              </a>
-            </td>
+              </a>  </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Swap your X and your Y.</td>
           </tr>
         </table> 
@@ -424,7 +351,7 @@
     <panel>
       <title>--------------------</title>
       <html>
-        <h1>Section 9 - Whatever it is xyseries and untable do </h1>
+        <h1>Section 9 - Whatever it is xyseries and untable do</h1>
       </html>
     </panel>
   </row>
@@ -433,11 +360,7 @@
       <html>
         <h1>Fixing weirdly structured data.  Or something like that.</h1>
         <p>
-          <a href="xyseries">
-            <tt>xyseries</tt>
-          </a> and <a href="untable">
-            <tt>untable</tt>
-          </a> are almost but not quite inverses of one another, and each modifies the structure of data to either "make it into a table" when it wasn't before, or to undo data that's too tabular.  Sorry fore the confusion, just see the examples.</p>
+          <a href="xyseries"><tt>xyseries</tt></a> and <a href="untable"><tt>untable</tt></a> are almost but not quite inverses of one another, and each modifies the structure of data to either "make it into a table" when it wasn't before, or to undo data that's too tabular.  Sorry fore the confusion, just see the examples.</p>
       </html>
     </panel>
     <panel>
@@ -449,17 +372,13 @@
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="xyseries">xyseries</a>
-              </tt>
+              <tt>    <a href="xyseries">xyseries</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Converts data from a more "tabular" form to one that more closely resembles the output of stats.</td>
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="untable">untable</a>
-              </tt>
+              <tt>    <a href="untable">untable</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Converts data into a more "tabular" form.</td>
           </tr>
@@ -479,13 +398,7 @@
     <panel>
       <html>
         <h1>Don't let your data ghost you!</h1>
-        <p>The three commands <a href="makecontinuous">
-            <tt>makecontinuous</tt>
-          </a>, <a href="filldown">
-            <tt>filldown</tt>
-          </a>, and <a href="fillnull">
-            <tt>fillnull</tt>
-          </a> all perform variations of "filling in missing values".  Makecontinuous just fills in gaps in non-contiguous events by adding events.  Fillnull fills in null values with some user-specified value, and filldown uses the previous value to fill in empty values. </p>
+        <p>The three commands <a href="makecontinuous"><tt>makecontinuous</tt></a>, <a href="filldown"><tt>filldown</tt></a>, and <a href="fillnull"><tt>fillnull</tt></a> all perform variations of "filling in missing values".  Makecontinuous just fills in gaps in non-contiguous events by adding events.  Fillnull fills in null values with some user-specified value, and filldown uses the previous value to fill in empty values. </p>
       </html>
     </panel>
     <panel>
@@ -497,25 +410,19 @@
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="makecontinuous">makecontinuous</a>
-              </tt>
+              <tt>    <a href="makecontinuous">makecontinuous</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Fills in gaps in events by just adding empty events into the holes.</td>
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="filldown">filldown</a>
-              </tt>
+              <tt>    <a href="filldown">filldown</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Uses the previous value for a field to fill in gaps/missing values.</td>
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="fillnull">fillnull</a>
-              </tt>
+              <tt>    <a href="fillnull">fillnull</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Replaces null valued fields with some user-specified value instead.</td>
           </tr>
@@ -535,9 +442,7 @@
     <panel>
       <html>
         <h1>So, I'm weird and this is my favorite command.</h1>
-        <p>While it's a fairly niche command, I think <a href="reltime">
-            <tt>reltime</tt>
-          </a> underutilized.  Makes times into things like "5 minutes ago".</p>
+        <p>While it's a fairly niche command, I think <a href="reltime"><tt>reltime</tt></a> is underutilized.  Makes times into things like "5 minutes ago".</p>
       </html>
     </panel>
     <panel>
@@ -549,9 +454,7 @@
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="reltime">reltime</a>
-              </tt>
+              <tt>    <a href="reltime">reltime</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Converts times into a human-readable difference in time from "now", like "2 days ago".</td>
           </tr>
@@ -571,10 +474,7 @@
     <panel>
       <html>
         <h1>Changing field names</h1>
-        <p>
-          <a href="rename">
-            <tt>rename</tt>
-          </a> is a pretty simple command, I think you'll get the hang of it quickly.  Also keep in mind that many other commands like timechart, stats and others, all let you rename things during the command itself making <tt>rename</tt> often unnecessary.</p>
+        <p><a href="rename"><tt>rename</tt></a> is a pretty simple command, I think you'll get the hang of it quickly.  Also keep in mind that many other commands like timechart, stats and others, all let you rename things during the command itself making <tt>rename</tt> often unnecessary.</p>
       </html>
     </panel>
     <panel>
@@ -586,9 +486,7 @@
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="rename">rename</a>
-              </tt>
+              <tt>    <a href="rename">rename</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Renames fields - and remember you can rename ugly/shorthand names to longer ones for readability, or rename long ones (or ones with spaces) temporarily to make it easier to work with it.</td>
           </tr>
@@ -609,11 +507,7 @@
       <html>
         <h1>Regular Expressions are FUN!</h1>
         <p>
-          <a href="regex">
-            <tt>regex</tt>
-          </a> and <a href="rex">
-            <tt>rex</tt>
-          </a> both involve regular expressions, but in completely different ways.  <tt>regex</tt> lets you filter events by a regular expression, and <tt>rex</tt> lets you either create new fields from parsing "things" with regular expressions, or lets you do some simple replacing/substitution (using mode=sed).</p>
+          <a href="regex"><tt>regex</tt></a> and <a href="rex"><tt>rex</tt></a> both involve regular expressions, but in completely different ways.  <tt>regex</tt> lets you filter events by a regular expression, and <tt>rex</tt> lets you either create new fields from parsing "things" with regular expressions, or lets you do some simple replacing/substitution (using mode=sed).</p>
       </html>
     </panel>
     <panel>
@@ -625,17 +519,13 @@
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="regex">regex</a>
-              </tt>
+              <tt>    <a href="regex">regex</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">*FILTERS* data by a regular expression.</td>
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="rex">rex</a>
-              </tt>
+              <tt>    <a href="rex">rex</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Uses regular expressions to *CREATE* new fields from existing data.</td>
           </tr>
@@ -655,16 +545,8 @@
     <panel>
       <html>
         <h1>Serious Data analytics commands</h1>
-        <p>There's a lot of meat here.  <a href="timechart">
-            <tt>timechart</tt>
-          </a> creates time-oriented aggregations, whereas <a href="stats">
-            <tt>stats</tt>
-          </a> is more general purpose and can create aggregations by practically anything, time or other fields as well.  Do note that "aggregations" can be mathematical, but they can ALSO be just thought of as "grouping" sometimes.</p>
-        <p>In addition to those two, there's two even more mind blowing commands.  <a href="chart">
-            <tt>chart</tt>
-          </a> is just like <tt>stats</tt> except it supports an "over" and also a "by" clause.  This is mind-boggling the first few times you see or use it, but it's really powerful.  Lastly, <a href="eventstats">
-            <tt>eventstats</tt>
-          </a> lets you do stats-like calculations on the entire data set, *without* replacing that data set.  So, for instance, you can calculate a "grand total" for the data (in whole or "by" some criteria), and have that value tacked onto each event so you can do <tt>eval</tt> math/calculations with it, like find the percentages of totals.
+        <p>There's a lot of meat here.  <a href="timechart"><tt>timechart</tt></a> creates time-oriented aggregations, whereas <a href="stats"><tt>stats</tt></a> is more general purpose and can create aggregations by practically anything, time or other fields as well.  Do note that "aggregations" can be mathematical, but they can ALSO be just thought of as "grouping" sometimes.</p>
+        <p>In addition to those two, there's two even more mind blowing commands.  <a href="chart"><tt>chart</tt></a> is just like <tt>stats</tt> except it supports an "over" and also a "by" clause.  This is mind-boggling the first few times you see or use it, but it's really powerful.  Lastly, <a href="eventstats"><tt>eventstats</tt></a> lets you do stats-like calculations on the entire data set, *without* replacing that data set.  So, for instance, you can calculate a "grand total" for the data (in whole or "by" some criteria), and have that value tacked onto each event so you can do <tt>eval</tt> math/calculations with it, like find the percentages of totals.
           
         </p>
       </html>
@@ -678,33 +560,25 @@
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="timechart">timechart</a>
-              </tt>
+              <tt>    <a href="timechart">timechart</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Time-series aggregations and groupings.</td>
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="stats">stats</a>
-              </tt>
+              <tt>    <a href="stats">stats</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">General purpose aggregations and groupings.</td>
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="chart">chart</a>
-              </tt>
+              <tt>    <a href="chart">chart</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Add a the ability to both slice and dice the data, *at the same time*.</td>
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>
-                <a href="eventstats">eventstats</a>
-              </tt>
+              <tt>    <a href="eventstats">eventstats</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Can calculate over the entire data set, appending its results into each event.  This sounds weird and dumb, but once you see it you'll see the power.</td>
           </tr>

@@ -22,19 +22,16 @@
     </panel>
     <panel>
       <html>
-      <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a>
-        </p>
-      <pre>| inputlookup mydata.csv</pre>
-      While yours may differ slightly, that data for us is:
-      <pre>"_time",salesperson,"Cars Sold This Hour"
-1711665905,Rich,1
-1711665905,David,1
-1711662305,Rich,0
-1711662305,David,0
-1711658705,Rich,1
-1711658705,David,2
-1711655105,Rich,2
-1711655105,David,3</pre>
+        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
+        <pre>| inputlookup rich_and_dave_cars.csv</pre>
+        <p>While yours may differ slightly, that data for us is:</p>
+      </html>
+      <table>
+        <search>
+          <query>| inputlookup rich_and_dave_cars.csv</query>
+        </search>
+      </table>
+      <html>
       <p>Also, we'll use some data from _internal:
       <pre>index=_internal</pre>
         </p>
@@ -50,69 +47,48 @@
       </html>
       <table>
         <search>
-          <query>|inputlookup mydata.csv | stats values(salesperson)</query>
+          <query>|inputlookup rich_and_dave_cars.csv | stats values(salesperson)</query>
           <earliest>-5m</earliest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">100</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
     <panel>
       <title>How many cars sold by day?</title>
       <html>
-        <pre>... | bin _time span=1d | stats sum("Cars Sold This Hour") AS "Cars Sold By Day" by _time</pre>
+        <pre>... | bin _time span=1d | stats sum(cars) AS "Cars Sold By Day" by _time</pre>
       </html>
       <table>
         <search>
-          <query>|inputlookup mydata.csv | bin _time span=1d | stats sum("Cars Sold This Hour") AS "Cars Sold By Day" by _time</query>
+          <query>|inputlookup rich_and_dave_cars.csv | bin _time span=1d | stats sum(cars) AS "Cars Sold By Day" by _time</query>
           <earliest>0</earliest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">100</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
     <panel>
       <title>How many cars did each salesperson sell each day?</title>
       <html>
-        <pre>... | bin _time span=1d | stats sum("Cars Sold This Hour") AS "Cars Sold By Day" by salesperson, _time</pre>
+        <pre>... | bin _time span=1d | stats sum(cars) AS "Cars Sold By Day" by salesperson, _time</pre>
       </html>
       <table>
         <search>
-          <query>|inputlookup mydata.csv | bin _time span=1d | stats sum("Cars Sold This Hour") AS "Cars Sold By Day" by salesperson, _time</query>
+          <query>|inputlookup rich_and_dave_cars.csv | bin _time span=1d | stats sum(cars) AS "Cars Sold By Day" by salesperson, _time</query>
           <earliest>0</earliest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">100</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
   </row>
   <row>
     <panel>
       <title>actions vs. levels in _internal</title>
-      <html>Does a two-level stats, counting how many results for each combination of <tt>action</tt> (get_modtime, update_configurations...) and <tt>level</tt> (INFO, ERROR...) (limiting to first 10 results)
-      <pre>... | stats count by action level</pre>
+      <html>Does a two-level stats, counting how many results for each combination of <tt>status</tt> (200, 404,...) and <tt>user</tt> (limiting to first 10 results)
+      <pre>... | stats count by status user</pre>
       </html>
       <table>
         <search>
-          <query>index=_internal action=* level=* earliest=-1h | stats count by action level | head 10</query>
+          <query>index=_internal status=* user=* earliest="-15m@m" latest="@m" | stats count by status user</query>
           <earliest>0</earliest>
           <latest></latest>
           <sampleRatio>1</sampleRatio>
@@ -134,17 +110,9 @@
       </html>
       <table>
         <search>
-          <query>index=_internal action_time_ms=* | stats count avg(action_time_ms) as action_time_ms_avg, perc95(action_time_ms) as action_time_ms_p95 by savedsearch_name | search count&gt;=5 | fields - count</query>
-          <earliest>-5m</earliest>
+          <query>index=_internal action_time_ms=* earliest="-4h@h" latest="@h"  | stats count avg(action_time_ms) as action_time_ms_avg, perc95(action_time_ms) as action_time_ms_p95 by savedsearch_name | search count&gt;=5 | fields - count</query>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">100</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
   </row>
@@ -185,13 +153,6 @@
           <earliest>-5m</earliest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">100</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
   </row>

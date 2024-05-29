@@ -20,7 +20,6 @@
       <html>
       <p>The examples we are using for this command:
       <pre>| makeresults</pre>
-
       <pre>| makeresults format=csv data="user, dept
 Rich, IT
 David, Sales"</pre>
@@ -48,13 +47,6 @@ David, Sales"</pre>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">100</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
     <panel>
@@ -68,13 +60,6 @@ David, Sales"</query>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">100</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
   </row>
@@ -91,13 +76,6 @@ David, Sales"</query>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">100</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
     <panel>
@@ -110,13 +88,6 @@ David, Sales"</query>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">100</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
   </row>

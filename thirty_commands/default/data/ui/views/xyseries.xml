@@ -26,7 +26,6 @@ The Town Hall, Partly Cloudy, 6
 The Park, Sunny, 23
 The Park, Cloudy, 2
 The Park, Partly Cloudy, 9"
-| eval _time = strptime(time, "%Y-%m-%dT%H:%M:%S")
 </pre>
         </p>
       </html>
@@ -46,20 +45,8 @@ The Town Hall, Cloudy, 5
 The Town Hall, Partly Cloudy, 6
 The Park, Sunny, 23
 The Park, Cloudy, 2
-The Park, Partly Cloudy, 9"
-| eval _time = strptime(time, "%Y-%m-%dT%H:%M:%S")</query>
-          <earliest>1708873200</earliest>
-          <latest>1708959600</latest>
-          <sampleRatio>1</sampleRatio>
+The Park, Partly Cloudy, 9"</query>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
     <panel>
@@ -78,18 +65,7 @@ The Park, Cloudy, 2
 The Park, Partly Cloudy, 9"
 | eval _time = strptime(time, "%Y-%m-%dT%H:%M:%S")
 | xyseries location conditions observations</query>
-          <earliest>1708873200</earliest>
-          <latest>1708959600</latest>
-          <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
   </row>

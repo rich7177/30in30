@@ -22,19 +22,15 @@
     </panel>
     <panel>
       <html>
-      <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
-      <pre>| inputlookup mydata.csv</pre>
-      While yours may differ slightly, that data for us is:
-      <pre>"_time",salesperson,"Cars Sold This Hour"
-1711665905,Rich,1
-1711665905,David,1
-1711662305,Rich,0
-1711662305,David,0
-1711658705,Rich,1
-1711658705,David,2
-1711655105,Rich,2
-1711655105,David,3</pre>
+        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
+        <pre>| inputlookup rich_and_dave_cars.csv</pre>
+        <p>While yours may differ slightly, that data for us is:</p>
       </html>
+      <table>
+        <search>
+          <query>| inputlookup rich_and_dave_cars.csv</query>
+        </search>
+      </table>
     </panel>
   </row>
   <row>
@@ -45,21 +41,13 @@
       <title>Fudging time</title>
       <table>
         <search>
-          <query>| inputlookup mydata.csv
+          <query>| inputlookup rich_and_dave_cars.csv
 | eval semi_random_time = strftime(_time + (random()%1200)-600, "%Y-%m-%d %H:%M:%S")
-| table _time, semi_random_time, salesperson, "Cars Sold This Hour"</query>
+| table _time, semi_random_time, salesperson, cars</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
     <panel>
@@ -69,21 +57,13 @@
       <title>Rewriting fields</title>
       <table>
         <search>
-          <query>| inputlookup mydata.csv
+          <query>| inputlookup rich_and_dave_cars.csv
 | eval salesperson = if(salesperson="Rich", "Rich is awesome", "The other guy got lucky")
-| table _time, salesperson, "Cars Sold This Hour"</query>
+| table _time, salesperson, cars</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
   </row>
@@ -95,53 +75,36 @@
   <row>
     <panel>
       <html>
-        <p>Conditional, vaguely complex calculations which are then used to filter. </p><p> <tt>| eval quota_met = case(cars_sold>=1 AND salesperson="Rich", "Yes", cars_sold>=2 AND salesperson="David", "Yes", true(), "No")</tt>.</p>  Then we filter to only where <tt>quota_met</tt> is Yes.  Note we <a href="rename"><tt>rename</tt></a> to make life easier in the eval.
+        <p>Conditional, vaguely complex calculations which are then used to filter. </p><p> <tt>| eval quota_met = case(cars>=1 AND salesperson="Rich", "Yes", cars>=2 AND salesperson="David", "Yes", true(), "No")</tt>.</p>  
       </html>
       <title>Medium complexity stuff</title>
       <table>
         <search>
-          <query>| inputlookup mydata.csv
-| rename "Cars Sold This Hour" AS cars_sold
-| eval quota_met = case(cars_sold>=1 AND salesperson="Rich", "Yes", cars_sold>=2 AND salesperson="David", "Yes", true(), "No")
-| search quota_met = "Yes"</query>
+          <query>| inputlookup rich_and_dave_cars.csv
+| eval quota_met = case(cars>=1 AND salesperson="Rich", "Yes", cars>=2 AND salesperson="David", "Yes", true(), "No")
+</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
     <panel>
       <html>
         <p>While it's often better to use eval separately to build new fields then use stats with simpler calculations, you can do complex things with eval inside stats itself.</p>
         <p>Here we calculate the number of hours where each salesperson sold more than their quota.  (Rich 1, David 2)</p>
-        <p><tt>| stats sum(eval(case(cars_sold>=1 AND salesperson="Rich", 1, cars_sold>=2 AND salesperson="David", 1, true(), 0))) AS hours_over_quota BY salesperson</tt></p>
+        <p><tt>| stats sum(eval(case(cars>=1 AND salesperson="Rich", 1, cars>=2 AND salesperson="David", 1, true(), 0))) AS hours_over_quota BY salesperson</tt></p>
       </html>
       <title>Eval can be used in stats!</title>
       <table>
         <search>
-          <query>| inputlookup mydata.csv
+          <query>| inputlookup rich_and_dave_cars.csv
 | rename "Cars Sold This Hour" AS cars_sold
-| stats sum(eval(case(cars_sold>=1 AND salesperson="Rich", 1, cars_sold>=2 AND salesperson="David", 1, true(), 0))) AS hours_over_quota BY salesperson</query>
+| stats sum(eval(case(cars>=1 AND salesperson="Rich", 1, cars>=2 AND salesperson="David", 1, true(), 0))) AS hours_over_quota BY salesperson</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
   </row>

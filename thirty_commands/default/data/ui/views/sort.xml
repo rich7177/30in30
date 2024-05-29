@@ -22,114 +22,78 @@
     </panel>
     <panel>
       <html>
-      <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
-      <pre>| inputlookup mydata.csv</pre>
-      While yours may differ slightly, that data for us is:
-      <pre>"_time",salesperson,"Cars Sold This Hour"
-1711665905,Rich,1
-1711665905,David,1
-1711662305,Rich,0
-1711662305,David,0
-1711658705,Rich,1
-1711658705,David,2
-1711655105,Rich,2
-1711655105,David,3</pre>
+        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
+        <pre>| inputlookup rich_and_dave_cars.csv</pre>
+        <p>While yours may differ slightly, that data for us is:</p>
       </html>
+      <table>
+        <search>
+          <query>| inputlookup rich_and_dave_cars.csv</query>
+        </search>
+      </table>
     </panel>
   </row>
   <row>
     <panel>
       <html>
-        Sorted most simply, with the default "ascending" on one field, "Cars Sold This Hour"
+        Sorted most simply, with the default "ascending" on one field, "cars"
       </html>
       <title>Simple sort</title>
       <table>
         <search>
-          <query>| inputlookup mydata.csv
-| sort "Cars Sold This Hour"</query>
+          <query>| inputlookup rich_and_dave_cars.csv
+| sort "cars"</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
     <panel>
       <html>
-        Flipping the sort to be "descending" for "Cars Sold This Hour"
+        Flipping the sort to be "descending" for "cars"
       </html>
       <title>Simple sort, descending</title>
       <table>
         <search>
-          <query>| inputlookup mydata.csv
-| sort -"Cars Sold This Hour"</query>
+          <query>| inputlookup rich_and_dave_cars.csv
+| sort -"cars"</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
 </row>
   <row>
     <panel>
       <html>
-        More complex sort - "salesperson" ascending (David first), "Cars Sold This Hour" descending
+        More complex sort - "salesperson" ascending (David first), "cars" descending
       </html>
       <title>Complex sort</title>
       <table>
         <search>
-          <query>| inputlookup mydata.csv
-| sort +salesperson -"Cars Sold This Hour"</query>
+          <query>| inputlookup rich_and_dave_cars.csv
+| sort +salesperson -"cars"</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
     <panel>
       <html>
-        More complex sort - "salesperson" and "Cars Sold This Hour" both ascending
+        More complex sort - "salesperson" and "cars" both ascending
       </html>
       <title>Complex sort</title>
       <table>
         <search>
-          <query>| inputlookup mydata.csv
-| sort +salesperson +"Cars Sold This Hour"</query>
+          <query>| inputlookup rich_and_dave_cars.csv
+| sort +salesperson +"cars"</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
 </row>

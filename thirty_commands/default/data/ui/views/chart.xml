@@ -11,70 +11,55 @@
       </ol>
       <p>How: <tt>chart &lt;aggregation terms&gt; OVER &lt;field&gt; BY &lt;field&gt;</tt></p>
       <p>Why: <tt>chart</tt> does a job that's nearly impossible without it.  See the examples!</p>
-      <p>So What: Usually, but not always, <tt>chart</tt> is a command to </p>
+      <p>So What: Usually, but not always, <tt>chart</tt> is a command used to really alter the structure of data, moving things that weren't an axis into being an axis, and vice versa.</p>
       <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/chart">chart</a>.
       </p>
-      <p>Extra Notes here</p>
+      <p>Notes: I always get <tt>over</tt> and <tt>by</tt> clauses mixed up, but sometimes that gives me an interesting thing in its own right.  Don't be scared to try flipping those two!</p>
       <p>Previous Command - <a href="eventstats">eventstats</a>
         </p>
-      <p>Next Command - <a href="Contents">Back to Contents</a>
+      <p>Next Command - <a href="contents">Back to Contents</a>
         </p>
       </html>
     </panel>
     <panel>
       <html>
-      <p>The data we are using for this command:
-      <pre>SPL_GOES_HERE</pre>
-        </p>
+        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
+        <pre>| inputlookup rich_and_dave_cars.csv</pre>
+        <p>While yours may differ slightly, that data for us is:</p>
       </html>
-    </panel>
-  </row>
-  <row>
-    <panel>
-      <html>
-        Adding <tt>| chart  sum("Cars Sold This Hour") as "Cars Sold This Hour" over salesperson by _time</tt> changed it into a two-important-axis chart.
-      </html>
-      <title>A simple example using our test data.</title>
       <table>
         <search>
-          <query>| inputlookup mydata.csv | eval _time = strftime(_time, "%Y-%m-%d %H:%M:%S") 
-| chart  sum("Cars Sold This Hour") as "Cars Sold This Hour" over salesperson by _time</query>
-          <earliest>1708873200</earliest>
-          <latest>1708959600</latest>
-          <sampleRatio>1</sampleRatio>
+          <query>| inputlookup rich_and_dave_cars.csv</query>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
   </row>
   <row>
     <panel>
       <html>
-        NOTES FOR DATA
+        Adding <tt>| chart  sum(cars) as "Cars Sold This Hour" over salesperson by _time</tt> changed it into a two-important-axis chart.
       </html>
-      <title>EXAMPLE TITLE</title>
+      <title>A simple example using our test data.</title>
       <table>
         <search>
-          <query>index=_internal | chart count over action by level</query>
+          <query>| inputlookup rich_and_dave_cars.csv | eval _time = strftime(_time, "%Y-%m-%d %H:%M:%S") 
+| chart  sum(cars) as "Cars Sold This Hour" over salesperson by _time</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>We're counting how many of each status (200, 404, etc) happened by user.  When you run this yourself, try <tt>over user by status</tt> too.</html>
+      <title>A more "real life example"</title>
+      <table>
+        <search>
+          <query>index=_internal status=* user=* earliest="-15m@m" latest="@m"  | chart count over status by user</query>
+          <sampleRatio>1</sampleRatio>
+        </search>
       </table>
     </panel>
   </row>

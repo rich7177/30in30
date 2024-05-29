@@ -34,33 +34,23 @@
     <panel>
       <html><p>Return all the fields</p>
       <pre>index=_internal sourcetype=splunkd earliest=-24h  
+| table *
 | eval size=len(_raw) 
 | stats sum(size) as datasize 
-| table datasize
 | eval datasize=tostring(datasize, "commas")</pre>
-Note the data size and duration to run. Note that everything after <tt>fields</tt> is used to calculate the size of the data set returned.
+Note the data size and duration to run. Everything after <tt>fields</tt> is used to calculate the size of the data set returned.  Also we're using <tt>table</tt> to make a point.  :)
 </html>
       <table>
         <search>
           <query>index=_internal sourcetype=splunkd earliest=-24h  
+| table *
 | eval size=len(_raw) 
 | stats sum(size) as datasize 
-| table datasize
 | eval datasize=tostring(datasize, "commas")</query>
           <progress>
             <eval token="duration1">tostring(tonumber($job.runDuration$),"duration")</eval>
           </progress>
-          <earliest>-1h@m</earliest>
-          <latest>now</latest>
-          <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">2</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
       <html>
           <h3>Duration</h3>
@@ -74,7 +64,6 @@ Note the data size and duration to run. Note that everything after <tt>fields</t
 | fields component group 
 | eval size=len(component)+len(group) 
 | stats sum(size) as datasize 
-| table datasize
 | eval datasize=tostring(datasize, "commas")</pre>
 Note the data size and duration to run. Note that everything after <tt>fields</tt> is used to calculate the size of the data set returned.
 </html>
@@ -84,22 +73,11 @@ Note the data size and duration to run. Note that everything after <tt>fields</t
 | fields component group 
 | eval size=len(component)+len(group) 
 | stats sum(size) as datasize 
-| table datasize
 | eval datasize=tostring(datasize, "commas")</query>
           <progress>
             <eval token="duration2">tostring(tonumber($job.runDuration$),"duration")</eval>
           </progress>
-          <earliest>-1h@m</earliest>
-          <latest>now</latest>
-          <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">2</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
       <html>
           <h3>Duration</h3>

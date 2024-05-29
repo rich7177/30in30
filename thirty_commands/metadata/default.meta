@@ -23,7 +23,6 @@ export = system
 
 
 ### LOOKUPS
-
 [lookups]
 export = system
 
@@ -33,3 +32,8 @@ export = system
 [viewstates]
 access = read : [ * ], write : [ * ]
 export = system
+
+[savedsearches/Regenerate%20cars%20data]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin

@@ -22,7 +22,7 @@
     <panel>
        <html>
       <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
-      <pre>| inputlookup mydata.csv</pre>
+      <pre>| inputlookup rich_and_dave_cars.csv</pre>
       <p>You'll see what this looks like in the first data pane below.</p>
 <p>And also a new lookup created with <a href="outputlookup"><tt>outputlookup</tt></a> -</p><pre>| makeresults format=csv data="count, outcome
 0,Fired
@@ -41,41 +41,25 @@
       <title>Original Data</title>
       <table>
         <search>
-          <query>| inputlookup mydata.csv</query>
+          <query>| inputlookup rich_and_dave_cars.csv</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
     <panel>
       <html>
-        By adding <tt>| lookup rich_outcomes.csv count AS "Cars Sold This Hour" OUTPUT outcome as Outcome"</tt> to the end, look what happens!
+        By adding <tt>| lookup rich_outcomes.csv count AS cars OUTPUT outcome as Outcome"</tt> to the end, look what happens!
       </html>
       <title>Data with lookup</title>
       <table>
         <search>
-          <query>| inputlookup mydata.csv | lookup rich_outcomes.csv count AS "Cars Sold This Hour" OUTPUT outcome as Outcome </query>
+          <query>| inputlookup rich_and_dave_cars.csv | lookup rich_outcomes.csv count AS cars OUTPUT outcome as Outcome </query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
   </row>

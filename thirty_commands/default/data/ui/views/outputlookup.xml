@@ -1,5 +1,10 @@
-<dashboard version="1.1" theme="light">
+<form version="1.1" theme="light">
   <label>outputlookup</label>
+  <fieldset submitButton="false">
+    <input type="text" token="moniker">
+      <label>PUT YOUR NAME HERE</label>
+    </input>
+  </fieldset>
   <row>
     <panel>
       <html>
@@ -11,7 +16,8 @@
         <li>Sort of "invisible" when run.</li>
         <li>Other options, like appending or overwriting, available too in the docs.</li>
       </ol>
-      <p>How: <tt>... | outputlookup myFileName.csv</tt></p>
+      <p>How: <tt>... | outputlookup myFileName.csv</tt>
+        </p>
       <p>Why: Quick way to temporarily save off "slower" search output to work on and test with.</p>
       <p>So What: We'll use it a lot in here.</p>
       <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/outputlookup">outputlookup</a>.
@@ -33,16 +39,20 @@
 -3600, Rich, 1
 -3600, David, 2
 -0, Rich, 2
--0, David, 3"</pre>
+-0, David, 3"
+| eval _time = now() - offset
+| rename cars AS cars_this_hour 
+| table _time, salesperson, cars_this_hour
+</pre>
       </html>
     </panel>
   </row>
   <row>
     <panel>
+      <title></title>
       <html>
         The raw search above
       </html>
-      <title></title>
       <table>
         <search>
           <query>| makeresults format=csv data="offset, salesperson, cars
@@ -55,28 +65,19 @@
 -0, Rich, 2
 -0, David, 3"
 | eval _time = now() - offset
-| table _time, salesperson, cars
-| rename cars AS "Cars Sold This Hour" 
+| rename cars AS cars_this_hour 
+| table _time, salesperson, cars_this_hour
 </query>
-          <earliest>1708873200</earliest>
-          <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
     <panel>
-      <html>
-        Adding <tt>| outputlookup mydata.csv</tt> to the end.  <b>NOTE</b> that it's an "unsafe command" so you'll have to click the warning triangle to allow it!
-      </html>
       <title></title>
+      <html>
+        <p>Adding <tt>| outputlookup $moniker$_rich_and_dave_cars.csv</tt> to the end.  <b>NOTE</b> that it's an "unsafe command" so you'll have to click the warning triangle to allow it!</p>
+        <p><strong>ALSO be sure to fill in a name above (unique!) before running this!</strong></p>
+      </html>
       <table>
         <search>
           <query>| makeresults format=csv data="offset, salesperson, cars
@@ -91,19 +92,11 @@
 | eval _time = now() - offset
 | table _time, salesperson, cars
 | rename cars AS "Cars Sold This Hour" 
-| outputlookup mydata.csv</query>
+| outputlookup $moniker$_rich_and_dave_cars.csv</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
-        <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
-        <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">false</option>
-        <option name="totalsRow">false</option>
-        <option name="wrap">true</option>
       </table>
     </panel>
   </row>
@@ -114,4 +107,4 @@
       </html>
     </panel>
   </row>
-</dashboard>
+</form>
