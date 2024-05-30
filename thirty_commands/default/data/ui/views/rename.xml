@@ -74,7 +74,7 @@
     </panel>
     <panel>
       <html>
-        <p>Also you can rename multiple fields at once, like the following.  NOTE _time is even mroe special than the other _* fields.  It is stored as unix epoch time, then at display time converted to your default time format.  When you rename it, that specialness gets lost.  You can "fix" it with eval though.</p>
+        <p>Also you can rename multiple fields at once, like the following.  NOTE _time is even more special than the other _* fields.  It is stored as unix epoch time, then at display time converted to your default time format.  When you rename it, that specialness gets lost.  You can "fix" it with eval though.</p>
         <tt>| rename salesperson AS "Sales Person" _time as Time</tt>
         
       </html>
