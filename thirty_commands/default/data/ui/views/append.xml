@@ -15,7 +15,6 @@
       <p>So What: IMO it's an overused command.  It's often better to do the big "pile o' data" then stats it to group it.</p>
       <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/append">append</a>.
       </p>
-      <p>Extra Notes here</p>
       <p>Previous Command - <a href="table">table</a>
         </p>
       <p>Next Command - <a href="appendcols">appendcols</a>

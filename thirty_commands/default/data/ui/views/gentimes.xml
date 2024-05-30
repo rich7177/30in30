@@ -14,7 +14,6 @@
       <p>So What: Exact time stamps to do whatever you need to do with them</p>
       <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Gentimes">gentimes</a>.
       </p>
-      <p>Extra Notes here</p>
       <p>Previous Command - <a href="makeresults">makeresults</a>
         </p>
       <p>Next Command - <a href="outputlookup">outputlookup</a>

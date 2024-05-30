@@ -9,7 +9,6 @@
       <p>So What: Honestly, not a whole lot except in certain situations, often when combined with <tt>| reverse</tt> or some funky <tt>| sort</tt></p>
       <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/tail">tail</a>.
       </p>
-      <p>Extra Notes here</p>
       <p>Previous Command - <a href="head">head</a>
         </p>
       <p>Next Command - <a href="top">top</a>

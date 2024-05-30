@@ -16,7 +16,6 @@
       <p>So What: Few use cases, but it's one of those commands to be aware of because sometimes it's the only command that will do what you need.</p>
       <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/appendcols">appendcols</a>.
       </p>
-      <p>Extra Notes here</p>
       <p>Previous Command - <a href="append">append</a>
         </p>
       <p>Next Command - <a href="appendpipe">appendpipe</a>

@@ -21,7 +21,6 @@
       <p>So What: You can use it to "inject totals" into the middle of other searches, lots of interesting use cases.</p>
       <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/appendpipe">appendcols</a>.
       </p>
-      <p>Extra Notes here</p>
       <p>Previous Command - <a href="appendcols">appendcols</a>
         </p>
       <p>Next Command - <a href="head">head</a>

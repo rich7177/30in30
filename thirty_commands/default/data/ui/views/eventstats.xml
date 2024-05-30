@@ -10,7 +10,6 @@
       <p>Why: <tt>eventstats</tt> creates summary stats of fields without changing total number of events in the results.</p>
       <p>So What: Calculated fields while keeping original granularity of data</p>
       <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/eventstats">eventstats</a>.</p>
-      <p>Extra Notes here</p>
       <p>Previous Command - <a href="stats">stats</a>
         </p>
       <p>Next Command - <a href="chart">chart</a>
