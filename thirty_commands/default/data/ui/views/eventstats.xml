@@ -32,12 +32,6 @@
   <row>
     <panel>
       <title>Creating a simple average.</title>
-        <html>
-          <p>
-      <pre>| inputlookup rich_and_dave_cars.csv
-| eventstats avg(cars) as "Avg_cars_per_hour"</pre>
-        </p>
-      </html>
       <table>
         <search>
           <query>| inputlookup rich_and_dave_cars.csv
@@ -50,13 +44,6 @@
     </panel>
     <panel>
       <title>It also supports a "BY" clause.</title>
-              <html>
-          <p>
-      <pre>| inputlookup rich_and_dave_cars.csv
-| eventstats avg(cars) as "Avg_cars_per_hour" by salesperson</pre>
-        </p>
-      </html>
-
       <table>
         <search>
           <query>| inputlookup rich_and_dave_cars.csv
@@ -72,14 +59,6 @@
   <row>
     <panel>
       <title>Creating a percent of total field</title>
-        <html>
-          <p>
-      <pre>| inputlookup rich_and_dave_cars.csv
-| eventstats sum(cars) as "total_cars"
-| eval percent_of_total = (('Cars Sold This Hour' / total_cars) * 100) . "%"</pre>
-Also you may notice why you shouldn't use fields with spaces in them.  
-        </p>
-      </html>
       <table>
         <search>
           <query>| inputlookup rich_and_dave_cars.csv
@@ -93,14 +72,6 @@ Also you may notice why you shouldn't use fields with spaces in them.
     </panel>
     <panel>
       <title>Combining the above things</title>
-              <html>
-          <p> Creates a total per salesperson, then tells you what percentage of that person's sales were each hour.
-      <pre>| inputlookup rich_and_dave_cars.csv
-| eventstats avg(cars) as "total_cars_for_this_salesperson" by salesperson
-| eval percent_of_total = (('Cars Sold This Hour' / total_cars_for_this_salesperson) * 100) . "%"</pre>
-        </p>
-      </html>
-
       <table>
         <search>
           <query>| inputlookup rich_and_dave_cars.csv

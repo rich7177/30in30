@@ -26,8 +26,10 @@
     <panel>
       <html>
         <p>The data we are using for this command:
-        <pre>index=_*  | timechart span=15m count by sourcetype</pre></p>
-        <p>We're also using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
+        <pre>index=_*  | timechart span=15m count by sourcetype</pre>
+        </p>
+        <p>We're also using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a>
+        </p>
         <pre>| inputlookup rich_and_dave_cars.csv</pre>
         <p>While yours may differ slightly, that data for us is:</p>
       </html>
@@ -36,14 +38,11 @@
           <query>| inputlookup rich_and_dave_cars.csv</query>
         </search>
       </table>
-   </panel>
+    </panel>
   </row>
   <row>
     <panel>
       <title>Same SPL, different visualizations for the same data</title>
-      <html>
-      <pre>| inputlookup rich_and_dave_cars.csv | timechart span=1h max(cars) as "Cars Sold This Hour"</pre>
-    </html>
     </panel>
   </row>
   <row>
@@ -214,9 +213,7 @@
   </row>
   <row>
     <panel>
-      <html>
-      <pre>index=_*  | timechart span=15m count by sourcetype limit=15</pre>
-    </html>
+      <title>Same SPL, different visualizations for the same data from _* indexes</title>
     </panel>
   </row>
   <row>

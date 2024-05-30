@@ -41,10 +41,6 @@
   <row>
     <panel>
       <title>Who's Selling Cars?</title>
-      <html>
-        <pre>... | stats values(salesperson)
-      </pre>
-      </html>
       <table>
         <search>
           <query>|inputlookup rich_and_dave_cars.csv | stats values(salesperson)</query>
@@ -55,9 +51,6 @@
     </panel>
     <panel>
       <title>How many cars sold by day?</title>
-      <html>
-        <pre>... | bin _time span=1d | stats sum(cars) AS "Cars Sold By Day" by _time</pre>
-      </html>
       <table>
         <search>
           <query>|inputlookup rich_and_dave_cars.csv | bin _time span=1d | stats sum(cars) AS "Cars Sold By Day" by _time</query>
@@ -68,9 +61,6 @@
     </panel>
     <panel>
       <title>How many cars did each salesperson sell each day?</title>
-      <html>
-        <pre>... | bin _time span=1d | stats sum(cars) AS "Cars Sold By Day" by salesperson, _time</pre>
-      </html>
       <table>
         <search>
           <query>|inputlookup rich_and_dave_cars.csv | bin _time span=1d | stats sum(cars) AS "Cars Sold By Day" by salesperson, _time</query>
@@ -84,7 +74,6 @@
     <panel>
       <title>actions vs. levels in _internal</title>
       <html>Does a two-level stats, counting how many results for each combination of <tt>status</tt> (200, 404,...) and <tt>user</tt> (limiting to first 10 results)
-      <pre>... | stats count by status user</pre>
       </html>
       <table>
         <search>
@@ -106,7 +95,6 @@
     <panel>
       <title>actions vs. levels in _internal</title>
       <html>Here we take an average and a 95th percentile for action_time_ms, and list those by savedsearch_name. (Filtering out where there's 4 or fewer results, because "95th percentile" isn't very useful on small results)
-      <pre>... | stats count avg(action_time_ms) as action_time_ms_avg, perc95(action_time_ms) as action_time_ms_p95 by savedsearch_name | search count&gt;=5 | fields - count</pre>
       </html>
       <table>
         <search>
@@ -120,8 +108,6 @@
     <panel>
       <title>NOT USING JOIN</title>
       <html>The Splunk command <tt>join</tt> is almost never what you want.  Here's an example where you combine two completely different sets of data by using <tt>stats</tt> instead of <tt>join</tt>.
-      <pre>(index=_internal sourcetype=splunkd) OR (index=_internal sourcetype=scheduler) 
-| stats sum(run_time) as total_run_time, sum(active_hist_searches) as active_hist_searches by user</pre>
       The important point here is that the two searches on each side of the <tt>OR</tt> could be *any* two searches. If they share a common field, you use <tt>stats ... by</tt> to group them.
       </html>
       <table>

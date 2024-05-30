@@ -39,7 +39,6 @@
     <panel>
       <html>
         <p>Have Splunk tell you what's in the csv file</p>
-        <tt>| inputlookup rich_and_dave_cars.csv</tt>
       </html>
       <table>
         <search>
@@ -53,7 +52,6 @@
     <panel>
       <html>
         <p>Let's do something with that info</p>
-        <tt>| inputlookup rich_and_dave_cars.csv | stats count as "Cars Sold" by salesperson</tt>
       </html>
       <table>
         <search>
