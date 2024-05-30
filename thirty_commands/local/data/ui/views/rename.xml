@@ -1,0 +1,90 @@
+<dashboard version="1.1" theme="light">
+  <label>rename</label>
+  <row>
+    <panel>
+      <html>
+      <p>What: Renames fields.</p>
+      <p>How: <tt>rename oldfieldname AS newfieldname ...</tt></p>
+      <p>Why: Makes it look like you know what you are doing.</p>
+      <p>So What: Makes 'bad' field names easier to work with, or converts shorthand names to longer ones at the end of your SPL.</p>
+      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/rename">rename</a>.
+      </p>
+      <p>Be careful! You'd think <tt>rename</tt> wouldn't cause problems, but you can overwrite fields with null and cause other minor mayhem.</p>
+      <p>Previous Command - <a href="reltime">reltime</a>
+        </p>
+      <p>Next Command - <a href="regex">regex</a>
+        </p>
+      </html>
+    </panel>
+    <panel>
+      <html>
+        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
+        <pre>| inputlookup rich_and_dave_cars.csv</pre>
+        <p>While yours may differ slightly, that data for us is:</p>
+      </html>
+      <table>
+        <search>
+          <query>| inputlookup rich_and_dave_cars.csv</query>
+        </search>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        You know, that field <tt>cars</tt> isn't real descriptive.
+      </html>
+      <title>Our original data</title>
+      <table>
+        <search>
+          <query>| inputlookup rich_and_dave_cars.csv</query>
+        </search>
+      </table>
+    </panel>
+    <panel>
+      <html>
+        So we rename <tt>cars</tt> to <tt>Cars Sold This Hour</tt> <br />
+      </html>
+      <title>Renaming a field</title>
+      <table>
+        <search>
+          <query>| inputlookup rich_and_dave_cars.csv
+          | rename cars AS "Cars Sold This Hour"</query>
+        </search>
+      </table>
+    </panel>
+  </row>
+    <row>
+    <panel>
+      <html>
+        You can make all the fields pretty.  Just do yourself a favor, only rename things to have spaces in them at the end of your search. It's painful if you do that too soon.<br />
+      </html>
+      <title>Another example</title>
+      <table>
+        <search>
+          <query>| inputlookup rich_and_dave_cars.csv
+          | rename "salesperson" AS "Sales Person" </query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+      </table>
+    </panel>
+    <panel>
+      <html>
+        <p>Also you can rename multiple fields at once, like the following.  NOTE _time is even mroe special than the other _* fields.  It is stored as unix epoch time, then at display time converted to your default time format.  When you rename it, that specialness gets lost.  You can "fix" it with eval though.</p>
+      </html>
+      <title>Multiple renames</title>
+      <table>
+        <search>
+          <query>| inputlookup rich_and_dave_cars.csv
+          | rename salesperson AS "Sales Person" _time as Time</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+      </table>
+    </panel>
+  </row>
+
+</dashboard>
