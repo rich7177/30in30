@@ -12,7 +12,7 @@
       <p>So What: The admiration of colleagues.</p>
       <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/reltime">reltime</a>.
       </p>
-      <p>Was previous *very* limited, but recently they added some functionality. Still waiting for "future" timespans to work well though.</p>
+      <p>Was previously *very* limited, but recently they added some functionality. Still waiting for "future" timespans to work well though.</p>
       <p>Previous Command - <a href="fillnull">fillnull</a>
         </p>
       <p>Next Command - <a href="rename">rename</a>
