@@ -1,0 +1,66 @@
+<dashboard version="1.1" theme="light">
+  <label>inputlookup</label>
+  <row>
+    <panel>
+      <html>
+      <p>What: Input events/rows from a lookup table</p>
+      <ol>
+        <li>Can be a CSV or KV store lookup </li>
+        <li>Often reading results of previous <tt>outputlookup</tt>
+          </li>
+        <li>Can append to existing set of results or be the complete set of results</li>
+      </ol>
+      <p>How: <tt>| inputlookup mytablename.csv</tt>
+        </p>
+      <p>Why: Easy way to enrich the results set and provide context beyond the event data</p>
+      <p>So What: We'll use it a lot in this workshop and you'll use it a lot once you understand what it does</p>
+      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/inputlookup">inputlookup</a>.
+      </p>
+      <p>Previous Command - <a href="outputlookup">outputlookup</a>
+        </p>
+      <p>Next Command - <a href="lookup">lookup</a>
+        </p>
+      </html>
+    </panel>
+    <panel>
+      <html>
+        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
+        <pre>| inputlookup rich_and_dave_cars.csv</pre>
+        <p>While yours may differ slightly, that data for us is:</p>
+      </html>
+      <table>
+        <search>
+          <query>| inputlookup rich_and_dave_cars.csv</query>
+        </search>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        <p>Have Splunk tell you what's in the csv file</p>
+      </html>
+      <table>
+        <search>
+          <query>| inputlookup rich_and_dave_cars.csv</query>
+          <earliest>-30m@m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+      </table>
+    </panel>
+    <panel>
+      <html>
+        <p>Let's do something with that info</p>
+      </html>
+      <table>
+        <search>
+          <query>| inputlookup rich_and_dave_cars.csv | stats count as "Cars Sold" by salesperson</query>
+          <earliest>-30m@m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+      </table>
+    </panel>
+  </row>
+</dashboard>
