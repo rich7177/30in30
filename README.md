@@ -2,4 +2,4 @@ Splunk Server to login: <a href="https://scv-shw-6f19262b25dec2.stg.splunkcloud.
 
 Login: user1
 
-Password: user1
+Password: user1234
