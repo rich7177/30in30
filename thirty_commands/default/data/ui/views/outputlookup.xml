@@ -75,7 +75,7 @@
     <panel>
       <title></title>
       <html>
-        <p>Adding <tt>| outputlookup $moniker$_rich_and_dave_cars.csv</tt> to the end.  <b>NOTE</b> that it's an "unsafe command" so you'll have to click the warning triangle to allow it!</p>
+        <p>Adding <tt>| outputlookup $moniker$_cars.csv</tt> to the end.  <b>NOTE</b> that it's an "unsafe command" so you'll have to click the warning triangle to allow it!</p>
         <p><strong>ALSO be sure to fill in a name above (unique!) before running this!</strong></p>
       </html>
       <table>
@@ -92,7 +92,7 @@
 | eval _time = now() - offset
 | table _time, salesperson, cars
 | rename cars AS "Cars Sold This Hour" 
-| outputlookup $moniker$_rich_and_dave_cars.csv</query>
+| outputlookup $moniker$_cars.csv</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
