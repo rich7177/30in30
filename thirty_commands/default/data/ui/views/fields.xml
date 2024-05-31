@@ -25,7 +25,7 @@
     <panel>
       <html>
       <p>The data we are using for this command:
-      <pre>| index=internal sourcetype=splunkd earliest=-1h</pre>
+      <pre>| index=_internal sourcetype=splunkd earliest=-1h</pre>
         </p>
       </html>
     </panel>
