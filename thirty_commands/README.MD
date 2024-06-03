@@ -150,7 +150,11 @@ Serious Data analytics commands
 
 There's a lot of meat here. timechart creates time-oriented aggregations, whereas stats is more general purpose and can create aggregations by practically anything, time or other fields as well. Do note that "aggregations" can be mathematical, but they can ALSO be just thought of as "grouping" sometimes.
 
-In addition to those two, there's two even more mind blowing commands. chart is just like stats except it supports an "over" and also a "by" clause. This is mind-boggling the first few times you see or use it, but it's really powerful. Lastly, eventstats lets you do stats-like calculations on the entire data set, *without* replacing that data set. So, for instance, you can calculate a "grand total" for the data (in whole or "by" some criteria), and have that value tacked onto each event so you can do eval math/calculations with it, like find the percentages of totals. 
+In addition to those two, there's three even more mind blowing commands. <tt>chart</tt> is just like <tt>stats</tt> except it supports an "over" and also a "by" clause. This is mind-boggling the first few times you see or use it, but it's really powerful. 
+
+The command <tt>eventstats</tt> lets you do stats-like calculations on the entire data set, *without* replacing that data set. So, for instance, you can calculate a "grand total" for the data (in whole or "by" some criteria), and have that value tacked onto each event so you can do eval math/calculations with it, like find the percentages of totals. 
+
+And lastly there's <tt>streamstats</tt> which allows you to add cumulative statistics to search results, either individually or in a "window" of events.  
 
 | Command  | Description |
 | --- | --- |
@@ -158,3 +162,4 @@ In addition to those two, there's two even more mind blowing commands. chart is 
 | stats | General purpose aggregations and groupings.|
 | chart | Add a the ability to both slice and dice the data, *at the same time*.|
 | eventstats | Can calculate over the entire data set, appending its results into each event. This sounds weird and dumb, but once you see it you'll see the power.|
+| streamstats | Adds summary statistics in a streaming manner.  Like eventstats, but isn't over all the data at once and instead can use a "window"... OK so this is even weirder and dumber sounding, but it's *extremely* useful and powerful so go check it out! |

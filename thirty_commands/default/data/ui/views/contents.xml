@@ -360,7 +360,7 @@
       <html>
         <h1>Fixing weirdly structured data.  Or something like that.</h1>
         <p>
-          <a href="xyseries"><tt>xyseries</tt></a> and <a href="untable"><tt>untable</tt></a> are almost but not quite inverses of one another, and each modifies the structure of data to either "make it into a table" when it wasn't before, or to undo data that's too tabular.  Sorry fore the confusion, just see the examples.</p>
+          <a href="xyseries"><tt>xyseries</tt></a> and <a href="untable"><tt>untable</tt></a> are almost but not quite inverses of one another.  Each modifies the structure of data to either "make it into a table" when it wasn't before, or to undo data that's too tabular.  Sorry for the confusion, just see the examples.</p>
       </html>
     </panel>
     <panel>
@@ -581,6 +581,12 @@
               <tt>    <a href="eventstats">eventstats</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Can calculate over the entire data set, appending its results into each event.  This sounds weird and dumb, but once you see it you'll see the power.</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
+              <tt>    <a href="eventstats">streamstats</a>    </tt>
+            </td>
+            <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Adds summary statistics in a streaming manner.  Like eventstats, but isn't over all the data at once and instead can use a "window"... OK so this is even weirder and dumber sounding, but it's *extremely* useful and powerful</td>
           </tr>
         </table> 
       </html>
