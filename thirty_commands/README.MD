@@ -1,6 +1,6 @@
-#Thirty Commands in Thirty Minutes
+# Thirty Commands in Thirty Minutes
 
-##Thirty Commands (or more!) in Thirty Minutes (but likely not less!)
+## Thirty Commands (or more!) in Thirty Minutes (but likely not less!)
 
 Welcome to our talk. This is the agenda, and also a reference for later. Follow along as we build some sample data, then do all sorts of fun searches against that data!
 
