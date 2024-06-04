@@ -40,30 +40,28 @@
   </row>
   <row>
     <panel>
-      <title>Who's Selling Cars?</title>
+      <title>All kinds of averages and sums here</title>
+      <html>
+        <p>You'll see that "entries" is just a running count, running_tot_car is the total cars sold as of that entry, and running_avg_cars is the running_tot_car/entries.</p>
+      </html>
       <table>
         <search>
-          <query>|inputlookup rich_and_dave_cars.csv | stats values(salesperson)</query>
+          <query>|inputlookup rich_and_dave_cars.csv
+| streamstats count as entries sum(cars) as running_tot_car avg(cars) AS running_avg_cars</query>
           <earliest>-5m</earliest>
           <sampleRatio>1</sampleRatio>
         </search>
       </table>
     </panel>
     <panel>
-      <title>How many cars sold by day?</title>
+      <title>The same as to the left, but by salesperson</title>
+      <html>
+        <p>A little harder to see because it's "by salesperson", but it's the same idea only there's one "thread" for each of us.</p>
+      </html>
       <table>
         <search>
-          <query>|inputlookup rich_and_dave_cars.csv | bin _time span=1d | stats sum(cars) AS "Cars Sold By Day" by _time</query>
-          <earliest>0</earliest>
-          <sampleRatio>1</sampleRatio>
-        </search>
-      </table>
-    </panel>
-    <panel>
-      <title>How many cars did each salesperson sell each day?</title>
-      <table>
-        <search>
-          <query>|inputlookup rich_and_dave_cars.csv | bin _time span=1d | stats sum(cars) AS "Cars Sold By Day" by salesperson, _time</query>
+          <query>|inputlookup rich_and_dave_cars.csv
+| streamstats count as entries sum(cars) as running_tot_car avg(cars) AS running_avg_cars by salesperson</query>
           <earliest>0</earliest>
           <sampleRatio>1</sampleRatio>
         </search>
@@ -72,12 +70,12 @@
   </row>
   <row>
     <panel>
-      <title>actions vs. levels in _internal</title>
-      <html>Does a two-level stats, counting how many results for each combination of <tt>status</tt> (200, 404,...) and <tt>user</tt> (limiting to first 10 results)
+      <title>And some fun with makeresults!</title>
+      <html><p><tt>count</tt> will be a running count, and the eval builds a semi-random field <tt>test_field</tt> that trends upwards.  Note the trend may be hard to see with 10 numbers - try opening it in search and changing it to <tt>count=100</tt> then taking a look out near the end.</p>
       </html>
       <table>
         <search>
-          <query>index=_internal status=* user=* earliest="-15m@m" latest="@m" | stats count by status user</query>
+          <query>| makeresults count=10 | streamstats count | eval test_field = round(((random() % 10) - 5) + count/2)</query>
           <earliest>0</earliest>
           <latest></latest>
           <sampleRatio>1</sampleRatio>
@@ -93,12 +91,30 @@
       </table>
     </panel>
     <panel>
-      <title>actions vs. levels in _internal</title>
-      <html>Here we take an average and a 95th percentile for action_time_ms, and list those by savedsearch_name. (Filtering out where there's 4 or fewer results, because "95th percentile" isn't very useful on small results)
+      <title>One weird trick...</title>
+      <html><p>Here we're "pulling a lot of shenanigans" to try to "level out" a running average of charge for my car on the old 110 "regular plugged in the wall" charger.</p>
+      <p>This is a dumb example because I had to mess around with it so much. But the idea is solid.</p>
       </html>
       <table>
         <search>
-          <query>index=_internal action_time_ms=* earliest="-4h@h" latest="@h"  | stats count avg(action_time_ms) as action_time_ms_avg, perc95(action_time_ms) as action_time_ms_p95 by savedsearch_name | search count&gt;=5 | fields - count</query>
+          <query>| makeresults format="csv" data="time, percent, miles
+2024-02-25T10:17:00,51,107
+2024-02-25T11:11:00,52,111
+2024-02-25T12:15:00,53,116
+2024-02-25T13:13:00,55,119
+2024-02-25T14:12:00,57,124
+2024-02-25T15:26:00,59,129
+2024-02-25T16:22:00,61,132
+2024-02-25T17:27:00,64,137
+2024-02-25T19:02:00,66,144
+2024-02-25T20:43:00,69,150
+2024-02-26T05:57:00,86,188"
+| eval _time = strptime(time, "%Y-%m-%dT%H:%M:%S")
+| makecontinuous _time span=1h
+| filldown percent
+| search percent=*
+| sort 0 _time
+| streamstats time_window=3h avg(percent) as avg_percent</query>
           <sampleRatio>1</sampleRatio>
         </search>
       </table>
@@ -106,14 +122,15 @@
   </row>
   <row>
     <panel>
-      <title>NOT USING JOIN</title>
-      <html>The Splunk command <tt>join</tt> is almost never what you want.  Here's an example where you combine two completely different sets of data by using <tt>stats</tt> instead of <tt>join</tt>.
-      The important point here is that the two searches on each side of the <tt>OR</tt> could be *any* two searches. If they share a common field, you use <tt>stats ... by</tt> to group them.
+      <title>A less stupid trick</title>
+      <html><p>Smoothing the run-time of saved searches over a 3-item window.  Just helps smooth out some jaggies, though still a bit of a contrived example.</p>
       </html>
       <table>
         <search>
-          <query>(index=_internal sourcetype=splunkd) OR (index=_internal sourcetype=scheduler) 
-| stats sum(run_time) as total_run_time, sum(active_hist_searches) as active_hist_searches by user</query>
+          <query>(index=_internal sourcetype=splunkd) OR (index=_internal sourcetype=scheduler) total_runtime="*"
+| streamstats window=3 avg(total_runtime) as smoothed_runtime
+| eval smoothed_runtime = round(smoothed_runtime, 3)
+| table total_runtime smoothed_runtime</query>
           <earliest>0</earliest>
           <latest></latest>
           <sampleRatio>1</sampleRatio>
