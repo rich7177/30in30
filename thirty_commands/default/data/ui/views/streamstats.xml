@@ -1,22 +1,22 @@
 <dashboard version="1.1" theme="light">
-  <label>stats</label>
+  <label>streamstats</label>
   <row>
     <panel>
       <html>
-      <p>What: Group things together and do statistics on them</p>
+      <p>What: Process events as they stream through, adding summary statistics to each event either individually or in a "window".</p>
       <ol>
-        <li>Simply can be used to count things</li>
-        <li>When using <b>BY</b>, <tt>stats</tt> returns a row per value</li>
+        <li>There's a lot of options you can use for how to reset statistics, change windows sizes and so on.  We'll touch on a few of these but see the docs!</li>
+        <li>Options for <tt>window=&lt;integer&gt;</tt> and <tt>time_window=&lt;span-length&gt;</tt> are probably the most commonly used.</li>
       </ol>
-      <p>How: <tt>|stats function(field) [AS field], function(field) [AS field], ... [BY field, field, ...]</tt>
+      <p>How: <tt>|streamstats [all kinds of options here] function(field) [AS field], function(field) [AS field], ... [BY field...]</tt>
         </p>
-      <p>Why: Primary way to perform aggregration &amp; analysis to data sets in Splunk</p>
-      <p>So What: Slicing &amp; dicing data to fit the narrative you want to tell.  Note that stats is probably the most useful command in all of Splunk. It's a swiss army knife that can do so much.</p>
+      <p>Why: Allows you to do all sorts of analysis that isn't easily done without it.  Time-window math/counts, running counts, etc. </p>
+      <p>So What: Streamstats, especially with time or other windows, is really powerful and solves problems that are simply unsolveable without it.  I also believe streamstats is probably the neatest command in all of Splunk. </p>
       <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/stats">stats</a>.
       </p>
-      <p>Previous Command - <a href="timechart">timechart</a>
+      <p>Previous Command - <a href="chart">chart</a>
         </p>
-      <p>Next Command - <a href="eventstats">eventstats</a>
+      <p>Next Command - <a href="contents">Back to Contents</a>
         </p>
       </html>
     </panel>

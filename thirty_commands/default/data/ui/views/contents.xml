@@ -584,7 +584,7 @@
           </tr>
           <tr>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">
-              <tt>    <a href="eventstats">streamstats</a>    </tt>
+              <tt>    <a href="streamstats">streamstats</a>    </tt>
             </td>
             <td style="border: 1px solid black; padding: 2px 5px 2px 5px;">Adds summary statistics in a streaming manner.  Like eventstats, but isn't over all the data at once and instead can use a "window"... OK so this is even weirder and dumber sounding, but it's *extremely* useful and powerful</td>
           </tr>
