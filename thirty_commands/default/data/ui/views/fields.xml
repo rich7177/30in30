@@ -75,4 +75,14 @@ Note the data size and duration to run. Note that everything after <tt>fields</t
       </html>
     </panel>
   </row>
+  <row>
+    <panel>
+      <html>
+	  <hr />
+      <p align="right">Next Command - <a href="table">table</a>
+        </p>
+	  <hr />
+      </html>
+    </panel>
+  </row>
 </dashboard>

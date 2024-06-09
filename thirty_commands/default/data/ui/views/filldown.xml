@@ -110,4 +110,14 @@
       </table>
     </panel>
   </row>
+  <row>
+    <panel>
+      <html>
+	  <hr />
+      <p align="right">Next Command - <a href="fillnull">fillnull</a>
+        </p>
+	  <hr />
+      </html>
+    </panel>
+  </row>
 </dashboard>

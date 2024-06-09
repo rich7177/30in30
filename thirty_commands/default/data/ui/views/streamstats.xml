@@ -147,16 +147,18 @@
     </panel>
     <panel>
       <title>Gonna do another here too.</title>
-      <html>
-      <pre></pre>
+      <html>This panel unintentionally left blank.
       </html>
-      <table>
-        <search>
-          <query></query>
-          <earliest>-5m</earliest>
-          <sampleRatio>1</sampleRatio>
-        </search>
-      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+	  <hr />
+      <p align="right">Next Command - <a href="contents">Back to Contents</a>
+        </p>
+	  <hr />
+      </html>
     </panel>
   </row>
 </dashboard>

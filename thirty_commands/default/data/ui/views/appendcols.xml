@@ -86,4 +86,14 @@
       </table>
     </panel>
   </row>
+  <row>
+    <panel>
+      <html>
+	  <hr />
+      <p align="right">Next Command - <a href="appendpipe">appendpipe</a>
+        </p>
+	  <hr />
+      </html>
+    </panel>
+  </row>
 </dashboard>

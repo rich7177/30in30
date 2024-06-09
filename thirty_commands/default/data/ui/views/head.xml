@@ -58,4 +58,14 @@
       </table>
     </panel>
   </row>
+  <row>
+    <panel>
+      <html>
+	  <hr />
+      <p align="right">Next Command - <a href="tail">tail</a>
+        </p>
+	  <hr />
+      </html>
+    </panel>
+  </row>
 </dashboard>

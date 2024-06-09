@@ -96,6 +96,15 @@
         </search>
       </table>
     </panel>
-</row>
-
+  </row>
+  <row>
+    <panel>
+      <html>
+	  <hr />
+      <p align="right">Next Command - <a href="reverse">reverse</a>
+        </p>
+	  <hr />
+      </html>
+    </panel>
+  </row>
 </dashboard>

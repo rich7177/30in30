@@ -120,4 +120,14 @@ Runs slower showing only the same fields, but this time it did the work for *all
       </html>
     </panel>
   </row>
+  <row>
+    <panel>
+      <html>
+	  <hr />
+      <p align="right">Next Command - <a href="append">append</a>
+        </p>
+	  <hr />
+      </html>
+    </panel>
+  </row>
 </dashboard>

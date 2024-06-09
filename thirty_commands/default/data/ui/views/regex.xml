@@ -66,5 +66,15 @@
         </search>
       </table>
     </panel>
-</row>
+  </row>
+  <row>
+    <panel>
+      <html>
+	  <hr />
+      <p align="right">Next Command - <a href="rex">rex</a>
+        </p>
+	  <hr />
+      </html>
+    </panel>
+  </row>
 </dashboard>

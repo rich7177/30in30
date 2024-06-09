@@ -63,5 +63,20 @@
       </table>
     </panel>
   </row>
-  <row><panel><html>Note - normally you would use this command against lookups that were defined via the UI (or in .conf files).  By doing it the way we're doing it, we have to specify the CSV file exactly (including the ".csv" at the end), otherwise it works just the same.  Except of course we can make these "automatic".  To do that, see the fine <a href="https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Makeyourlookupautomatic">docs on lookups</a>.</html></panel></row>
+  <row>
+    <panel>
+	  <html>Note - normally you would use this command against lookups that were defined via the UI (or in .conf files).  By doing it the way we're doing it, we have to specify the CSV file exactly (including the ".csv" at the end), otherwise it works just the same.  Except of course we can make these "automatic".  To do that, see the fine <a href="https://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Makeyourlookupautomatic">docs on lookups</a>.
+      </html>
+	</panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+	  <hr />
+      <p align="right">Next Command - <a href="eval">eval</a>
+        </p>
+	  <hr />
+      </html>
+    </panel>
+  </row>
 </dashboard>

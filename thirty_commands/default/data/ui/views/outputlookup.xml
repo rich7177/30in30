@@ -107,4 +107,14 @@
       </html>
     </panel>
   </row>
+  <row>
+    <panel>
+      <html>
+	  <hr />
+      <p align="right">Next Command - <a href="inputlookup">inputlookup</a>
+        </p>
+	  <hr />
+      </html>
+    </panel>
+  </row>
 </form>
