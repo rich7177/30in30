@@ -21,11 +21,11 @@
     </panel>
     <panel>
       <html>
-      <p>The data we are using for this command:
+      <p>The data we are using for this command, which is a different data set than we've been using:
       <pre>| makeresults format="csv" data="Name,Pigeons_counted,Location
 Dave,-500,Belfast
 Rich,60,Berlin
-Frankie,1000,Bethlehem
+Fred,1000,Bethlehem
 Sinatra,30000,Barstow
 Flyboy,400000,Boise"</pre>
         </p>
@@ -43,7 +43,7 @@ Flyboy,400000,Boise"</pre>
           <query>| makeresults format="csv" data="Name,Pigeons_counted,Location
 Dave,-500,Belfast
 Rich,60,Berlin
-Frankie,1000,Bethlehem
+Fred,1000,Bethlehem
 Sinatra,30000,Barstow
 Flyboy,400000,Boise"</query>
           <earliest>1708873200</earliest>
@@ -62,7 +62,7 @@ Flyboy,400000,Boise"</query>
           <query>| makeresults format="csv" data="Name,Pigeons_counted,Location
 Dave,-500,Belfast
 Rich,60,Berlin
-Frankie,1000,Bethlehem
+Fred,1000,Bethlehem
 Sinatra,30000,Barstow
 Flyboy,400000,Boise" 
 | transpose header_field=Name column_name="Who did what now?"</query>

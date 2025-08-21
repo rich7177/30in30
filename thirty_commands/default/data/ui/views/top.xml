@@ -4,7 +4,8 @@
     <panel>
       <html>
       <p>What: Returns the *most common value* of the field specified along with some statistics about that field</p>
-      <p>How: <tt>... | top &lt;fieldname&gt;</tt></p>
+      <p>How: <tt>... | top &lt;fieldname&gt;</tt>
+        </p>
       <p>Why: Occasionally useful for reporting things, but often useful when you are exploring the data.</p>
       <p>So What: Quicker than doing your own <tt>stats</tt> to get these same statistics on a single field and how common it is.
         </p>
@@ -19,40 +20,43 @@
     </panel>
     <panel>
       <html>
-        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
-        <pre>| inputlookup rich_and_dave_cars.csv</pre>
+        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a>
+        </p>
+        <pre>| inputlookup rdf_cars.csv</pre>
         <p>While yours may differ slightly, that data for us is:</p>
       </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv</query>
+          <query>| inputlookup rdf_cars.csv</query>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
   </row>
   <row>
     <panel>
+      <title>Raw data</title>
       <html>
         This is the data
       </html>
-      <title>Raw data</title>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv</query>
+          <query>| inputlookup rdf_cars.csv</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
     <panel>
-      <html>
-        And here's the data with <tt>top "cars"</tt> applied.  "1" is the most common, so it's at the top.  Pun intended, lol.
-      </html>
       <title>Using top</title>
+      <html>
+        And here's the data with <tt>top "cars"</tt> applied.  "5" is the most common number so it's at the top.  Pun intended, please laugh now.
+      </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv | top cars</query>
+          <query>| inputlookup rdf_cars.csv | top cars</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
@@ -63,10 +67,10 @@
   <row>
     <panel>
       <html>
-	  <hr />
+	  <hr/>
       <p align="right">Next Command - <a href="rare">rare</a>
         </p>
-	  <hr />
+	  <hr/>
       </html>
     </panel>
   </row>

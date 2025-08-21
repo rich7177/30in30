@@ -5,10 +5,13 @@
       <html>
       <p>What: Totally different from the behavior of append and appendcols because appendpipe is much smarter.  It appends the results of the existing pipe to the search results.</p>
       <ol>
-        <li><tt>appendpipe</tt> operates on that *same* data.
+        <li>
+            <tt>appendpipe</tt> operates on that *same* data.
           <ul>
-            <li><tt>append</tt> and <tt>appendcols</tt> both operate on sets of data different from the "main search" data.</li>
-          </ul></li>
+            <li>
+                <tt>append</tt> and <tt>appendcols</tt> both operate on sets of data different from the "main search" data.</li>
+          </ul>
+          </li>
         <li>
             <b>CAN ONLY be used</b> after a generating command or a transforming command 
           <ul>
@@ -32,13 +35,14 @@
       <p>The data we are using for this command - <br/>Data 1 - a previous makeresults:</p>
       <pre>| makeresults format=json data="[{\"name\":\"John\", \"age\":35}, {\"name\":\"Sarah\", \"age\":39}]"</pre>
       <p>Data 2 - an <tt>inputlookup</tt> we built earlier.  To build this see <a href="outputlookup">outputlookup</a>.</p>
-        <pre>| inputlookup rich_and_dave_cars.csv</pre>
+        <pre>| inputlookup rdf_cars.csv</pre>
         <p>While yours may differ slightly, that data for us is:</p>
       </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv</query>
+          <query>| inputlookup rdf_cars.csv</query>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
   </row>
@@ -46,16 +50,16 @@
     <panel>
       <title>Starting data</title>
       <html>
-        The contents of rich_and_dave_cars.csv
+        The contents of rdf_cars.csv
       </html>
-      
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv</query>
+          <query>| inputlookup rdf_cars.csv</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
     <panel>
@@ -65,7 +69,7 @@
       </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv | appendpipe [stats sum(cars) AS TOTAL_BY_HOUR by _time]
+          <query>| inputlookup rdf_cars.csv | appendpipe [stats sum(cars) AS TOTAL_BY_HOUR by _time]
 ``` we have to re-sort by time to get them all back into order.```
 | sort - _time
 ``` and then rearrange the columns ```
@@ -74,16 +78,17 @@
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
   </row>
   <row>
     <panel>
       <html>
-	  <hr />
+	  <hr/>
       <p align="right">Next Command - <a href="head">head</a>
         </p>
-	  <hr />
+	  <hr/>
       </html>
     </panel>
   </row>

@@ -2,33 +2,36 @@
   <label>makecontinuous</label>
   <row>
     <panel>
-    <html>
+      <html>
       <p>"Fills in" missing buckets/slots in data.</p>
       <ol>
-        <li>For time-based fields, you have options to either use "automatic" ranges, or you can specify it with <tt>span=&lt;units&gt;</tt></li>
+        <li>For time-based fields, you have options to either use "automatic" ranges, or you can specify it with <tt>span=&lt;units&gt;</tt>
+          </li>
         <li>For fields that are not time-based there are also options to either use "automatic" ranges or specific ones. See the docs in both cases.</li>
       </ol>
       <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Makecontinuous">makecontinuous</a>.
       </p>
       <p>Note that this isn't a real common command.  Things like <tt>chart</tt> and <tt>timechart</tt> sort of do this automatically for time, and that's most commonly when it's needed.</p>
-      <p>Previous Command - <a href="untable">untable</a></p>
-      <p>Next Command - <a href="filldown">filldown</a></p>
+      <p>Previous Command - <a href="untable">untable</a>
+        </p>
+      <p>Next Command - <a href="filldown">filldown</a>
+        </p>
       </html>
-</panel>
-<panel>
-    <html>
+    </panel>
+    <panel>
+      <html>
       <p>The data we are using for this command:<pre>| makeresults format="csv" data="time, percent, miles
-2024-02-25T10:17:00,51,107
-2024-02-25T11:11:00,52,111
-2024-02-25T12:15:00,53,116
-2024-02-25T13:13:00,55,119
-2024-02-25T14:12:00,57,124
-2024-02-25T15:26:00,59,129
-2024-02-25T16:22:00,61,132
-2024-02-25T17:27:00,64,137
-2024-02-25T19:02:00,66,144
-2024-02-25T20:43:00,69,150
-2024-02-26T05:57:00,86,188"
+2025-08-20T10:17:00,51,107
+2025-08-20T11:11:00,52,111
+2025-08-20T12:15:00,53,116
+2025-08-20T13:13:00,55,119
+2025-08-20T14:12:00,57,124
+2025-08-20T15:26:00,59,129
+2025-08-20T16:22:00,61,132
+2025-08-20T17:27:00,64,137
+2025-08-20T19:02:00,66,144
+2025-08-20T20:43:00,69,150
+2025-08-21T05:57:00,86,188"
 | eval _time = strptime(time, "%Y-%m-%dT%H:%M:%S")</pre>
         </p>
       </html>
@@ -36,52 +39,53 @@
   </row>
   <row>
     <panel>
+      <title>Before using makecontinuous</title>
       <html>
         Notice that in the time field there are gaps between 17:27 and 19:02, and also between the last entry on the 25th and the first entry on the 26th.
       </html>
-      <title>Before using makecontinuous</title>
       <table>
         <search>
           <query>| makeresults format="csv" data="time, percent, miles
-2024-02-25T10:17:00,51,107
-2024-02-25T11:11:00,52,111
-2024-02-25T12:15:00,53,116
-2024-02-25T13:13:00,55,119
-2024-02-25T14:12:00,57,124
-2024-02-25T15:26:00,59,129
-2024-02-25T16:22:00,61,132
-2024-02-25T17:27:00,64,137
-2024-02-25T19:02:00,66,144
-2024-02-25T20:43:00,69,150
-2024-02-26T05:57:00,86,188"
+2025-08-20T10:17:00,51,107
+2025-08-20T11:11:00,52,111
+2025-08-20T12:15:00,53,116
+2025-08-20T13:13:00,55,119
+2025-08-20T14:12:00,57,124
+2025-08-20T15:26:00,59,129
+2025-08-20T16:22:00,61,132
+2025-08-20T17:27:00,64,137
+2025-08-20T19:02:00,66,144
+2025-08-20T20:43:00,69,150
+2025-08-21T05:57:00,86,188"
 | eval _time = strptime(time, "%Y-%m-%dT%H:%M:%S")</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">15</option>
       </table>
     </panel>
   </row>
   <row>
     <panel>
+      <title>After using makecontinuous</title>
       <html>
         Adding <pre>| makecontinuous _time span=1h</pre> to the end of the above fills in the _time field on 1 hour increments.  At least mostly.
       </html>
-      <title>After using makecontinuous</title>
       <table>
         <search>
           <query>| makeresults format="csv" data="time, percent, miles
-2024-02-25T10:17:00,51,107
-2024-02-25T11:11:00,52,111
-2024-02-25T12:15:00,53,116
-2024-02-25T13:13:00,55,119
-2024-02-25T14:12:00,57,124
-2024-02-25T15:26:00,59,129
-2024-02-25T16:22:00,61,132
-2024-02-25T17:27:00,64,137
-2024-02-25T19:02:00,66,144
-2024-02-25T20:43:00,69,150
-2024-02-26T05:57:00,86,188"
+2025-08-20T10:17:00,51,107
+2025-08-20T11:11:00,52,111
+2025-08-20T12:15:00,53,116
+2025-08-20T13:13:00,55,119
+2025-08-20T14:12:00,57,124
+2025-08-20T15:26:00,59,129
+2025-08-20T16:22:00,61,132
+2025-08-20T17:27:00,64,137
+2025-08-20T19:02:00,66,144
+2025-08-20T20:43:00,69,150
+2025-08-21T05:57:00,86,188"
 | eval _time = strptime(time, "%Y-%m-%dT%H:%M:%S")
 | makecontinuous _time span=1h
 ```below here is just to make the formatting for the dashboard work```
@@ -90,11 +94,10 @@
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">25</option>
+        <option name="count">40</option>
         <option name="dataOverlayMode">none</option>
         <option name="drilldown">none</option>
         <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
         <option name="rowNumbers">false</option>
         <option name="totalsRow">false</option>
         <option name="wrap">true</option>
@@ -115,10 +118,10 @@
   </row>
   <row>
     <panel>
+      <title>After using makecontinuous</title>
       <html>
         For another example using a non time-based field, adding <pre>| makecontinuous percent</pre> to the end, without specifying a "span", lets it use its best guess on how to "fill it in". It's usually pretty good.
       </html>
-      <title>After using makecontinuous</title>
       <table>
         <search>
           <query>| makeresults format="csv" data="time, percent, miles
@@ -139,11 +142,10 @@
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">25</option>
+        <option name="count">40</option>
         <option name="dataOverlayMode">none</option>
         <option name="drilldown">none</option>
         <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
         <option name="rowNumbers">false</option>
         <option name="totalsRow">false</option>
         <option name="wrap">true</option>
@@ -156,12 +158,11 @@
   <row>
     <panel>
       <html>
-	  <hr />
+	  <hr/>
       <p align="right">Next Command - <a href="filldown">filldown</a>
         </p>
-	  <hr />
+	  <hr/>
       </html>
     </panel>
   </row>
-
 </dashboard>

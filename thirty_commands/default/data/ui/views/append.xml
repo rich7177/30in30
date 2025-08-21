@@ -26,22 +26,23 @@
       <p>The data we are using for this command - <br/>Data 1 - a previous makeresults:</p>
       <pre>| makeresults format=json data="[{\"name\":\"John\", \"age\":35}, {\"name\":\"Sarah\", \"age\":39}]"</pre>
       <p>Data 2 - an <tt>inputlookup</tt> we built earlier.  To build this see <a href="outputlookup">outputlookup</a>.</p>
-        <pre>| inputlookup rich_and_dave_cars.csv</pre>
+        <pre>| inputlookup rdf_cars.csv</pre>
         <p>While yours may differ slightly, that data for us is:</p>
       </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv</query>
+          <query>| inputlookup rdf_cars.csv</query>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
   </row>
   <row>
     <panel>
+      <title>Data 1</title>
       <html>
         John and Sarah
       </html>
-      <title>Data 1</title>
       <table>
         <search>
           <query>| makeresults format=json data="[{\"name\":\"John\", \"age\":35}, {\"name\":\"Sarah\", \"age\":39}]"</query>
@@ -49,49 +50,52 @@
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
     <panel>
-      <html>
-        Whatever's in rich_and_dave_cars.csv :)
-      </html>
       <title>Data 2</title>
+      <html>
+        Whatever's in rdf_cars.csv :)
+      </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv</query>
+          <query>| inputlookup rdf_cars.csv</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
   </row>
   <row>
     <panel>
+      <title>Data 1</title>
       <html>
         <p>Adding them together</p>
         <tt>| makeresults format=json data="[{\"name\":\"John\", \"age\":35}, {\"name\":\"Sarah\", \"age\":39}]"
-| append [ | inputlookup rich_and_dave_cars.csv ]</tt>
+| append [ | inputlookup rdf_cars.csv ]</tt>
         <p>You'll see all the columns from both sides.</p>
       </html>
-      <title>Data 1</title>
       <table>
         <search>
-          <query>| makeresults format=json data="[{\"name\":\"John\", \"age\":35}, {\"name\":\"Sarah\", \"age\":39}]" | append [ | inputlookup rich_and_dave_cars.csv ]</query>
+          <query>| makeresults format=json data="[{\"name\":\"John\", \"age\":35}, {\"name\":\"Sarah\", \"age\":39}]" | append [ | inputlookup rdf_cars.csv ]</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">15</option>
       </table>
     </panel>
   </row>
   <row>
     <panel>
       <html>
-	  <hr />
+	  <hr/>
       <p align="right">Next Command - <a href="appendcols">appendcols</a>
         </p>
-	  <hr />
+	  <hr/>
       </html>
     </panel>
   </row>

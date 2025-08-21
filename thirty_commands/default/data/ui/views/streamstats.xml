@@ -22,14 +22,16 @@
     </panel>
     <panel>
       <html>
-        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
-        <pre>| inputlookup rich_and_dave_cars.csv</pre>
+        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a>
+        </p>
+        <pre>| inputlookup rdf_cars.csv</pre>
         <p>While yours may differ slightly, that data for us is:</p>
       </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv</query>
+          <query>| inputlookup rdf_cars.csv</query>
         </search>
+        <option name="count">12</option>
       </table>
       <html>
       <p>Also, we'll use some data from _internal:
@@ -42,36 +44,47 @@
     <panel>
       <title>All kinds of averages and sums here</title>
       <html>
-        <p>You'll see that "entries" is just a running count, running_tot_car is the total cars sold as of that entry, and running_avg_cars is the running_tot_car/entries.</p>
+        <p>You'll see that "entries" is just a running count, <br/>
+        "running_tot_car" is the total cars sold as of that entry, and <br/>
+        "running_avg_cars" is the running_tot_car/entries (all are rounded!)</p>
       </html>
       <table>
         <search>
-          <query>|inputlookup rich_and_dave_cars.csv
-| streamstats count as entries sum(cars) as running_tot_car avg(cars) AS running_avg_cars</query>
+          <query>|inputlookup rdf_cars.csv
+| streamstats count as entries sum(cars) as running_tot_car avg(cars) AS running_avg_cars
+| eval running_avg_cars = round(running_avg_cars, 2)</query>
           <earliest>-5m</earliest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">40</option>
       </table>
     </panel>
+  </row>
+  <row>
     <panel>
       <title>The same as to the left, but by salesperson</title>
       <html>
-        <p>A little harder to see because it's "by salesperson", but it's the same idea only there's one "thread" for each of us.</p>
+        <p>A little harder to see because it's "by salesperson", but it's the same idea only there's one "thread" for each of us.  Sorted to make it easier to see!</p>
       </html>
       <table>
         <search>
-          <query>|inputlookup rich_and_dave_cars.csv
-| streamstats count as entries sum(cars) as running_tot_car avg(cars) AS running_avg_cars by salesperson</query>
+          <query>|inputlookup rdf_cars.csv
+| streamstats count as entries sum(cars) as running_tot_car avg(cars) AS running_avg_cars by salesperson
+| eval running_avg_cars = round(running_avg_cars, 2)
+| sort + salesperson</query>
           <earliest>0</earliest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">40</option>
       </table>
     </panel>
   </row>
   <row>
     <panel>
       <title>And some fun with makeresults!</title>
-      <html><p><tt>count</tt> will be a running count, and the eval builds a semi-random field <tt>test_field</tt> that trends upwards.  Note the trend may be hard to see with 10 numbers - try opening it in search and changing it to <tt>count=100</tt> then taking a look out near the end.</p>
+      <html>
+        <p>
+          <tt>count</tt> will be a running count, and the eval builds a semi-random field <tt>test_field</tt> that trends upwards.  Note the trend may be hard to see with 10 numbers - try opening it in search and changing it to <tt>count=100</tt> then taking a look out near the end.</p>
       </html>
       <table>
         <search>
@@ -90,49 +103,97 @@
         <option name="wrap">true</option>
       </table>
     </panel>
+  </row>
+  <row>
     <panel>
       <title>One weird trick...</title>
-      <html><p>Here we're "pulling a lot of shenanigans" to try to "level out" a running average of charge for my car on the old 110 "regular plugged in the wall" charger.</p>
+      <html>
+        <p>Here we're "pulling a lot of shenanigans" to try to "level out" a running average of charge for my car on the old 110 "regular plugged in the wall" charger.</p>
       <p>This is a dumb example because I had to mess around with it so much. But the idea is solid.</p>
       </html>
       <table>
         <search>
           <query>| makeresults format="csv" data="time, percent, miles
-2024-02-25T10:17:00,51,107
-2024-02-25T11:11:00,52,111
-2024-02-25T12:15:00,53,116
-2024-02-25T13:13:00,55,119
-2024-02-25T14:12:00,57,124
-2024-02-25T15:26:00,59,129
-2024-02-25T16:22:00,61,132
-2024-02-25T17:27:00,64,137
-2024-02-25T19:02:00,66,144
-2024-02-25T20:43:00,69,150
-2024-02-26T05:57:00,86,188"
+2025-08-20T10:17:00,51,107
+2025-08-20T11:11:00,52,111
+2025-08-20T12:15:00,53,116
+2025-08-20T13:13:00,55,119
+2025-08-20T14:12:00,57,124
+2025-08-20T15:26:00,59,129
+2025-08-20T16:22:00,61,132
+2025-08-20T17:27:00,64,137
+2025-08-20T19:02:00,66,144
+2025-08-20T20:43:00,69,150
+2025-08-21T05:57:00,86,188"
 | eval _time = strptime(time, "%Y-%m-%dT%H:%M:%S")
+| fields - percent
 | makecontinuous _time span=1h
-| filldown percent
-| search percent=*
+| filldown miles
+| search miles=*
 | sort 0 _time
-| streamstats time_window=3h avg(percent) as avg_percent</query>
+| streamstats time_window=4h avg(miles) as 4h_avg_miles
+| eval 4h_avg_miles = round('4h_avg_miles', 2)</query>
+          <earliest>$earliest$</earliest>
+          <latest>$latest$</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">40</option>
+        <option name="refresh.display">progressbar</option>
       </table>
     </panel>
   </row>
   <row>
     <panel>
+      <title>The one weird trick's results...</title>
+      <html>
+      <p>The dumb example above, plotted.  It's a bit hard to see, but the 4h_avg_percent is a straighter line.</p>
+      </html>
+      <chart>
+        <search>
+          <query>| makeresults format="csv" data="time, percent, miles
+2025-08-20T10:17:00,51,107
+2025-08-20T11:11:00,52,111
+2025-08-20T12:15:00,53,116
+2025-08-20T13:13:00,55,119
+2025-08-20T14:12:00,57,124
+2025-08-20T15:26:00,59,129
+2025-08-20T16:22:00,61,132
+2025-08-20T17:27:00,64,137
+2025-08-20T19:02:00,66,144
+2025-08-20T20:43:00,69,150
+2025-08-21T05:57:00,86,188"
+| eval _time = strptime(time, "%Y-%m-%dT%H:%M:%S")
+| fields - percent
+| makecontinuous _time span=1h
+| filldown miles
+| search miles=*
+| sort 0 _time
+| streamstats time_window=4h avg(miles) as 4h_avg_miles
+| eval 4h_avg_miles = round('4h_avg_miles', 2)
+| fields _time, miles, 4h_avg_miles</query>
+          <earliest>$earliest$</earliest>
+          <latest>$latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.chart">line</option>
+        <option name="refresh.display">progressbar</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
       <title>A less stupid trick</title>
-      <html><p>Smoothing the run-time of saved searches over a 3-item window.  Just helps smooth out some jaggies, though still a bit of a contrived example.</p>
+      <html>
+        <p>Smoothing the run-time of saved searches over a 5-item window.  Just helps smooth out some jaggies, though still a bit of a contrived example.</p>
       </html>
       <table>
         <search>
           <query>(index=_internal sourcetype=splunkd) OR (index=_internal sourcetype=scheduler) total_runtime="*"
-| streamstats window=3 avg(total_runtime) as smoothed_runtime
-| eval smoothed_runtime = round(smoothed_runtime, 3)
-| table total_runtime smoothed_runtime</query>
-          <earliest>0</earliest>
-          <latest></latest>
+| timechart span=15m sum(total_runtime) as total_runtime
+| streamstats window=5 avg(total_runtime) as smoothed_runtime
+| eval smoothed_runtime = round(smoothed_runtime, 1)</query>
+          <earliest>-4h@m</earliest>
+          <latest>now</latest>
           <sampleRatio>1</sampleRatio>
         </search>
         <option name="count">100</option>
@@ -145,19 +206,35 @@
         <option name="wrap">true</option>
       </table>
     </panel>
+  </row>
+  <row>
     <panel>
-      <title>Gonna do another here too.</title>
-      <html>This panel unintentionally left blank.
+      <title>A less stupid trick</title>
+      <html>
+        <p>The above smoothed-over-5-item window resulting chart is a lot smoother.</p>
       </html>
+      <chart>
+        <search>
+          <query>(index=_internal sourcetype=splunkd) OR (index=_internal sourcetype=scheduler) total_runtime="*"
+| timechart span=15m sum(total_runtime) as total_runtime
+| streamstats window=5 avg(total_runtime) as smoothed_runtime
+| eval smoothed_runtime = round(smoothed_runtime, 1)</query>
+          <earliest>-4h@m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.chart">line</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
     </panel>
   </row>
   <row>
     <panel>
       <html>
-	  <hr />
+	  <hr/>
       <p align="right">Next Command - <a href="contents">Back to Contents</a>
         </p>
-	  <hr />
+	  <hr/>
       </html>
     </panel>
   </row>

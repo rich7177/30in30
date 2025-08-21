@@ -19,54 +19,58 @@
     </panel>
     <panel>
       <html>
-        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
-        <pre>| inputlookup rich_and_dave_cars.csv</pre>
+        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a>
+        </p>
+        <pre>| inputlookup rdf_cars.csv</pre>
         <p>While yours may differ slightly, that data for us is:</p>
       </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv</query>
+          <query>| inputlookup rdf_cars.csv</query>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
   </row>
   <row>
     <panel>
+      <title>Raw data</title>
       <html>
         This is the data
       </html>
-      <title>Raw data</title>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv</query>
+          <query>| inputlookup rdf_cars.csv</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
     <panel>
-      <html>
-        And here's the data with <tt>rare "cars"</tt> applied.  "3" is the least common, so it's at the top. 
-      </html>
       <title>Using rare</title>
+      <html>
+        And here's the data with <tt>rare "cars"</tt> applied.  "4" is the least common number of cars sold, so it's at the top.  No pun here, move along. 
+      </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv | rare cars</query>
+          <query>| inputlookup rdf_cars.csv | rare cars</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
   </row>
   <row>
     <panel>
       <html>
-	  <hr />
+	  <hr/>
       <p align="right">Next Command - <a href="sort">sort</a>
         </p>
-	  <hr />
+	  <hr/>
       </html>
     </panel>
   </row>

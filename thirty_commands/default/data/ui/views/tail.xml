@@ -6,7 +6,8 @@
       <p>What: Trims to the last X events</p>
       <p>How: <tt>... | tail N</tt> where N is some number</p>
       <p>Why: Less useful than <tt>| head</tt> but does have it's uses, usually after some transforming command.</p>
-      <p>So What: Honestly, not a whole lot except in certain situations, often when combined with <tt>| reverse</tt> or some funky <tt>| sort</tt></p>
+      <p>So What: Honestly, not a whole lot except in certain situations, often when combined with <tt>| reverse</tt> or some funky <tt>| sort</tt>
+        </p>
       <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/tail">tail</a>.
       </p>
       <p>Previous Command - <a href="head">head</a>
@@ -17,48 +18,52 @@
     </panel>
     <panel>
       <html>
-        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
-        <pre>| inputlookup rich_and_dave_cars.csv</pre>
+        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a>
+        </p>
+        <pre>| inputlookup rdf_cars.csv</pre>
         <p>While yours may differ slightly, that data for us is:</p>
       </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv</query>
+          <query>| inputlookup rdf_cars.csv</query>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
   </row>
   <row>
     <panel>
+      <title>Raw data</title>
       <html>
         This is the data
       </html>
-      <title>Raw data</title>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv</query>
+          <query>| inputlookup rdf_cars.csv</query>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
     <panel>
+      <title>Using head</title>
       <html>
         And here's the data with <tt>tail 4</tt> applied.
       </html>
-      <title>Using head</title>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv | tail 4</query>
+          <query>| inputlookup rdf_cars.csv | tail 4</query>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
   </row>
   <row>
     <panel>
       <html>
-	  <hr />
+	  <hr/>
       <p align="right">Next Command - <a href="top">top</a>
         </p>
-	  <hr />
+	  <hr/>
       </html>
     </panel>
   </row>

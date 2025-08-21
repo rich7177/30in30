@@ -22,14 +22,16 @@
     </panel>
     <panel>
       <html>
-        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
-        <pre>| inputlookup rich_and_dave_cars.csv</pre>
+        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a>
+        </p>
+        <pre>| inputlookup rdf_cars.csv</pre>
         <p>While yours may differ slightly, that data for us is:</p>
       </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv</query>
+          <query>| inputlookup rdf_cars.csv</query>
         </search>
+        <option name="count">12</option>
       </table>
       <html>
       <p>Also, we'll use some data from _internal:
@@ -43,7 +45,7 @@
       <title>Who's Selling Cars?</title>
       <table>
         <search>
-          <query>|inputlookup rich_and_dave_cars.csv | stats values(salesperson)</query>
+          <query>|inputlookup rdf_cars.csv | stats values(salesperson)</query>
           <earliest>-5m</earliest>
           <sampleRatio>1</sampleRatio>
         </search>
@@ -53,17 +55,29 @@
       <title>How many cars sold by day?</title>
       <table>
         <search>
-          <query>|inputlookup rich_and_dave_cars.csv | bin _time span=1d | stats sum(cars) AS "Cars Sold By Day" by _time</query>
+          <query>|inputlookup rdf_cars.csv | bin _time span=1d | stats sum(cars) AS "Cars Sold By Day" by _time</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>How many cars did each salesperson sell each day?</title>
+      <table>
+        <search>
+          <query>|inputlookup rdf_cars.csv | bin _time span=1d | stats sum(cars) AS "Cars Sold By Day" by salesperson, _time</query>
           <earliest>0</earliest>
           <sampleRatio>1</sampleRatio>
         </search>
       </table>
     </panel>
     <panel>
-      <title>How many cars did each salesperson sell each day?</title>
+      <title>For each Salesperson, what is their average sales per hour for today?</title>
       <table>
         <search>
-          <query>|inputlookup rich_and_dave_cars.csv | bin _time span=1d | stats sum(cars) AS "Cars Sold By Day" by salesperson, _time</query>
+          <query>|inputlookup rdf_cars.csv | stats avg(cars) AS "Average Cars Sold Per Hour" by salesperson</query>
           <earliest>0</earliest>
           <sampleRatio>1</sampleRatio>
         </search>
@@ -92,13 +106,15 @@
         <option name="wrap">true</option>
       </table>
     </panel>
+  </row>
+  <row>
     <panel>
       <title>actions vs. levels in _internal</title>
-      <html>Here we take an average and a 95th percentile for action_time_ms, and list those by savedsearch_name. (Filtering out where there's 4 or fewer results, because "95th percentile" isn't very useful on small results)
+      <html>Here we take an average and a 95th percentile for action_time_ms, and list those by savedsearch_name. We filter out where there's 4 or fewer results with <tt>| search count>=5</tt>, because "95th percentile" isn't very useful on small results.  We are also limiting it to the first 10 results with <tt>| head 10</tt> and finally use <tt>| eval savedsearch_name = substr(savedsearch_name, 1, 20) . "..."</tt> to shorten it so it fits better.
       </html>
       <table>
         <search>
-          <query>index=_internal action_time_ms=* earliest="-4h@h" latest="@h"  | stats count avg(action_time_ms) as action_time_ms_avg, perc95(action_time_ms) as action_time_ms_p95 by savedsearch_name | search count&gt;=5 | fields - count</query>
+          <query>index=_internal action_time_ms=* earliest="-4h@h" latest="@h"  | stats count avg(action_time_ms) as action_time_ms_avg, perc95(action_time_ms) as action_time_ms_p95 by savedsearch_name | search count&gt;=5 | fields - count | head 10 | eval savedsearch_name = substr(savedsearch_name, 1, 20) . "..."</query>
           <sampleRatio>1</sampleRatio>
         </search>
       </table>
@@ -128,19 +144,14 @@
         <option name="wrap">true</option>
       </table>
     </panel>
-    <panel>
-      <title>Gonna do another here too.</title>
-      <html>This panel intentionally left blank.
-      </html>
-    </panel>
   </row>
   <row>
     <panel>
       <html>
-	  <hr />
+	  <hr/>
       <p align="right">Next Command - <a href="eventstats">eventstats</a>
         </p>
-	  <hr />
+	  <hr/>
       </html>
     </panel>
   </row>

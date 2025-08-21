@@ -32,17 +32,20 @@
       <html>
       <p>The data output we build here will be used in a lot of succeeding commands, so please be sure to do this one!</p>
       <pre>| makeresults format=csv data="offset, salesperson, cars
--10800, Rich, 1
--10800, David, 1
--7200, Rich, 0
--7200, David, 0
--3600, Rich, 1
--3600, David, 2
+-10800, Rich, 2
+-10800, David, 2
+-10800, Fred, 5
+-7200, Rich, 5
+-7200, David, 4
+-7200, Fred, 5
+-3600, Rich, 3
+-3600, David, 3
+-3600, Fred, 3
 -0, Rich, 2
--0, David, 3"
+-0, David, 4
+-0, Fred, 5"
 | eval _time = now() - offset
-| rename cars AS cars_this_hour 
-| table _time, salesperson, cars_this_hour
+| table _time, salesperson, cars
 </pre>
       </html>
     </panel>
@@ -56,17 +59,20 @@
       <table>
         <search>
           <query>| makeresults format=csv data="offset, salesperson, cars
--10800, Rich, 1
--10800, David, 1
--7200, Rich, 0
--7200, David, 0
--3600, Rich, 1
--3600, David, 2
+-10800, Rich, 2
+-10800, David, 2
+-10800, Fred, 5
+-7200, Rich, 5
+-7200, David, 4
+-7200, Fred, 5
+-3600, Rich, 3
+-3600, David, 3
+-3600, Fred, 3
 -0, Rich, 2
--0, David, 3"
+-0, David, 4
+-0, Fred, 5"
 | eval _time = now() - offset
-| rename cars AS cars_this_hour 
-| table _time, salesperson, cars_this_hour
+| table _time, salesperson, cars
 </query>
           <sampleRatio>1</sampleRatio>
         </search>
@@ -81,17 +87,20 @@
       <table>
         <search>
           <query>| makeresults format=csv data="offset, salesperson, cars
--10800, Rich, 1
--10800, David, 1
--7200, Rich, 0
--7200, David, 0
--3600, Rich, 1
--3600, David, 2
+-10800, Rich, 2
+-10800, David, 2
+-10800, Fred, 5
+-7200, Rich, 5
+-7200, David, 4
+-7200, Fred, 5
+-3600, Rich, 3
+-3600, David, 3
+-3600, Fred, 3
 -0, Rich, 2
--0, David, 3"
+-0, David, 4
+-0, Fred, 5"
 | eval _time = now() - offset
 | table _time, salesperson, cars
-| rename cars AS "Cars Sold This Hour" 
 | outputlookup $moniker$_cars.csv</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>

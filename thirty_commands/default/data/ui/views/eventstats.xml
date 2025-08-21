@@ -18,14 +18,16 @@
     </panel>
     <panel>
       <html>
-        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
-        <pre>| inputlookup rich_and_dave_cars.csv</pre>
+        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a>
+        </p>
+        <pre>| inputlookup rdf_cars.csv</pre>
         <p>While yours may differ slightly, that data for us is:</p>
       </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv</query>
+          <query>| inputlookup rdf_cars.csv</query>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
   </row>
@@ -34,63 +36,75 @@
       <title>Creating a simple average.</title>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv
-| eventstats avg(cars) as "Avg_cars_per_hour"</query>
+          <query>| inputlookup rdf_cars.csv
+| eventstats avg(cars) as avg_cars_per_hour
+| eval avg_cars_per_hour = round(avg_cars_per_hour, 2)
+</query>
           <earliest>-30m@m</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
+  </row>
+  <row>
     <panel>
       <title>It also supports a "BY" clause.</title>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv
-| eventstats avg(cars) as "Avg_cars_per_hour" by salesperson</query>
+          <query>| inputlookup rdf_cars.csv
+| eventstats avg(cars) as avg_cars_this_salesperson_per_hour by salesperson
+| eval avg_cars_this_salesperson_per_hour = round(avg_cars_this_salesperson_per_hour, 2)</query>
           <earliest>-30m@m</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">12</option>
+        <option name="refresh.display">progressbar</option>
       </table>
     </panel>
   </row>
-  
   <row>
     <panel>
       <title>Creating a percent of total field</title>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv
+          <query>| inputlookup rdf_cars.csv
 | eventstats sum(cars) as "total_cars"
-| eval percent_of_total = (('Cars Sold This Hour' / total_cars) * 100) . "%"</query>
+| eval percent_of_total = round((cars / total_cars) * 100, 2) . "%"</query>
           <earliest>-30m@m</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
+  </row>
+  <row>
     <panel>
       <title>Combining the above things</title>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv
+          <query>| inputlookup rdf_cars.csv
 | eventstats sum(cars) as "total_cars_for_this_salesperson" by salesperson
-| eval percent_of_total = (('Cars Sold This Hour' / total_cars_for_this_salesperson) * 100) . "%"</query>
+| eval percent_of_this_salespersons_total = round((cars / total_cars_for_this_salesperson) * 100, 2) . "%"</query>
           <earliest>-30m@m</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">12</option>
+        <option name="refresh.display">progressbar</option>
       </table>
     </panel>
   </row>
   <row>
     <panel>
       <html>
-	  <hr />
+	  <hr/>
       <p align="right">Next Command - <a href="chart">chart</a>
         </p>
-	  <hr />
+	  <hr/>
       </html>
     </panel>
   </row>

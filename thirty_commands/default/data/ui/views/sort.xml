@@ -6,10 +6,15 @@
       <p>What: I'll give you three guesses as to what it does.</p>
       <ol>
         <li>Can sort ascending, descending, and a mixture of those.</li>
-        <li>Can also sort with special fields, like by <tt>ip(&lt;field&gt;)</tt></li>
+        <li>Can also sort with special fields, like by <tt>ip(&lt;field&gt;)</tt>
+          </li>
       </ol>
-      <p>How: <tt>sort [limit=N] +/-&lt;field&gt; +/-&lt;field&gt;...</tt></p>
-      <p>Why: I mean, come on. Of course you occasionally need to sort things!  For a simple and specific case, see also <a href="reverse"><tt>reverse</tt></a></p>
+      <p>How: <tt>sort [limit=N] +/-&lt;field&gt; +/-&lt;field&gt;...</tt>
+        </p>
+      <p>Why: I mean, come on. Of course you occasionally need to sort things!  For a simple and specific case, see also <a href="reverse">
+            <tt>reverse</tt>
+          </a>
+        </p>
       <p>So What: Often useful after a stats or top/rare or some other "grouping and statistics" function.</p>
       <p>Be aware that <tt>sort</tt> has a built in default limit of 10000. First argument may be a number, and if it set to 0, all results are returned.</p>
       <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/sort">sort</a>.
@@ -22,88 +27,94 @@
     </panel>
     <panel>
       <html>
-        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
-        <pre>| inputlookup rich_and_dave_cars.csv</pre>
+        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a>
+        </p>
+        <pre>| inputlookup rdf_cars.csv</pre>
         <p>While yours may differ slightly, that data for us is:</p>
       </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv</query>
+          <query>| inputlookup rdf_cars.csv</query>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
   </row>
   <row>
     <panel>
+      <title>Simple sort</title>
       <html>
         Sorted most simply, with the default "ascending" on one field, "cars"
       </html>
-      <title>Simple sort</title>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv
+          <query>| inputlookup rdf_cars.csv
 | sort "cars"</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
     <panel>
+      <title>Simple sort, descending</title>
       <html>
         Flipping the sort to be "descending" for "cars"
       </html>
-      <title>Simple sort, descending</title>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv
+          <query>| inputlookup rdf_cars.csv
 | sort -"cars"</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
-</row>
+  </row>
   <row>
     <panel>
+      <title>Complex sort</title>
       <html>
         More complex sort - "salesperson" ascending (David first), "cars" descending
       </html>
-      <title>Complex sort</title>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv
+          <query>| inputlookup rdf_cars.csv
 | sort +salesperson -"cars"</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
     <panel>
+      <title>Complex sort</title>
       <html>
         More complex sort - "salesperson" and "cars" both ascending
       </html>
-      <title>Complex sort</title>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv
+          <query>| inputlookup rdf_cars.csv
 | sort +salesperson +"cars"</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
   </row>
   <row>
     <panel>
       <html>
-	  <hr />
+	  <hr/>
       <p align="right">Next Command - <a href="reverse">reverse</a>
         </p>
-	  <hr />
+	  <hr/>
       </html>
     </panel>
   </row>

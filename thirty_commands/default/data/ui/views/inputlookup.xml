@@ -24,14 +24,16 @@
     </panel>
     <panel>
       <html>
-        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
-        <pre>| inputlookup rich_and_dave_cars.csv</pre>
+        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a>
+        </p>
+        <pre>| inputlookup widget_sales.csv</pre>
         <p>While yours may differ slightly, that data for us is:</p>
       </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv</query>
+          <query>| inputlookup rdf_cars.csv</query>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
   </row>
@@ -42,11 +44,12 @@
       </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv</query>
+          <query>| inputlookup rdf_cars.csv</query>
           <earliest>-30m@m</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
     <panel>
@@ -55,21 +58,22 @@
       </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv | stats count as "Cars Sold" by salesperson</query>
+          <query>| inputlookup rdf_cars.csv | stats sum(cars) as "Cars Sold" by salesperson</query>
           <earliest>-30m@m</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
   </row>
   <row>
     <panel>
       <html>
-	  <hr />
+	  <hr/>
       <p align="right">Next Command - <a href="lookup">lookup</a>
         </p>
-	  <hr />
+	  <hr/>
       </html>
     </panel>
   </row>

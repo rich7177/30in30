@@ -5,10 +5,12 @@
       <html>
       <p>What: Only keep and use what you need</p>
       <ol>
-        <li><tt>fields</tt> returns only the fields you specify, and removes the rest from the working data set</li>
+        <li>
+            <tt>fields</tt> returns only the fields you specify, and removes the rest from the working data set</li>
         <li>Use <tt>fields</tt> anywhere in the SPL to slim down the data set</li>
         <li>It's okay to use <tt>fields</tt> multiple times in the same SPL</li>
-        <li><tt>fields</tt> can keep [+] or remove [-] the field list presented</li>
+        <li>
+            <tt>fields</tt> can keep [+] or remove [-] the field list presented</li>
       </ol>
       <p>How: <tt>| fields [+|-] &lt;field&gt;, &lt;field&gt;, ...</tt>
         </p>
@@ -33,19 +35,22 @@
   <row>
     <panel>
       <title>Return all the fields</title>
-<html>Note the data size and duration to run. Everything after <tt>fields</tt> is used to calculate the size of the data set returned.  Also we're using <tt>table</tt> to make a point.  :)
+      <html>Note the data size and duration to run. Everything after <tt>fields</tt> is used to calculate the size of the data set returned.  Also we're using <tt>table</tt> to make a point.  :)
 </html>
       <table>
         <search>
-          <query>index=_internal sourcetype=splunkd earliest=-1h  
-| table *
-| eval size=len(_raw) 
-| stats sum(size) as datasize 
-| eval datasize=tostring(datasize, "commas")</query>
           <progress>
             <eval token="duration1">tostring(tonumber($job.runDuration$),"duration")</eval>
           </progress>
+          <query>index=_internal sourcetype=splunkd earliest=-1h  
+| table component group
+| eval size=len(_raw) 
+| stats sum(size) as datasize 
+| eval datasize=tostring(datasize, "commas")</query>
+          <earliest>$earliest$</earliest>
+          <latest>$latest$</latest>
         </search>
+        <option name="refresh.display">progressbar</option>
       </table>
       <html>
           <h3>Duration</h3>
@@ -53,7 +58,7 @@
       </html>
     </panel>
     <panel>
-	<title>Now let's ask for only the fields we care about</title>
+      <title>Now let's ask for only the fields we care about</title>
       <html>
 Note the data size and duration to run. Note that everything after <tt>fields</tt> is used to calculate the size of the data set returned.
 </html>
@@ -78,10 +83,10 @@ Note the data size and duration to run. Note that everything after <tt>fields</t
   <row>
     <panel>
       <html>
-	  <hr />
+	  <hr/>
       <p align="right">Next Command - <a href="table">table</a>
         </p>
-	  <hr />
+	  <hr/>
       </html>
     </panel>
   </row>

@@ -8,7 +8,8 @@
         <li>Don't confuse with the command rex!</li>
         <li>Be aware that pipes <tt>|</tt> and backslashes <tt>\</tt> need special attention.</li>
       </ol>
-      <p>How: <tt>| regex &lt;regex-expression&gt;|&lt;field&gt;=&lt;regex-expression&gt;</tt></p>
+      <p>How: <tt>| regex &lt;regex-expression&gt;|&lt;field&gt;=&lt;regex-expression&gt;</tt>
+        </p>
       <p>Why: More complex filtering/searching is possible through it.</p>
       <p>So What: I honestly have never used it in a production environment.  I prefer using rex to create a new field out of the things I want/don't want and then use a standard <tt>| search ...</tt> to do this instead.  I know, I'm crazy.</p>
       <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/regex">regex</a>.
@@ -21,59 +22,62 @@
     </panel>
     <panel>
       <html>
-        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a>.  Note that we use our base lookup, but I multiply the number of cars per hour by 6 to give us some neat things to work with.</p>
-        <pre>| inputlookup rich_and_dave_cars.csv</pre>
+        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a>.  Note that we use our base lookup, but I multiply the number of cars per hour by 3 to give us some neat things to work with.</p>
+        <pre>| inputlookup rdf_cars.csv</pre>
         <p>While yours may differ slightly, that data for us is:</p>
       </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv</query>
+          <query>| inputlookup rdf_cars.csv</query>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
   </row>
   <row>
     <panel>
-      <html>
-        Note the x6 of the cars sold per hour, and it being renamed.
-      </html>
       <title>Original (slightly modified) data</title>
+      <html>
+        Note the x3 of the cars sold per hour and it being renamed.
+      </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv
+          <query>| inputlookup rdf_cars.csv
 | rename cars AS carsSoldPerHour
-| eval carsSoldPerHour = 6 * carsSoldPerHour</query>
+| eval carsSoldPerHour = 3 * carsSoldPerHour</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
-      <panel>
+    <panel>
+      <title>Regex is fun!</title>
       <html>
         Filtered with <tt>| regex carsSoldPerHour="\d{2,}"</tt> which tells it to include only rows where carsSoldPerHour is two or more digits.
       </html>
-      <title>Regex is fun!</title>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv
+          <query>| inputlookup rdf_cars.csv
       | rename cars AS carsSoldPerHour
-      | eval carsSoldPerHour = 6 * carsSoldPerHour
+      | eval carsSoldPerHour = 3 * carsSoldPerHour
       | regex carsSoldPerHour="\d{2,}"</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
   </row>
   <row>
     <panel>
       <html>
-	  <hr />
+	  <hr/>
       <p align="right">Next Command - <a href="rex">rex</a>
         </p>
-	  <hr />
+	  <hr/>
       </html>
     </panel>
   </row>

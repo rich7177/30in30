@@ -5,7 +5,8 @@
       <html>
       <p>What: Structure a table of data for humans</p>
       <ol>
-        <li><tt>Table</tt> returns only the fields you specify</li>
+        <li>
+            <tt>Table</tt> returns only the fields you specify</li>
         <li>Cannot be used to rename fields.  Which is a huge let-down, but no one seems interested in fixing it.</li>
         <li>Use <tt>table</tt> at the end of your SPL; it can significantly impact performance when used too early!</li>
       </ol>
@@ -23,14 +24,16 @@
     </panel>
     <panel>
       <html>
-        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
-        <pre>| inputlookup rich_and_dave_cars.csv</pre>
+        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a>
+        </p>
+        <pre>| inputlookup rdf_cars.csv</pre>
         <p>While yours may differ slightly, that data for us is:</p>
       </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv</query>
+          <query>| inputlookup rdf_cars.csv</query>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
   </row>
@@ -41,30 +44,35 @@
       </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv | table cars, salesperson</query>
+          <query>| inputlookup rdf_cars.csv | table cars, salesperson</query>
           <earliest>-1h@m</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
-     <panel>
+    <panel>
       <html>
         <p>Skipping more fields by just adding <tt>| table salesperson</tt> to the end of the search.</p>
       </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv | table salesperson</query>
+          <query>| inputlookup rdf_cars.csv | table salesperson</query>
           <earliest>-1h@m</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
-
   </row>
   <row>
-    <html><hr style="height: 4px;" /></html>
+    <panel>
+      <html>
+        <hr style="height: 4px;"/>
+      </html>
+    </panel>
   </row>
   <row>
     <panel>
@@ -95,7 +103,7 @@ Runs faster as its returning only 2 fields (plus _raw and _time). Note the eval'
       </html>
     </panel>
     <panel>
-            <html>
+      <html>
         <p>Now let's flip the <tt>table</tt> and a <tt>fields</tt>:</p>
 <pre>index=_internal sourcetype=splunkd earliest=-1h
 | table *
@@ -114,7 +122,7 @@ Runs slower showing only the same fields, but this time it did the work for *all
           <sampleRatio>1</sampleRatio>
         </search>
       </table>
-            <html>
+      <html>
           <h3>Duration</h3>
           <div class="custom-result-value">$duration2$</div>
       </html>
@@ -123,10 +131,10 @@ Runs slower showing only the same fields, but this time it did the work for *all
   <row>
     <panel>
       <html>
-	  <hr />
+	  <hr/>
       <p align="right">Next Command - <a href="append">append</a>
         </p>
-	  <hr />
+	  <hr/>
       </html>
     </panel>
   </row>

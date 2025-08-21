@@ -5,11 +5,14 @@
       <html>
       <p>What: Similar to <tt>timechart</tt> and <tt>stats</tt>, but has the ability to use both axes at once.</p>
       <ol>
-        <li><tt>OVER</tt> is the Y axis</li>
-        <li><tt>BY</tt> is the X axis</li>
+        <li>
+            <tt>OVER</tt> is the Y axis</li>
+        <li>
+            <tt>BY</tt> is the X axis</li>
         <li>You actually don't need to use both parameters if you don't want.</li>
       </ol>
-      <p>How: <tt>chart &lt;aggregation terms&gt; OVER &lt;field&gt; BY &lt;field&gt;</tt></p>
+      <p>How: <tt>chart &lt;aggregation terms&gt; OVER &lt;field&gt; BY &lt;field&gt;</tt>
+        </p>
       <p>Why: <tt>chart</tt> does a job that's nearly impossible without it.  See the examples!</p>
       <p>So What: Usually, but not always, <tt>chart</tt> is a command used to really alter the structure of data, moving things that weren't an axis into being an axis, and vice versa.</p>
       <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/chart">chart</a>.
@@ -23,26 +26,28 @@
     </panel>
     <panel>
       <html>
-        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
-        <pre>| inputlookup rich_and_dave_cars.csv</pre>
+        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a>
+        </p>
+        <pre>| inputlookup rdf_cars.csv</pre>
         <p>While yours may differ slightly, that data for us is:</p>
       </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv</query>
+          <query>| inputlookup rdf_cars.csv</query>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
   </row>
   <row>
     <panel>
+      <title>A simple example using our test data.</title>
       <html>
         Adding <tt>| chart  sum(cars) as "Cars Sold This Hour" over salesperson by _time</tt> changed it into a two-important-axis chart.
       </html>
-      <title>A simple example using our test data.</title>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv | eval _time = strftime(_time, "%Y-%m-%d %H:%M:%S") 
+          <query>| inputlookup rdf_cars.csv | eval _time = strftime(_time, "%Y-%m-%d %H:%M:%S") 
 | chart  sum(cars) as "Cars Sold This Hour" over salesperson by _time</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
@@ -53,8 +58,25 @@
   </row>
   <row>
     <panel>
-      <html>We're counting how many of each status (200, 404, etc) happened by user.  When you run this yourself, try <tt>over user by status</tt> too.</html>
+      <title>The same, only flipping the <tt>over</tt> and <tt>by</tt> clauses.</title>
+      <html>
+        Adding <tt>| chart  sum(cars) as "Cars Sold This Hour" over _time by salesperson</tt> changed it into a different two-important-axis chart.
+      </html>
+      <table>
+        <search>
+          <query>| inputlookup rdf_cars.csv | eval _time = strftime(_time, "%Y-%m-%d %H:%M:%S") 
+| chart  sum(cars) as "Cars Sold This Hour" over _time by salesperson</query>
+          <earliest>1708873200</earliest>
+          <latest>1708959600</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
       <title>A more "real life example"</title>
+      <html>We're counting how many of each status (200, 404, etc) happened by user.  When you run this yourself, try <tt>over user by status</tt> too.</html>
       <table>
         <search>
           <query>index=_internal status=* user=* earliest="-15m@m" latest="@m"  | chart count over status by user</query>
@@ -66,10 +88,10 @@
   <row>
     <panel>
       <html>
-	  <hr />
+	  <hr/>
       <p align="right">Next Command - <a href="streamstats">streamstats</a>
         </p>
-	  <hr />
+	  <hr/>
       </html>
     </panel>
   </row>

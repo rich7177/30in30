@@ -3,12 +3,16 @@
   <row>
     <panel>
       <html>
-      <p>What: "Eval"-uates 'things'.  One of the two Swiss Army knives of Splunk. (The other being <a href="stats"><tt>stats</tt></a>).</p>
+      <p>What: "Eval"-uates 'things'.  One of the two Swiss Army knives of Splunk. (The other being <a href="stats">
+            <tt>stats</tt>
+          </a>).</p>
       <ol>
         <li>Can create new fields on the fly.  Can edit existing fields.</li>
-        <li>A literal metric craptonne of possibilities - <a href="https://docs.splunk.com/Documentation/Splunk/9.2.1/SearchReference/CommonEvalFunctions#Function_list_by_category">Peruse the eval functions list from Splunk</a></li>
+        <li>A literal metric craptonne of possibilities - <a href="https://docs.splunk.com/Documentation/Splunk/9.2.1/SearchReference/CommonEvalFunctions#Function_list_by_category">Peruse the eval functions list from Splunk</a>
+          </li>
       </ol>
-      <p>How: <tt>| eval fieldname = &gt;something_stuff_and_things&lt;</tt></p>
+      <p>How: <tt>| eval fieldname = &gt;something_stuff_and_things&lt;</tt>
+        </p>
       <p>Why: The single most useful command to know in all of Splunkdom.  Or at least in the top 3.</p>
       <p>So What: When you wish upon a star, makes no difference who you are, almost anything your Splunk desires, <tt>eval</tt> will bring to you...</p>
       <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/eval">eval</a>.
@@ -22,66 +26,73 @@
     </panel>
     <panel>
       <html>
-        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a></p>
-        <pre>| inputlookup rich_and_dave_cars.csv</pre>
+        <p>We're using data we built earlier by using <tt>outputlookup</tt>.  To build this see <a href="outputlookup">outputlookup</a>
+        </p>
+        <pre>| inputlookup rdf_cars.csv</pre>
         <p>While yours may differ slightly, that data for us is:</p>
       </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv</query>
+          <query>| inputlookup rdf_cars.csv</query>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
   </row>
   <row>
     <panel>
+      <title>Fudging time</title>
       <html>
         Adding a random number of seconds between -600 and +600 (+/- 10 minutes) to a new field <tt>semi_random_time</tt> with <tt>| eval semi_random_time = strftime(_time + (random()%1200)-600, "%Y-%m-%d %H:%M:%S")</tt> 
       </html>
-      <title>Fudging time</title>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv
+          <query>| inputlookup rdf_cars.csv
 | eval semi_random_time = strftime(_time + (random()%1200)-600, "%Y-%m-%d %H:%M:%S")
 | table _time, semi_random_time, salesperson, cars</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
     <panel>
-      <html>
-        Used an eval with conditional if: <tt>| eval salesperson = if(salesperson="Rich", "Rich is awesome", "The other guy got lucky")</tt> 
-      </html>
       <title>Rewriting fields</title>
+      <html>
+        Used an eval with conditional if: <tt>| eval salesperson = if(salesperson="Rich", "Rich is awesome", salesperson . " got lucky")</tt> 
+      </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv
-| eval salesperson = if(salesperson="Rich", "Rich is awesome", "The other guy got lucky")
+          <query>| inputlookup rdf_cars.csv
+| eval salesperson = if(salesperson="Rich", "Rich is awesome", salesperson . " got lucky")
 | table _time, salesperson, cars</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="count">12</option>
       </table>
     </panel>
   </row>
   <row>
     <panel>
-      <html><hr /></html>
+      <html>
+        <hr/>
+      </html>
     </panel>
   </row>
   <row>
     <panel>
-      <html>
-        <p>Conditional, vaguely complex calculations which are then used to filter. </p><p> <tt>| eval quota_met = case(cars>=1 AND salesperson="Rich", "Yes", cars>=2 AND salesperson="David", "Yes", true(), "No")</tt>.</p>  
-      </html>
       <title>Medium complexity stuff</title>
+      <html>
+        <p>Conditional, vaguely complex calculations which are then used to filter. </p>
+        <p> <tt>| eval quota_met = case(cars&gt;1 AND salesperson="Rich", "Yes", cars&gt;=3, "Yes", true(), "No")</tt>.</p>  
+      </html>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv
-| eval quota_met = case(cars>=1 AND salesperson="Rich", "Yes", cars>=2 AND salesperson="David", "Yes", true(), "No")
+          <query>| inputlookup rdf_cars.csv
+| eval quota_met = case(cars&gt;1 AND salesperson="Rich", "Yes", cars&gt;=3, "Yes", true(), "No")
 </query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
@@ -90,17 +101,18 @@
       </table>
     </panel>
     <panel>
+      <title>Eval can be used in stats!</title>
       <html>
         <p>While it's often better to use eval separately to build new fields then use stats with simpler calculations, you can do complex things with eval inside stats itself.</p>
-        <p>Here we calculate the number of hours where each salesperson sold more than their quota.  (Rich 1, David 2)</p>
-        <p><tt>| stats sum(eval(case(cars>=1 AND salesperson="Rich", 1, cars>=2 AND salesperson="David", 1, true(), 0))) AS hours_over_quota BY salesperson</tt></p>
+        <p>Here we calculate the number of hours where each salesperson sold more than their quota.  (Rich 1, David and Fred 2)</p>
+        <p>
+          <tt>| stats sum(eval(case(cars&gt;=1 AND salesperson="Rich", 1, cars&gt;=2", 1, true(), 0))) AS hours_above_quota BY salesperson</tt>
+        </p>
       </html>
-      <title>Eval can be used in stats!</title>
       <table>
         <search>
-          <query>| inputlookup rich_and_dave_cars.csv
-| rename "Cars Sold This Hour" AS cars_sold
-| stats sum(eval(case(cars>=1 AND salesperson="Rich", 1, cars>=2 AND salesperson="David", 1, true(), 0))) AS hours_over_quota BY salesperson</query>
+          <query>| inputlookup rdf_cars.csv
+| stats sum(eval(case(cars&gt;1 AND salesperson="Rich", 1, cars&gt;=3, 1, true(), 0))) AS hours_above_quota BY salesperson</query>
           <earliest>1708873200</earliest>
           <latest>1708959600</latest>
           <sampleRatio>1</sampleRatio>
@@ -111,10 +123,10 @@
   <row>
     <panel>
       <html>
-	  <hr />
+	  <hr/>
       <p align="right">Next Command - <a href="fields">fields</a>
         </p>
-	  <hr />
+	  <hr/>
       </html>
     </panel>
   </row>

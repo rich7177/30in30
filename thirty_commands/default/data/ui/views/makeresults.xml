@@ -25,7 +25,8 @@
       <pre>| makeresults</pre>
       <pre>| makeresults format=csv data="user, dept
 Rich, IT
-David, Sales"</pre>
+David, Sales
+Fred, Sales"</pre>
 
       <pre>| makeresults count=7 
 | streamstats count 
@@ -58,7 +59,8 @@ David, Sales"</pre>
         <search>
           <query>| makeresults format=csv data="user, dept
 Rich, IT
-David, Sales"</query>
+David, Sales
+Fred, Sales"</query>
           <earliest>-30m@m</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
