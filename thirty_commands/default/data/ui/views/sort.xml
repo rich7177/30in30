@@ -17,7 +17,7 @@
         </p>
       <p>So What: Often useful after a stats or top/rare or some other "grouping and statistics" function.</p>
       <p>Be aware that <tt>sort</tt> has a built in default limit of 10000. First argument may be a number, and if it set to 0, all results are returned.</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/sort">sort</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/sort">sort</a>.
       </p>
       <p>Previous Command - <a href="rare">rare</a>
         </p>

@@ -12,7 +12,7 @@
         </p>
       <p>Why: Sometimes your data isn't fully extracted, so this command can help with that.</p>
       <p>So What: Incredibly useful, often you'll end up creating a proper props.conf EXTRACT out of what you build here.  Not always, but often.</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/rex">rex</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/rex">rex</a>.
       </p>
       <p>Also there's a few more flags you can use that can be useful.  See the docs.</p>
       <p>As awesome as Splunk is, <a href="http://regex101.com">regex101.com</a> is the bees knees for quickly and visually testing out regex expressions on small data sets.</p>

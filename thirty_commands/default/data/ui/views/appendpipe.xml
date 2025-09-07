@@ -22,7 +22,7 @@
       <p>How: ... (existing *transforming* or *generating* search) | appendpipe [(another summary-style search on that same data)]</p>
       <p>Why: Unlike <tt>append</tt> and <tt>appendcols</tt>, <tt>appendpipe</tt> is a bit tricky to get your head around, but useful in several cases.</p>
       <p>So What: You can use it to "inject totals" into the middle of other searches, lots of interesting use cases.</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/appendpipe">appendcols</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/appendpipe">appendpipe</a>.
       </p>
       <p>Previous Command - <a href="appendcols">appendcols</a>
         </p>

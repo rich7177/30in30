@@ -12,7 +12,7 @@
         </p>
       <p>Why: More complex filtering/searching is possible through it.</p>
       <p>So What: I honestly have never used it in a production environment.  I prefer using rex to create a new field out of the things I want/don't want and then use a standard <tt>| search ...</tt> to do this instead.  I know, I'm crazy.</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/regex">regex</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/regex">regex</a>.
       </p>
       <p>Previous Command - <a href="rename">rename</a>
         </p>

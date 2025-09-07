@@ -11,7 +11,7 @@
       <p>How: <b>| makeresults</b></p>
       <p>Why: Makeresults can enumerate exactly what you give it, or it can be a true generating command</p>
       <p>So what: We're going to use makeresults for many of the examples in this workshop</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Makeresults">makeresults</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/makeresults">makeresults</a>.
       </p>
       <p>Previous Command - <a href="contents">Back to Contents</a>
         </p>

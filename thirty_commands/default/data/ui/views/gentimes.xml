@@ -12,7 +12,7 @@
         </p>
       <p>Why: <tt>gentimes</tt> often pairs with the map command or sometimes you just need periodic time, ya know?</p>
       <p>So What: Exact time stamps to do whatever you need to do with them</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Gentimes">gentimes</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/gentimes">gentimes</a>.
       </p>
       <p>Previous Command - <a href="makeresults">makeresults</a>
         </p>

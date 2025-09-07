@@ -14,7 +14,7 @@
         </p>
       <p>Why: Sometimes people need to read data too!</p>
       <p>So What: Make your results pretty, and don't confuse it with <tt>fields</tt>.</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/table">table</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/table">table</a>.
       </p>
       <p>Previous Command - <a href="fields">fields</a>
         </p>

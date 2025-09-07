@@ -15,7 +15,7 @@
         </p>
       <p>Why: <tt>chart</tt> does a job that's nearly impossible without it.  See the examples!</p>
       <p>So What: Usually, but not always, <tt>chart</tt> is a command used to really alter the structure of data, moving things that weren't an axis into being an axis, and vice versa.</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/chart">chart</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/chart">chart</a>.
       </p>
       <p>Notes: I always get <tt>over</tt> and <tt>by</tt> clauses mixed up, but sometimes that gives me an interesting thing in its own right.  Don't be scared to try flipping those two!</p>
       <p>Previous Command - <a href="eventstats">eventstats</a>

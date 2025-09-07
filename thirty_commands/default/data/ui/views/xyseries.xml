@@ -7,7 +7,7 @@
       <p>How: <tt>xyseries &lt;x-field&gt; &lt;y-name-field&gt; &lt;y-data-field&gt; </tt></p>
       <p>Why: Twists data around to show it in a completely different format.</p>
       <p>So What: In addition to changing the "look" of data, it can occasionally be used to reformat data so that other manipulation can be done.  See also <a href="untable"><tt>untable</tt></a> which is the inverse of this command.  Another similar command is <a href="transpose"><tt>transpose</tt></a>.</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/xyseries">xyseries</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/xyseries">xyseries</a>.
       </p>
       <p>Previous Command - <a href="transpose">transpose</a>
         </p>

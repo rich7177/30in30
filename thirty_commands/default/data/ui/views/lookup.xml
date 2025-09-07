@@ -12,7 +12,7 @@
       <p>How: lookup &lt;lookup name&gt; &lt;lookup field&gt; AS &lt;matching field in data&gt; OUTPUT/OUTPUTNEW &lt;field in lookup&gt; AS &lt;new name for field from lookup&gt; &lt;maybe another field from lookup&gt; AS &lt;and a new name for it&gt;</p>
       <p>Why: Extremely efficient at adding in relatively small (e.g. not TB!) set of reasonably static data.</p>
       <p>So What: Commonly used to do things like convert status codes into status strings.  Instead of "404" you could build a new field that said "Not Found".</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/lookup">lookup</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/lookup">lookup</a>.
       </p>
       <p>Previous Command - <a href="inputlookup">inputlookup</a>
         </p>

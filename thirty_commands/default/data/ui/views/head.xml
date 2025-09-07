@@ -7,7 +7,7 @@
       <p>How: <tt>... | head N</tt> where N is some number</p>
       <p>Why: Keeps things fast and performant when you are exploring or just need a few samples.</p>
       <p>So What: Useful not only in exploration phases, but also in various other use cases.  Combine with <tt>sort</tt> sometimes.</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/head">head</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/head">head</a>.
       </p>
       <p>Previous Command - <a href="appendpipe">appendpipe</a>
         </p>

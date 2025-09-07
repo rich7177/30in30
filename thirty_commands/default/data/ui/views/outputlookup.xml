@@ -20,7 +20,7 @@
         </p>
       <p>Why: Quick way to temporarily save off "slower" search output to work on and test with.</p>
       <p>So What: We'll use it a lot in here.</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/outputlookup">outputlookup</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/outputlookup">outputlookup</a>.
       </p>
       <p>Previous Command - <a href="gentimes">gentimes</a>
         </p>

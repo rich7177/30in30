@@ -12,7 +12,7 @@
           </a> for a more generic sorter.
         </p>
       <p>So What: Fairly rare to use this.  Also in really large result sets this can be slow and take a lot of RAM and temporary disk space.  Because obviously.</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/reverse">reverse</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/reverse">reverse</a>.
       </p>
       <p>Previous Command - <a href="sort">sort</a>
         </p>

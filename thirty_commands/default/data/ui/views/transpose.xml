@@ -11,7 +11,7 @@
         </p>
       <p>Why: Few rows with many columns can be hard to read or scroll through</p>
       <p>So What: Reorient data in a much easier to consume way</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Transpose">transpose</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/transpose">transpose</a>.
       </p>
       <p>Previous Command - <a href="reverse">reverse</a>
         </p>

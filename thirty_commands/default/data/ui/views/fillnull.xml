@@ -8,7 +8,7 @@
         </p>
       <p>Why: when you have gaps in data, but have filldown won't help you, you can use this to replace it with whatever you'd like.</p>
       <p>So What: Cleans up weird looking data.</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/fillnull">fillnull</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/fillnull">fillnull</a>.
       </p>
       <p>See also <tt>filldown</tt> for a command to use when copying the previous value is appropriate.</p>
       <p>Previous Command - <a href="sort">filldown</a>

@@ -8,7 +8,7 @@
         </p>
       <p>Why: Makes it look like you know what you are doing.</p>
       <p>So What: Makes 'bad' field names easier to work with, or converts shorthand names to longer ones at the end of your SPL.</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/rename">rename</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/rename">rename</a>.
       </p>
       <p>Be careful! You'd think <tt>rename</tt> wouldn't cause problems, but you can overwrite fields with null and cause other minor mayhem.</p>
       <p>Previous Command - <a href="reltime">reltime</a>

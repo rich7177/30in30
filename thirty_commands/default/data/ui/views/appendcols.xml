@@ -19,7 +19,7 @@
       <p>How: ... (existing search) | appendcols [(some other search)]</p>
       <p>Why: Even more unusual to need this than <tt>append</tt> itself</p>
       <p>So What: Few use cases, but it's one of those commands to be aware of because sometimes it's the only command that will do what you need.</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/appendcols">appendcols</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/appendcols">appendcols</a>.
       </p>
       <p>Previous Command - <a href="append">append</a>
         </p>

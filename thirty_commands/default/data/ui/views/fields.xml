@@ -16,7 +16,7 @@
         </p>
       <p>Why: Nuke unnecessary fields in data, keep the fields you need</p>
       <p>So What: Return results faster, clean up output, save memory and processing resources, and don't confuse with <tt>table</tt>.</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/fields">fields</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/fields">fields</a>.
       </p>
       <p>Previous Command - <a href="eval">eval</a>
         </p>

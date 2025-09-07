@@ -13,7 +13,7 @@
       <p>How: ... (existing search) | append [(some other search)]</p>
       <p>Why: While it's not the best command, there are times when it's the right one to use.  Two data, *completely* unrelated, especially if one or both are relatively small.  And by "completely unrelated" I mean that specifically, like 'from search' and 'from a datagen/makeresults'.</p>
       <p>So What: IMO it's an overused command.  It's often better to do the big "pile o' data" then stats it to group it.</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/append">append</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/append">append</a>.
       </p>
       <p>Previous Command - <a href="table">table</a>
         </p>

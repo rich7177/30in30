@@ -10,7 +10,7 @@
       <p>How: <tt>reltime [timefield="field-list"][prefix=string"]</tt></p>
       <p>Why: Very useful for human-readable dates/times.</p>
       <p>So What: The admiration of colleagues.</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/reltime">reltime</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/reltime">reltime</a>.
       </p>
       <p>Was previously *very* limited, but recently they added some functionality. Still waiting for "future" timespans to work well though.</p>
       <p>Previous Command - <a href="fillnull">fillnull</a>

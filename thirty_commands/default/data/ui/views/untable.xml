@@ -11,7 +11,7 @@
       <p>How: untable x-field y-name-field y-data-field</p>
       <p>Why: Data sometimes comes in already summarized, this is a way to "unsummarize" it.  It's sort of the inverse of <a href="xyseries"><tt>xyseries</tt></a>.</p>
       <p>So What: I honestly have only used it a few times, but it's great when you need it.</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/untable">untable</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/untable">untable</a>.
       </p>
       <p>Previous Command - <a href="xyseries">xyseries</a>
         </p>

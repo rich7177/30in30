@@ -13,7 +13,7 @@
         </p>
       <p>Why: Easiest way to begin visualizing data in Splunk</p>
       <p>So What: Build your Knowledge Manager experience on top of a solid foundation for visualizations</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/timechart">Timechart</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/timechart">timechart</a>.
       </p>
       <p>
           <tt>timechart</tt> is one of the commands that has a lot of options to modify how it works, including <tt>span=</tt>, <tt>limit=</tt>, <tt>partial=</tt>, and <tt>&lt;eval&gt; AS</tt>, </p>

@@ -12,7 +12,7 @@
         </p>
       <p>Why: Primary way to perform aggregration &amp; analysis to data sets in Splunk</p>
       <p>So What: Slicing &amp; dicing data to fit the narrative you want to tell.  Note that stats is probably the most useful command in all of Splunk. It's a swiss army knife that can do so much.</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/stats">stats</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/stats">stats</a>.
       </p>
       <p>Previous Command - <a href="timechart">timechart</a>
         </p>

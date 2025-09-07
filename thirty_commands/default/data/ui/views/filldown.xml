@@ -8,7 +8,7 @@
         </p>
       <p>Why: Sometimes you need to fill in gaps in data and the best option is to just pretend it is what it was before.  Also sometimes that's *exactly* what no data means (see a lot of home-automation data).</p>
       <p>So What: Cleans up weird looking data.</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/filldown">filldown</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/filldown">filldown</a>.
       </p>
       <p>Watch your sorting!  See also <a href="fillnull"><tt>fillnull</tt></a> for a command to use when it should not just use the last value.</p>
       <p>Previous Command - <a href="makecontinuous">makecontinuous</a>

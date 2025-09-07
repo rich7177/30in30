@@ -9,7 +9,7 @@
           </li>
         <li>For fields that are not time-based there are also options to either use "automatic" ranges or specific ones. See the docs in both cases.</li>
       </ol>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Makecontinuous">makecontinuous</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/makecontinuous">makecontinuous</a>.
       </p>
       <p>Note that this isn't a real common command.  Things like <tt>chart</tt> and <tt>timechart</tt> sort of do this automatically for time, and that's most commonly when it's needed.</p>
       <p>Previous Command - <a href="untable">untable</a>

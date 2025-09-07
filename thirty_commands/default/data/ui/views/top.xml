@@ -9,7 +9,7 @@
       <p>Why: Occasionally useful for reporting things, but often useful when you are exploring the data.</p>
       <p>So What: Quicker than doing your own <tt>stats</tt> to get these same statistics on a single field and how common it is.
         </p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/top">top</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/top">top</a>.
       </p>
       <p>See also <tt>rare</tt> which is the "reverse" of this command.</p>
       <p>Previous Command - <a href="tail">tail</a>

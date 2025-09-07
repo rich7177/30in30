@@ -15,7 +15,7 @@
         </p>
       <p>Why: The single most useful command to know in all of Splunkdom.  Or at least in the top 3.</p>
       <p>So What: When you wish upon a star, makes no difference who you are, almost anything your Splunk desires, <tt>eval</tt> will bring to you...</p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/eval">eval</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/eval">eval</a>.
       </p>
       <p>Really, can't emphasize enough how much you can do with eval!</p>
       <p>Previous Command - <a href="lookup">lookup</a>

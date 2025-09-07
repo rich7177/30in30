@@ -12,7 +12,7 @@
         </p>
       <p>Why: Allows you to do all sorts of analysis that isn't easily done without it.  Time-window math/counts, running counts, etc. </p>
       <p>So What: Streamstats, especially with time or other windows, is really powerful and solves problems that are simply unsolveable without it.  I also believe streamstats is probably the neatest command in all of Splunk. </p>
-      <p>Docs: <a href="https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/stats">stats</a>.
+      <p>Docs: <a href="https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.0/search-commands/streamstats">streamstats</a>.
       </p>
       <p>Previous Command - <a href="chart">chart</a>
         </p>
