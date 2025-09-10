@@ -547,8 +547,8 @@
       <html>
         <h1>Serious Data analytics commands</h1>
         <p>There's a lot of meat here.  <a href="timechart"><tt>timechart</tt></a> creates time-oriented aggregations, whereas <a href="stats"><tt>stats</tt></a> is more general purpose and can create aggregations by practically anything, time or other fields as well.  Do note that "aggregations" can be mathematical, but they can ALSO be just thought of as "grouping" sometimes.</p>
-        <p>In addition to those two, there's two even more mind blowing commands.  <a href="chart"><tt>chart</tt></a> is just like <tt>stats</tt> except it supports an "over" and also a "by" clause.  This is mind-boggling the first few times you see or use it, but it's really powerful.  Lastly, <a href="eventstats"><tt>eventstats</tt></a> lets you do stats-like calculations on the entire data set, *without* replacing that data set.  So, for instance, you can calculate a "grand total" for the data (in whole or "by" some criteria), and have that value tacked onto each event so you can do <tt>eval</tt> math/calculations with it, like find the percentages of totals.
-          
+        <p>In addition to those two, there's two even more mind blowing commands.  <a href="chart"><tt>chart</tt></a> is just like <tt>stats</tt> except it supports an "over" and also a "by" clause.  This is mind-boggling the first few times you see or use it, but it's really powerful.  Lastly, <a href="eventstats"><tt>eventstats</tt></a> lets you do stats-like calculations on the entire data set, *without* replacing that data set.  So, for instance, you can calculate a "grand total" for the data (in whole or "by" some criteria), and have that value tacked onto each event so you can do <tt>eval</tt> math/calculations with it, like find the percentages of totals. </p>
+	<p> Lastly, <a href="streamstats"><tt>streamstats</tt></a> operates on a set of data as it streams through, acting on individual events, events in groups by order (like a window of 3 or 5), or or even by time windows.  Nothing else in Splunk works quite like it.
         </p>
       </html>
     </panel>
